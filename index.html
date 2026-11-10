@@ -403,7 +403,7 @@
   <div class="bento">
     <article class="card card--sales" data-reveal>
       <header class="card__head"><h3 class="card__title"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-receipt"/></svg>Tickets sold</h3><span class="card__tag">Sample</span></header>
-      <p class="card__big"><span data-count="214">0</span><small> of 350</small></p>
+      <p class="card__big"><span data-chart-total="214">214</span><small> of 350</small></p>
       <div class="chart" data-chart>
         <svg viewBox="0 0 600 180" preserveAspectRatio="none" aria-hidden="true">
           <defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3730B8" stop-opacity=".16"/><stop offset="1" stop-color="#3730B8" stop-opacity="0"/></linearGradient></defs>
@@ -455,8 +455,8 @@
         <li><span class="av">HY</span><span><b>H. Yusuf</b><small>Regular</small></span><span class="wait"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>Not yet</span></li>
         <li><span class="av">ZI</span><span><b>Z. Ibrahim</b><small>Free RSVP</small></span><span class="wait"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg>Not yet</span></li>
       </ul>
-      <div class="meter"><i style="--p:.61"></i></div>
-      <p class="card__foot card__foot--plain">214 of 350 checked in</p>
+      <div class="meter" data-meter="214" data-of="350"><i style="--p:.61"></i></div>
+      <p class="card__foot card__foot--plain"><span data-meter-text>214</span> of 350 checked in</p>
     </article>
 
     <article class="card card--payout" data-reveal>
@@ -469,8 +469,8 @@
           <p class="bank__acct">Account ending 4021</p>
         </div>
         <ul class="ledger">
-          <li><span>Regular × 180</span><b data-roll="₦900,000">₦900,000</b></li>
-          <li><span>VIP × 10</span><b data-roll="₦150,000">₦150,000</b></li>
+          <li><span>Regular × 180</span><b>₦900,000</b></li>
+          <li><span>VIP × 10</span><b>₦150,000</b></li>
           <li><span>Free RSVP × 24</span><b>₦0</b></li>
         </ul>
       </div>

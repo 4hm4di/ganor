@@ -1363,3 +1363,16 @@ select option { background-color: #fff; color: var(--ganor-ink); }
 .intro.is-out { transform: translate3d(0, -100%, 0); border-radius: 0 0 40px 40px; }
 .intro.is-out .intro__inner { opacity: 0; transform: translateY(-40px); transition: opacity 420ms ease, transform 700ms cubic-bezier(.76,0,.24,1); }
 @media (prefers-reduced-motion: reduce) { .intro, .intro.is-out .intro__inner { transition: opacity 300ms ease; } .intro.is-out { transform: none; opacity: 0; } }
+
+/* Chart and meter driven by script (setupChart / setupMeter) */
+.chart.is-live .chart__line, .chart.is-live .chart__area, .chart.is-live .chart__dot, .chart.is-live .chart__tip { transition: none; }
+.chart.is-live .chart__dot { left: calc(var(--x, .8) * 100%); top: calc(var(--y, .289) * 100%); }
+.chart.is-live .chart__tip { left: calc(var(--tx, .8) * 100%); top: calc(var(--y, .289) * 100%); font-variant-numeric: tabular-nums; }
+.chart.is-live .chart__area { opacity: 1; }
+.chart.is-live:not(.is-run) .chart__dot, .chart.is-live:not(.is-run) .chart__tip { opacity: 0; }
+.chart.is-live.is-run .chart__dot { opacity: 1; transform: scale(1); transition: opacity 200ms ease, transform 300ms var(--ganor-ease-out); }
+.chart.is-live.is-run .chart__tip { opacity: 1; transition: opacity 200ms ease; }
+.card--sales .card__big span { font-variant-numeric: tabular-nums; }
+.meter.is-live i { transition: none; }
+[data-meter-text] { font-variant-numeric: tabular-nums; }
+.card__foot--plain { display: block; }

@@ -309,6 +309,98 @@
     });
   }
 
+  /* ---------- Tickets sold chart: the dot walks the line Mon → Fri, counting as it goes ---------- */
+  function setupChart() {
+    const chart = $('[data-chart]');
+    if (!chart) return;
+    const card = chart.closest('.card');
+    const line = $('.chart__line', chart), area = $('.chart__area', chart);
+    const tip = $('.chart__tip', chart);
+    const total = $('[data-chart-total]', card);
+    const TOTAL = +total.dataset.chartTotal;
+    const pts = [[0,170],[60,160],[120,150],[180,140],[240,118],[300,112],[360,88],[420,70],[480,52],[540,40],[600,22]];
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    const sold = [14, 19, 24, 27, 31];            // sample daily sales, Mon–Fri
+    const yAt = x => {
+      for (let i = 1; i < pts.length; i++) if (x <= pts[i][0]) {
+        const [x0, y0] = pts[i - 1], [x1, y1] = pts[i];
+        return y0 + (y1 - y0) * ((x - x0) / (x1 - x0));
+      }
+      return pts[pts.length - 1][1];
+    };
+    const ease = t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const FRI = 480, W = 600, H = 180;
+    const place = (x) => {
+      chart.style.setProperty('--x', x / W);
+      chart.style.setProperty('--y', yAt(x) / H);
+      const half = (tip.offsetWidth / 2 + 4) / chart.clientWidth;   // keep the tooltip inside the card
+      chart.style.setProperty('--tx', Math.min(1 - half, Math.max(half, x / W)));
+    };
+    const setLine = (x) => {
+      const cut = Math.max(-2, 100 - (x / W) * 100);
+      line.style.clipPath = `inset(-10% ${cut}% -10% 0)`;
+      area.style.clipPath = `inset(0 ${Math.max(0, cut)}% 0 0)`;
+    };
+    const label = (x) => {
+      const pos = x / 120, i = Math.min(4, Math.floor(pos + 0.0001));
+      const f = Math.min(1, pos - i);
+      const n = i < 4 ? Math.round(sold[i] + (sold[i + 1] - sold[i]) * f) : sold[4];
+      tip.textContent = `${days[Math.min(4, Math.round(pos))]} · ${n} sold`;
+    };
+    // resting state (no animation)
+    const finish = () => { place(FRI); setLine(W); label(FRI); total.textContent = TOTAL; };
+    chart.classList.add('is-live');
+    if (reduced.matches) { chart.classList.add('is-run'); finish(); return; }
+    place(0); setLine(0); label(0); total.textContent = '0';
+    const run = () => {
+      chart.classList.add('is-run');
+      const D1 = 2400, D2 = 450, start = performance.now() + 250;
+      const frame = (now) => {
+        const t = Math.max(0, Math.min(1, (now - start) / D1));
+        const x = FRI * ease(t);
+        place(x); setLine(x); label(x);
+        total.textContent = Math.round(TOTAL * ease(t));
+        if (t < 1) return requestAnimationFrame(frame);
+        // after Friday the line carries on to Saturday
+        const s2 = performance.now();
+        const tail = (n) => {
+          const u = Math.min(1, (n - s2) / D2);
+          setLine(FRI + (W - FRI) * ease(u));
+          if (u < 1) requestAnimationFrame(tail); else total.textContent = TOTAL;
+        };
+        requestAnimationFrame(tail);
+      };
+      requestAnimationFrame(frame);
+    };
+    if (card.classList.contains('is-in')) run(); else card.addEventListener('reveal', run, { once: true });
+  }
+
+  /* ---------- Check-in meter: the bar and the number move together ---------- */
+  function setupMeter() {
+    $$('[data-meter]').forEach(meter => {
+      const card = meter.closest('.card');
+      const target = +meter.dataset.meter, of = +meter.dataset.of;
+      const text = $('[data-meter-text]', card);
+      const bar = meter.firstElementChild;
+      meter.classList.add('is-live');
+      if (reduced.matches) { bar.style.transform = `scaleX(${target / of})`; return; }
+      bar.style.transform = 'scaleX(0)'; text.textContent = '0';
+      const run = () => {
+        const D = 1700, start = performance.now() + 300;
+        const ease = t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+        const frame = (now) => {
+          const t = Math.max(0, Math.min(1, (now - start) / D));
+          const v = Math.round(target * ease(t));
+          bar.style.transform = `scaleX(${v / of})`;
+          text.textContent = v;
+          if (t < 1) requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+      };
+      if (card.classList.contains('is-in')) run(); else card.addEventListener('reveal', run, { once: true });
+    });
+  }
+
   /* ---------- Switches ---------- */
   function setupSwitches() {
     $$('.switch').forEach(sw => sw.addEventListener('click', () => {
@@ -701,5 +793,7 @@
   setupDocNav();
   setupTypeline();
   setupPayout();
+  setupChart();
+  setupMeter();
   runIntro(startHero);
 })();
