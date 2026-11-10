@@ -30,7 +30,7 @@ PAGES = {
     "index": (
         "/",
         "Ganor · Events, tickets and trusted places near you",
-        "Find events and trusted places near you. Hosts create an event, share one link, "
+        "Find conferences, summits, trade fairs and trusted places near you. Hosts share one link, "
         "sell tickets and scan guests in at the gate. Free events cost nothing.",
         "og.png",
         "Ganor: your city, found. Events, tickets and places near you.",
