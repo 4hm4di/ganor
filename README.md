@@ -73,8 +73,8 @@ With no endpoint set, it opens WhatsApp with the details filled in, so sign-ups 
 ## Deploy (GitHub Pages)
 
 1. Repo settings → Pages → Deploy from branch → `main`, folder `/ (root)`.
-2. Preview address: https://4hm4di.github.io/ganor/ (all paths are relative, so the site works there and on the domain).
-3. When DNS is ready: add a `CNAME` file containing `ganor.ng`, set the custom domain in Pages settings, then tick **Enforce HTTPS** once the certificate is issued.
+2. Custom domain: the `CNAME` file contains `ganor.ng`. In Pages settings, check the custom domain shows ganor.ng, then tick **Enforce HTTPS** once the certificate is issued.
+3. The old preview address https://4hm4di.github.io/ganor/ now redirects to https://ganor.ng.
 4. DNS at the registrar:
    - `A @` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - `CNAME www` → `<github-username>.github.io`
