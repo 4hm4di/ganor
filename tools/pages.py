@@ -77,7 +77,8 @@ page("docs", "Docs", "How Ganor works for hosts, guests and businesses: creating
       <ol>
         <li>Give your event a name, a date and a start time.</li>
         <li>Add the venue. A full address and a map pin help guests find you.</li>
-        <li>Add a photo and a few lines about what to expect.</li>
+        <li>Add a banner for the top of your event page, and your logo or a photo of you as the host. Guests see them on the event page, in search and on their ticket.</li>
+        <li>Add a few lines about what to expect.</li>
         <li>Add how guests can reach you. Guests contact the host about the event, so this is required.</li>
         <li>Add your ticket types (see below), then publish.</li>
       </ol>
@@ -91,7 +92,9 @@ page("docs", "Docs", "How Ganor works for hosts, guests and businesses: creating
       </ul>
       <p>Free RSVPs work the same way as tickets: each guest gets a QR code on WhatsApp, and you scan it at the gate. You can turn any ticket type on or off at any time.</p>"""),
  ("share", "Share your event", "share", """
-      <p>Every event gets one link, like <b>ganor.ng/e/your-event</b>. Post it on WhatsApp, your status, Instagram or anywhere else. The link shows a clean preview with your photo, date and venue.</p>
+      <p>Every event gets one link, like <b>ganor.ng/e/your-event</b>. Post it on WhatsApp, your status, Instagram or anywhere else. The link shows a clean preview with your banner, date and venue.</p>
+      <h3>Your host profile</h3>
+      <p>Your logo or avatar, name and past events live on your host profile, so guests can follow you and find your next event.</p>
       <p>Guests who open the link can buy or RSVP straight away. They don’t need to download anything.</p>"""),
  ("fees", "Fees and payouts", "percent", """
       <p>Free events and free RSVPs cost nothing. On paid tickets, the Ganor fee is <b>5% of the ticket price + ₦100 per ticket</b>. Card and bank transfer charges are included in that fee. There is no setup fee and no monthly fee.</p>
@@ -130,7 +133,7 @@ page("docs", "Docs", "How Ganor works for hosts, guests and businesses: creating
  ("places", "For businesses", "shop", """
       <p>Ganor Places helps people find the businesses they can trust nearby: phone and electronics shops, fabric sellers, markets, hospitals, pharmacies, restaurants, hotels, event halls, salons, mechanics, schools, parks and more.</p>
       <p>Every listing is checked in person, with directions and a working phone number. Ganor Places comes after events. To be among the first listed, <a href="./#join">join the list</a> and choose <b>A local business</b>.</p>"""),
- ("help", "Get help", "chat", f"""
+ ("help", "Get help", "support", f"""
       <p>We answer on WhatsApp first.</p>
       {CONTACT}"""),
  ])
@@ -187,7 +190,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a guest or a
       <p>Nothing in these terms limits rights you have under Nigerian consumer law, including the Federal Competition and Consumer Protection Act 2018.</p>"""),
  ("changes", "Changes and law", "settings", """
       <p>We may update these terms. If a change is important, we’ll tell you before it applies. These terms are governed by the laws of the Federal Republic of Nigeria.</p>"""),
- ("contact", "Contact", "chat", CONTACT),
+ ("contact", "Contact", "support", CONTACT),
  ], meta=f"Last updated {UPDATED}")
 
 # ---------------- PRIVACY ----------------
@@ -238,7 +241,7 @@ page("privacy", "Privacy policy", "What personal data Ganor collects, why, who i
       <p>Message us and we’ll reply within 30 days. If you’re unhappy with our answer, you can complain to the Nigeria Data Protection Commission.</p>"""),
  ("safety", "Security", "lock", """
       <p>We protect your data with access controls and encryption in transit. If a breach puts your data at risk, we’ll tell you and the Nigeria Data Protection Commission as the law requires.</p>"""),
- ("contact", "Contact", "chat", CONTACT),
+ ("contact", "Contact", "support", CONTACT),
  ], meta=f"Last updated {UPDATED}")
 
 # ---------------- REFUNDS ----------------
@@ -261,7 +264,7 @@ page("refunds", "Refund policy", "How refunds work on Ganor: who to contact, wha
       <p>We’ll look into it and, where a refund is owed, make sure it reaches you.</p>"""),
  ("how", "How refunds are paid", "wallet", """
       <p>Refunds go back to the card or account you paid with, through our payment partner. Banks can take a few working days to show the money in your account.</p>"""),
- ("contact", "Contact", "chat", CONTACT),
+ ("contact", "Contact", "support", CONTACT),
  ], meta=f"Last updated {UPDATED}")
 
 # ---------------- CREDITS ----------------

@@ -25,22 +25,23 @@
     const pct = $('[data-intro-pct]', intro);
     const bar = $('[data-intro-bar]', intro);
     const start = performance.now();
-    const DURATION = 950;
+    const DURATION = 2200; // long enough to read the screen
+    const HOLD = 550;       // pause at 100% before the slats lift
     const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
     let fontsReady = false;
     fonts.then(() => { fontsReady = true; });
-    const ease = t => 1 - Math.pow(1 - t, 3);
+    const ease = t => -(Math.cos(Math.PI * t) - 1) / 2; // steady climb, easy to read
 
     function tick(now) {
       const t = Math.min(1, (now - start) / DURATION);
       const v = Math.round(ease(t) * 100);
       pct.textContent = String(v).padStart(2, '0');
       bar.style.setProperty('--p', ease(t));
-      if (t < 1 || (!fontsReady && now - start < 2500)) { requestAnimationFrame(tick); return; }
-      intro.classList.add('is-out');
+      if (t < 1 || (!fontsReady && now - start < 3500)) { requestAnimationFrame(tick); return; }
+      setTimeout(() => intro.classList.add('is-out'), HOLD);
       try { localStorage.setItem('ganor-intro', '1'); } catch (e) {}
-      setTimeout(done, 260);
-      setTimeout(() => intro.classList.add('is-gone'), 900);
+      setTimeout(done, HOLD + 260);
+      setTimeout(() => intro.classList.add('is-gone'), HOLD + 900);
     }
     requestAnimationFrame(tick);
   }
@@ -126,7 +127,7 @@
         then && then();
       }, 250);
     };
-    open.addEventListener('click', () => { sheet.showModal(); open.setAttribute('aria-expanded', 'true'); });
+    open.addEventListener('click', () => { sheet.showModal(); sheet.focus({ preventScroll: true }); open.setAttribute('aria-expanded', 'true'); });
     sheet.addEventListener('close', () => { open.setAttribute('aria-expanded', 'false'); open.focus({ preventScroll: true }); });
     sheet.addEventListener('cancel', e => { e.preventDefault(); shut(); });
     $('[data-menu-close]', sheet).addEventListener('click', () => shut());
@@ -232,6 +233,35 @@
     el.setAttribute('aria-label', str);
   }
 
+  /* Rolling numbers for any text like "₦1,050,000" or "200 tickets": digits roll, other characters stay */
+  function rollText(el, str) {
+    let sr = el.querySelector(':scope > .sr-only');
+    let roll = el.querySelector(':scope > .roll');
+    if (!roll) {
+      el.textContent = '';
+      sr = document.createElement('span'); sr.className = 'sr-only';
+      roll = document.createElement('span'); roll.className = 'roll'; roll.setAttribute('aria-hidden', 'true');
+      el.append(sr, roll);
+    }
+    sr.textContent = str;
+    const shape = [...str].map(c => (/\d/.test(c) ? 'd' : c)).join('');
+    if (roll.dataset.shape !== shape) {
+      const old = [...roll.querySelectorAll('.digit__col')].map(c => c.style.getPropertyValue('--n') || '0');
+      roll.textContent = '';
+      const cols = [];
+      [...str].forEach(c => {
+        if (/\d/.test(c)) { const d = digitEl(); roll.append(d); cols.push(d.firstElementChild); }
+        else { const t = document.createElement('span'); t.className = 'roll__ch'; t.textContent = c; roll.append(t); }
+      });
+      // keep the old digits lined up from the right so a new column doesn't make everything jump
+      cols.reverse().forEach((c, i) => c.style.setProperty('--n', old[old.length - 1 - i] || '0'));
+      roll.dataset.shape = shape;
+      void roll.offsetWidth;
+    }
+    const digits = [...str].filter(c => /\d/.test(c));
+    [...roll.querySelectorAll('.digit__col')].forEach((c, i) => c.style.setProperty('--n', digits[i]));
+  }
+
   /* ---------- Countdown to launch ---------- */
   function setupCountdown() {
     const box = $('[data-countdown]');
@@ -265,6 +295,16 @@
       setDigits(el, 0, String(value).length);
       const card = el.closest('[data-reveal]') || el;
       const run = () => setTimeout(() => setDigits(el, value, String(value).length), 200);
+      if (card.classList.contains('is-in')) run(); else card.addEventListener('reveal', run, { once: true });
+    });
+  }
+
+  function setupPayout() {
+    $$('[data-roll]').forEach(el => {
+      const value = el.dataset.roll;
+      rollText(el, value.replace(/\d/g, '0'));
+      const card = el.closest('[data-reveal]') || el;
+      const run = () => setTimeout(() => rollText(el, value), 250);
       if (card.classList.contains('is-in')) run(); else card.addEventListener('reveal', run, { once: true });
     });
   }
@@ -425,19 +465,26 @@
     const out = $('[data-typed]', box);
     const caret = $('.name__caret', box);
     const text = $('.name__ghost', box).textContent;
+    let timer;
     const type = () => {
+      clearTimeout(timer);
       if (reduced.matches) { out.textContent = text; return; }
+      out.textContent = '';
       caret.classList.add('is-on');
       let i = 0;
       const step = () => {
         out.textContent = text.slice(0, ++i);
-        if (i < text.length) setTimeout(step, text[i - 1] === ',' ? 260 : 34 + Math.random() * 40);
+        if (i < text.length) timer = setTimeout(step, text[i - 1] === ',' ? 260 : 34 + Math.random() * 40);
       };
-      setTimeout(step, 350);
+      timer = setTimeout(step, 350);
     };
+    const reset = () => { clearTimeout(timer); if (!reduced.matches) out.textContent = ''; };
     if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); type(); } }, { threshold: 0.6 });
-      io.observe(box);
+      let shown = false;
+      new IntersectionObserver(([e]) => {
+        if (e.intersectionRatio >= 0.6 && !shown) { shown = true; type(); }
+        else if (e.intersectionRatio === 0 && shown) { shown = false; reset(); }
+      }, { threshold: [0, 0.6] }).observe(box);
     } else type();
   }
 
@@ -543,18 +590,21 @@
     const price = $('[data-in="price"]', calc), qty = $('[data-in="qty"]', calc);
     const out = k => $(`[data-out="${k}"]`, calc), res = k => $(`[data-res="${k}"]`, calc);
     let who = 'buyer';
-    const paint = (input) => input.style.setProperty('--v', ((input.value - input.min) / (input.max - input.min) * 100) + '%');
+    const paint = (input) => {
+      const f = (input.value - input.min) / (input.max - input.min);
+      input.closest('.rng').style.setProperty('--f', f);
+      input.style.setProperty('--v', (f * 100) + '%');
+    };
     const render = () => {
       const p = +price.value, q = +qty.value, f = fee(p);
       paint(price); paint(qty);
-      out('price').textContent = naira(p);
-      out('qty').textContent = q.toLocaleString('en-NG') + (q >= 3000 ? '+ tickets' : ' tickets');
-      const gross = p * q, total = f * q; // total fee is kept for the take-home maths only
-      const net = who === 'buyer' ? gross : gross - total;
-      res('net').textContent = naira(net);
-      res('gross').textContent = naira(gross);
-      res('per').textContent = naira(f);
-      res('buyer').textContent = naira(who === 'buyer' ? p + f : p);
+      rollText(out('price'), naira(p));
+      rollText(out('qty'), q.toLocaleString('en-NG') + ' tickets');
+      const gross = p * q, total = f * q;
+      rollText(res('net'), naira(who === 'buyer' ? gross : gross - total));
+      rollText(res('gross'), naira(gross));
+      rollText(res('per'), naira(f));
+      rollText(res('buyer'), naira(who === 'buyer' ? p + f : p));
       res('note').textContent = who === 'buyer'
         ? 'Your full ticket price goes to your bank. Buyers pay the Ganor fee at checkout.'
         : 'Buyers pay your ticket price only. The Ganor fee comes out of each sale.';
@@ -570,7 +620,28 @@
       const next = $(`.seg__opt[data-who="${who === 'buyer' ? 'host' : 'buyer'}"]`, calc);
       next.click(); next.focus(); e.preventDefault();
     });
-    [price, qty].forEach(i => i.addEventListener('input', render));
+
+    // Glass knob: grows into a lens while dragging and stretches with speed
+    [price, qty].forEach(input => {
+      const rng = input.closest('.rng');
+      let last = +input.value, settle;
+      const start = () => rng.classList.add('is-drag');
+      const end = () => { rng.classList.remove('is-drag'); rng.style.setProperty('--s', 0); };
+      input.addEventListener('pointerdown', start);
+      input.addEventListener('pointerup', end);
+      input.addEventListener('pointercancel', end);
+      input.addEventListener('blur', end);
+      input.addEventListener('input', () => {
+        const v = +input.value;
+        const speed = Math.min(1, Math.abs(v - last) / ((input.max - input.min) * 0.04));
+        last = v;
+        rng.style.setProperty('--s', speed.toFixed(2));
+        clearTimeout(settle);
+        settle = setTimeout(() => rng.style.setProperty('--s', 0), 120);
+        render();
+      });
+    });
+
     const ft = $('[data-fee-text]');
     if (ft) ft.textContent = `${FEE_RATE * 100}% + ${naira(FEE_FLAT)}`;
     render();
@@ -629,5 +700,6 @@
   setupPlaces();
   setupDocNav();
   setupTypeline();
+  setupPayout();
   runIntro(startHero);
 })();

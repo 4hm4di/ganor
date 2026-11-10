@@ -141,7 +141,7 @@
               </dl>
               <p class="app__label">Pay with</p>
               <div class="co__pay"><span>{{icon:card}}Card</span><span class="is-on" data-co-transfer>{{icon:wallet}}Transfer</span><span>{{icon:phone}}USSD</span></div>
-              <div class="co__wa">{{icon:chat}}<span><small>Send my tickets to WhatsApp</small><b>0801 234 5678</b></span>{{icon:check-circle|co__wa-ok}}</div>
+              <div class="co__wa">{{icon:whatsapp}}<span><small>Send my tickets to WhatsApp</small><b>0801 234 5678</b></span>{{icon:check-circle|co__wa-ok}}</div>
               <div class="co__btn" data-co-btn><i></i><span class="co__btn-l" data-co-label>Pay ₦10,700</span><span class="co__btn-d">{{icon:check-circle}}Paid</span></div>
             </section>
 
@@ -174,7 +174,7 @@
 
       <p class="tag tag--a" data-tag data-for="0">{{icon:location|tag__i}}Events near you</p>
       <p class="tag tag--b" data-tag data-for="1">{{icon:wallet|tag__i}}Paid by transfer</p>
-      <p class="tag tag--c" data-tag data-for="2">{{icon:chat|tag__i}}Ticket sent on WhatsApp</p>
+      <p class="tag tag--c" data-tag data-for="2">{{icon:whatsapp|tag__i}}Ticket sent on WhatsApp</p>
       <p class="tag tag--d" data-tag data-for="2">{{icon:users|tag__i}}214 of 350 checked in</p>
 
       <div class="live__foot">
@@ -240,11 +240,16 @@
         <div class="step__text">
           <p class="step__num"><span>01</span>Create</p>
           <h3 class="h3">Create your event</h3>
-          <p>Add the date, the venue and a photo. Sell tickets, take free RSVPs, or both.</p>
+          <p>Add the date and venue, a banner, and your logo or photo. Sell tickets, take free RSVPs, or both.</p>
         </div>
         <div class="step__card">
           <span class="stamp">Event · Draft saved</span>
           <div class="mini mini--form">
+            <div class="mini__banner">
+              <span class="mini__cover">{{icon:image}}Event banner</span>
+              <span class="mini__logo" aria-hidden="true">NTS</span>
+              <span class="mini__logo-tip">Your logo</span>
+            </div>
             <p class="mini__label">Event name</p>
             <p class="mini__input">Northern Tech Summit</p>
             <div class="mini__row">
@@ -293,7 +298,7 @@
               <span class="pay__opt">{{icon:wallet}}Transfer</span>
               <span class="pay__opt">{{icon:phone}}USSD</span>
             </div>
-            <div class="notice">{{icon:check-circle}}<span><b>Ticket sent</b><small>A. Musa · Regular · on WhatsApp</small></span></div>
+            <div class="notice">{{icon:whatsapp}}<span><b>Ticket sent</b><small>A. Musa · Regular · on WhatsApp</small></span></div>
           </div>
         </div>
       </li>
@@ -392,12 +397,12 @@
         <div class="bank">
           <span class="bank__chip">{{svg:assets/brand/ganor-symbol-small-currentcolor.svg}}</span>
           <p class="bank__label">Paid to your bank</p>
-          <p class="bank__amount">₦1,050,000</p>
+          <p class="bank__amount" data-roll="₦1,050,000">₦1,050,000</p>
           <p class="bank__acct">Account ending 4021</p>
         </div>
         <ul class="ledger">
-          <li><span>Regular × 180</span><b>₦900,000</b></li>
-          <li><span>VIP × 10</span><b>₦150,000</b></li>
+          <li><span>Regular × 180</span><b data-roll="₦900,000">₦900,000</b></li>
+          <li><span>VIP × 10</span><b data-roll="₦150,000">₦150,000</b></li>
           <li><span>Free RSVP × 24</span><b>₦0</b></li>
         </ul>
       </div>
@@ -426,14 +431,14 @@
 
       <div class="rng">
         <div class="rng__top"><label for="calc-price">Ticket price</label><output for="calc-price" data-out="price">₦5,000</output></div>
-        <input id="calc-price" type="range" min="500" max="100000" step="500" value="5000" data-in="price">
+        <div class="rng__ctl"><input id="calc-price" type="range" min="500" max="100000" step="500" value="5000" data-in="price"><span class="rng__knob" aria-hidden="true"></span></div>
         <div class="rng__scale" aria-hidden="true"><span>₦500</span><span>₦50,000</span><span>₦100,000</span></div>
       </div>
 
       <div class="rng">
         <div class="rng__top"><label for="calc-qty">Tickets you expect to sell</label><output for="calc-qty" data-out="qty">200 tickets</output></div>
-        <input id="calc-qty" type="range" min="10" max="3000" step="10" value="200" data-in="qty">
-        <div class="rng__scale" aria-hidden="true"><span>10</span><span>1,500</span><span>3,000</span></div>
+        <div class="rng__ctl"><input id="calc-qty" type="range" min="10" max="10000" step="10" value="200" data-in="qty"><span class="rng__knob" aria-hidden="true"></span></div>
+        <div class="rng__scale" aria-hidden="true"><span>10</span><span>5,000</span><span>10,000</span></div>
       </div>
     </div>
 
@@ -540,7 +545,7 @@
       <fieldset class="reach">
         <legend class="field__label">How should we reach you?</legend>
         <div class="reach__opts">
-          <label class="role"><input type="radio" name="reach" value="whatsapp" checked><span>{{icon:chat}}WhatsApp</span></label>
+          <label class="role"><input type="radio" name="reach" value="whatsapp" checked><span>{{icon:whatsapp}}WhatsApp</span></label>
           <label class="role"><input type="radio" name="reach" value="email"><span>{{icon:mail}}Email</span></label>
         </div>
       </fieldset>
