@@ -22,7 +22,10 @@ SOCIAL = [
     "https://www.youtube.com/@ganor.ng",
 ]
 
-# slug: (path, title, description, share image, image alt, breadcrumb name)
+# slug: (path, share title, description, share image, image alt, breadcrumb name)
+# Browser-tab titles are kept short so they show in full on a tab
+TAB = {"index": "Ganor · Your city, found.", "docs": "Docs · Ganor", "terms": "Terms · Ganor",
+       "privacy": "Privacy · Ganor", "refunds": "Refunds · Ganor", "credits": "Credits · Ganor"}
 PAGES = {
     "index": (
         "/",
@@ -165,7 +168,7 @@ def head(slug: str, page_html: str) -> str:
     image = f"{SITE}/assets/img/{img}"
     e = lambda s: html.escape(s, quote=True)
     return "\n".join([
-        f"<title>{e(title)}</title>",
+        f"<title>{e(TAB[slug])}</title>",
         f'<meta name="description" content="{e(desc)}">',
         f'<link rel="canonical" href="{url}">',
         '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">',

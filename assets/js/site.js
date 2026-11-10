@@ -324,7 +324,7 @@
     const title = $('[data-gate-title]', gate);
     const sub = $('[data-gate-sub]', gate);
     const STATES = {
-      ok: { icon: 'admitted', title: 'Admitted', sub: 'A. Musa · Regular · Admit one' },
+      ok: { icon: 'admitted', title: 'Admitted', sub: 'Abdallah Nasir · Regular · Admit one' },
       warn: { icon: 'already-checked-in', title: 'Already checked in', sub: 'First scanned 10:12 · Gate 1' },
       bad: { icon: 'not-valid', title: 'Not a valid ticket', sub: 'Send the guest to the help desk' }
     };
