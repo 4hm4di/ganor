@@ -9,6 +9,8 @@ import json
 import re
 
 SITE = "https://ganor.ng"
+# Bump when the share images change, so WhatsApp, Facebook and X fetch the new ones.
+OG_VERSION = "2"
 NAME = "Ganor"
 LOCALE = "en_NG"
 X_HANDLE = "@ganorng"
@@ -157,7 +159,7 @@ def jsonld(slug: str, page_html: str) -> str:
 def head(slug: str, page_html: str) -> str:
     path, title, desc, img, alt, _ = PAGES[slug]
     url = SITE + path
-    image = f"{SITE}/assets/img/{img}"
+    image = f"{SITE}/assets/img/{img}?v={OG_VERSION}"
     e = lambda s: html.escape(s, quote=True)
     return "\n".join([
         f"<title>{e(TAB[slug])}</title>",

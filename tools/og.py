@@ -19,23 +19,24 @@ def icon(name, cls=""):
     return f'<svg class="i {cls}"><use href="#i-{name}"/></svg>'
 
 
-# file, kicker, title (use <br>), subtitle, big icon, chips [(icon, text)], url
+# file, kicker, title (use <br>), subtitle, phone screen (find|pay|ticket), chips [(icon, text)], url
+# The phone screens are taken from the live hero on index.html (see shoot_phones below).
 CARDS = [
     ("og.png", "Events · Tickets · Places", "Your city,<br>found.",
      "Find what’s happening near you. Host an event, sell tickets, scan guests in.",
-     None, [("search", "Find events"), ("ticket", "Sell tickets"), ("scan", "Gate check-in"), ("shop", "Places")], "ganor.ng"),
+     "find", [("search", "Find events"), ("ticket", "Sell tickets"), ("scan", "Check-in")], "ganor.ng"),
     ("og-docs.png", "Docs", "How Ganor<br>works.",
      "Create an event, sell tickets, share one link and check guests in.",
-     "doc", [("calendar", "Create"), ("share", "Share"), ("ticket", "Sell"), ("scan", "Gate")], "ganor.ng/docs"),
+     "pay", [("calendar", "Create"), ("share", "Share"), ("scan", "Gate")], "ganor.ng/docs"),
     ("og-terms.png", "Legal", "Terms<br>of use.",
      "The rules for hosting, buying and listing on Ganor, written to be read.",
-     "shield", [], "ganor.ng/terms"),
+     "ticket", [], "ganor.ng/terms"),
     ("og-privacy.png", "Legal", "Privacy<br>policy.",
      "What we collect, why, and your rights under the Nigeria Data Protection Act 2023.",
-     "lock", [], "ganor.ng/privacy"),
+     "find", [], "ganor.ng/privacy"),
     ("og-refunds.png", "Legal", "Refund<br>policy.",
      "Ask the host first. If an event is cancelled, you get your money back.",
-     "wallet", [], "ganor.ng/refunds"),
+     "pay", [], "ganor.ng/refunds"),
 ]
 
 CSS = """
@@ -52,24 +53,17 @@ p.s{margin:18px 0 0;max-width:640px;font:500 26px/1.35 Inter;color:rgba(255,255,
 .chip{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 20px 0 14px;border-radius:999px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28);font:600 20px/1 Inter}
 .chip .i{width:26px;height:26px}
 .url{display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:999px;background:#fff;color:#3730B8;font:700 20px/1 Inter}
-.tile{position:absolute;right:84px;top:50%;width:300px;height:300px;margin-top:-150px;border-radius:72px;background:#fff;color:#3730B8;display:grid;place-items:center;transform:rotate(-6deg);box-shadow:0 40px 80px -30px rgba(21,19,42,.55)}
-.tile .i{width:168px;height:168px}
-.tile:after{content:"";position:absolute;inset:-22px;border-radius:90px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
-.stack{position:absolute;right:76px;top:96px;display:grid;gap:18px}
-.stack .t{width:116px;height:116px;border-radius:32px;background:#fff;color:#3730B8;display:grid;place-items:center;box-shadow:0 26px 50px -24px rgba(21,19,42,.6)}
-.stack .t .i{width:64px;height:64px}
-.stack .t:nth-child(1){transform:translateX(-60px) rotate(-8deg)}
-.stack .t:nth-child(2){transform:translateX(30px) rotate(5deg)}
-.stack .t:nth-child(3){transform:translateX(-30px) rotate(-3deg)}
+.ph{position:absolute;right:96px;top:62px;width:330px;transform:rotate(-5deg);transform-origin:50% 0;filter:drop-shadow(0 40px 60px rgba(21,19,42,.45))}
+.ph img{display:block;width:100%;height:auto}
+.in{max-width:850px}
+.foot{flex-wrap:nowrap!important}
+p.s{max-width:600px}
 """
 
 
-def card_html(kicker, title, sub, big, chips, url):
+def card_html(kicker, title, sub, screen, chips, url):
     chips_html = "".join(f'<span class="chip">{icon(i)}{t}</span>' for i, t in chips)
-    if big:
-        art = f'<div class="tile">{icon(big)}</div>'
-    else:
-        art = '<div class="stack">' + "".join(f'<div class="t">{icon(n)}</div>' for n in ("ticket", "location", "scan")) + "</div>"
+    art = f'<div class="ph"><img src="_phones/{screen}.png" alt=""></div>'
     return f"""<!doctype html><html><head><meta charset="utf-8">
 <link rel="stylesheet" href="../assets/css/fonts.css"><style>{CSS}</style></head><body>
 {SPRITE}
@@ -82,10 +76,48 @@ def card_html(kicker, title, sub, big, chips, url):
 </div></div></body></html>"""
 
 
+SET_SCREEN = """(i) => {
+  const live = document.querySelector('[data-live]');
+  live.querySelectorAll('.scr').forEach((s, k) => { s.classList.toggle('is-on', k === i); s.classList.remove('is-out'); });
+  const t = live.querySelector('[data-type]'); t.textContent = t.dataset.type;
+  const caret = live.querySelector('.app__caret'); if (caret) caret.style.display = 'none';
+  if (i === 1) {
+    const set = (q, v) => { live.querySelector(q).textContent = v; };
+    set('[data-qty]', '2'); set('[data-co-sub]', '₦10,000'); set('[data-co-fee]', '₦700');
+    set('[data-co-total]', '₦10,700'); set('[data-co-label]', 'Pay ₦10,700');
+  }
+  if (i === 2) live.querySelector('.scr--tk').classList.add('is-admitted');
+}"""
+FREEZE = """*{animation:none!important;transition:none!important}
+[data-rise]{opacity:1!important;transform:none!important} .phone{box-shadow:none!important} [data-tag]{display:none!important}
+html,body,.hero,.hero *:not(.phone):not(.phone *){background:transparent!important}
+.hero::before,.hero::after,.hero__visual::before,.hero__visual::after{display:none!important}"""
+
+
+def shoot_phones(b, folder):
+    """Screenshot the hero phone on index.html in each of its three screens (transparent PNGs)."""
+    folder.mkdir(exist_ok=True)
+    ctx = b.new_context(viewport={"width": 1280, "height": 1000}, device_scale_factor=2, reduced_motion="reduce")
+    ctx.add_init_script("try{localStorage.setItem('ganor-intro','1')}catch(e){}")
+    pg = ctx.new_page()
+    pg.goto((ROOT / "index.html").as_uri())
+    pg.wait_for_timeout(1500)
+    pg.add_style_tag(content=FREEZE)
+    pg.evaluate("() => document.querySelectorAll('[data-live-pause]').forEach(b => b.click())")
+    for i, name in enumerate(("find", "pay", "ticket")):
+        pg.evaluate(SET_SCREEN, i)
+        pg.wait_for_timeout(300)
+        pg.locator(".hero .phone").screenshot(path=str(folder / f"{name}.png"), omit_background=True)
+    ctx.close()
+
+
 def main():
+    import shutil
     tmp = ROOT / "tools" / "_og.html"
+    phones = ROOT / "tools" / "_phones"
     with sync_playwright() as p:
         b = p.chromium.launch(executable_path=os.environ.get("CHROME") or None)
+        shoot_phones(b, phones)
         pg = b.new_page(viewport={"width": 1200, "height": 630})
         for name, *rest in CARDS:
             tmp.write_text(card_html(*rest))
@@ -96,6 +128,7 @@ def main():
             print("made", name)
         b.close()
     tmp.unlink()
+    shutil.rmtree(phones)
 
 
 if __name__ == "__main__":
