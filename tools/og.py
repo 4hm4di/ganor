@@ -21,7 +21,7 @@ def icon(name, cls=""):
 
 # file, kicker, title (use <br>), subtitle, big icon, chips [(icon, text)], url
 CARDS = [
-    # The home card shows two app screens from the hero, in white phones set in a tray.
+    # The home card shows two app screens from the hero, sized to run from the logo line to the chip line.
     ("og.png", "Events · Tickets · Places", "Your city,<br>found.",
      None, "phones", [("search", "Find events"), ("ticket", "Sell tickets"), ("scan", "Check-in")], "ganor.ng"),
     ("og-docs.png", "Docs", "How Ganor<br>works.",
@@ -63,12 +63,10 @@ p.s{margin:18px 0 0;max-width:640px;font:500 26px/1.35 Inter;color:rgba(255,255,
 .stack .t:nth-child(3){transform:translateX(-30px) rotate(-3deg)}
 .home .in{max-width:640px}
 .home .foot{max-width:590px}
-.tray{position:absolute;left:668px;right:56px;top:46px;height:700px;border-radius:64px;background:linear-gradient(180deg,#EEEFF5 0%,#DCDEE8 100%);box-shadow:inset 0 3px 0 rgba(255,255,255,.9),inset 0 -40px 60px rgba(55,48,184,.10),0 40px 80px -30px rgba(21,19,42,.6)}
-.tray:before{content:"";position:absolute;inset:18px;border-radius:48px;background:#E3E5EE;box-shadow:inset 0 6px 14px rgba(21,19,42,.14)}
-.ph{position:absolute;top:84px;width:186px;filter:drop-shadow(0 26px 30px rgba(21,19,42,.28))}
+.ph{position:absolute;top:70px;width:244px;filter:drop-shadow(0 30px 40px rgba(10,8,40,.45))}
 .ph img{display:block;width:100%;height:auto}
-.ph--l{left:calc(50% - 194px);transform:rotate(-8deg);transform-origin:100% 100%}
-.ph--r{right:calc(50% - 194px);transform:rotate(8deg);transform-origin:0 100%}
+.ph--l{left:636px;transform:rotate(-5deg)}
+.ph--r{left:864px;transform:rotate(5deg);filter:drop-shadow(-18px 18px 26px rgba(10,8,40,.55)) drop-shadow(0 30px 40px rgba(10,8,40,.35))}
 """
 
 
@@ -76,8 +74,8 @@ def card_html(kicker, title, sub, big, chips, url):
     chips_html = "".join(f'<span class="chip">{icon(i)}{t}</span>' for i, t in chips)
     home = big == "phones"
     if home:
-        art = ('<div class="tray"><div class="ph ph--l"><img src="_phones/find.png" alt=""></div>'
-               '<div class="ph ph--r"><img src="_phones/ticket.png" alt=""></div></div>')
+        art = ('<div class="ph ph--l"><img src="_phones/find.png" alt=""></div>'
+               '<div class="ph ph--r"><img src="_phones/ticket.png" alt=""></div>')
     elif big:
         art = f'<div class="tile">{icon(big)}</div>'
     else:
@@ -101,10 +99,10 @@ SET_SCREEN = """(i) => {
   const caret = live.querySelector('.app__caret'); if (caret) caret.style.display = 'none';
   if (i === 2) live.querySelector('.scr--tk').classList.add('is-admitted');
 }"""
-# Freeze the hero and turn its phone into a white one, like the share-image mockup.
+# Freeze the hero phone on one screen, without its shadow (the card adds its own).
 FREEZE = """*{animation:none!important;transition:none!important}
 [data-rise]{opacity:1!important;transform:none!important} [data-tag]{display:none!important}
-.phone{background:linear-gradient(160deg,#FFFFFF,#E9EAF1)!important;box-shadow:inset 0 0 0 1.5px #D3D5E0,inset 0 0 0 5px #F7F7FA!important}
+.phone{box-shadow:none!important}
 html,body,.hero,.hero *:not(.phone):not(.phone *){background:transparent!important}
 .hero::before,.hero::after,.hero__visual::before,.hero__visual::after{display:none!important}"""
 

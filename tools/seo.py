@@ -10,7 +10,7 @@ import re
 
 SITE = "https://ganor.ng"
 # Bump when the share images change, so WhatsApp, Facebook and X fetch the new ones.
-OG_VERSION = "3"
+OG_VERSION = "4"
 NAME = "Ganor"
 LOCALE = "en_NG"
 X_HANDLE = "@ganorng"
