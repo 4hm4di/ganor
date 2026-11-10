@@ -1,4 +1,4 @@
-"""Writes the inner pages (docs, legal, credits) into src/ from the content below.
+"""Writes the inner pages (docs, legal) into src/ from the content below.
 Run: python3 tools/pages.py && python3 tools/build.py
 """
 from pathlib import Path
@@ -182,7 +182,15 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a guest or a
       <p>Nothing in these terms limits rights you have under Nigerian consumer law, including the Federal Competition and Consumer Protection Act 2018.</p>"""),
  ("changes", "Changes and law", "settings", """
       <p>We may update these terms. If a change is important, we’ll tell you before it applies. These terms are governed by the laws of the Federal Republic of Nigeria.</p>"""),
- ("contact", "Contact", "support", CONTACT),
+ ("credits", "Credits and licences", "star", """
+      <p>Ganor uses work by others, under these licences:</p>
+      <ul>
+        <li><b>Icons:</b> the <a href="https://icon-sets.iconify.design/solar/" rel="noopener">Solar icon set</a> by 480 Design, licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>, recoloured and reorganised for Ganor.</li>
+        <li><b>Social icons:</b> Facebook, Instagram and YouTube from <a href="https://feathericons.com" rel="noopener">Feather</a>; TikTok, X and WhatsApp from <a href="https://tabler.io/icons" rel="noopener">Tabler Icons</a>. Both MIT licensed. The platform logos are trademarks of their owners and are used only to link to Ganor’s accounts.</li>
+        <li><b>Typefaces:</b> Bricolage Grotesque and Inter, licensed under the <a href="https://openfontlicense.org" rel="noopener">SIL Open Font License 1.1</a>.</li>
+      </ul>
+      <p>The Ganor name, logo and symbol are Ganor’s. Please don’t use them without asking.</p>"""),
+  ("contact", "Contact", "support", CONTACT),
  ], meta=f"Last updated {UPDATED}")
 
 # ---------------- PRIVACY ----------------
@@ -259,13 +267,4 @@ page("refunds", "Refund policy", "How refunds work on Ganor: who to contact, wha
  ("contact", "Contact", "support", CONTACT),
  ], meta=f"Last updated {UPDATED}")
 
-# ---------------- CREDITS ----------------
-page("credits", "Credits and licences", "Credits and licences for the icons, typefaces and logos used on ganor.ng.",
- "Legal", "Credits and licences", "The work of others that helps make Ganor.",
- [
- ("icons", "Icons", "star", """<p>Icons from the <a href="https://icon-sets.iconify.design/solar/" rel="noopener">Solar icon set</a> by 480 Design, licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>, recoloured and reorganised for Ganor.</p>"""),
- ("type", "Typefaces", "pen", """<p>Bricolage Grotesque and Inter, both licensed under the <a href="https://openfontlicense.org" rel="noopener">SIL Open Font License 1.1</a>. Font files are hosted on this site; licence texts are in <a href="assets/fonts/OFL-Inter.txt">assets/fonts</a>.</p>"""),
- ("social", "Social media logos", "share", """<p>Instagram, TikTok, X, Facebook, YouTube and WhatsApp logos are trademarks of their owners and are used only to link to Ganor’s accounts. Facebook, Instagram and YouTube icons from <a href="https://feathericons.com" rel="noopener">Feather</a> (MIT). TikTok, X and WhatsApp icons from <a href="https://tabler.io/icons" rel="noopener">Tabler Icons</a> (MIT).</p>"""),
- ("ganor", "Ganor", "verified", """<p>The Ganor name, logo and symbol are Ganor’s. Please don’t use them without asking.</p>"""),
- ])
 print("pages written")

@@ -36,9 +36,6 @@ CARDS = [
     ("og-refunds.png", "Legal", "Refund<br>policy.",
      "Ask the host first. If an event is cancelled, you get your money back.",
      "wallet", [], "ganor.ng/refunds"),
-    ("og-credits.png", "Credits", "Credits and<br>licences.",
-     "The icons, typefaces and logos that help make Ganor.",
-     "star", [], "ganor.ng/credits"),
 ]
 
 CSS = """

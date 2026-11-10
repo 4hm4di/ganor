@@ -25,7 +25,7 @@ SOCIAL = [
 # slug: (path, share title, description, share image, image alt, breadcrumb name)
 # Browser-tab titles are kept short so they show in full on a tab
 TAB = {"index": "Ganor · Your city, found.", "docs": "Docs · Ganor", "terms": "Terms · Ganor",
-       "privacy": "Privacy · Ganor", "refunds": "Refunds · Ganor", "credits": "Credits · Ganor"}
+       "privacy": "Privacy · Ganor", "refunds": "Refunds · Ganor"}
 PAGES = {
     "index": (
         "/",
@@ -70,14 +70,6 @@ PAGES = {
         "og-refunds.png",
         "Ganor refund policy.",
         "Refund policy",
-    ),
-    "credits": (
-        "/credits.html",
-        "Credits and licences · Ganor",
-        "Credits and licences for the icons, typefaces and logos used on ganor.ng.",
-        "og-credits.png",
-        "Ganor credits and licences.",
-        "Credits",
     ),
 }
 
