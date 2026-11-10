@@ -36,22 +36,23 @@
         <span class="line"><span>Your city,</span></span>
         <span class="line"><span>found.</span></span>
       </h1>
-      <p class="hero__lede" data-rise>Find what’s happening near you, from weddings and conferences to lectures and campus nights. Hosting? Share one link, sell tickets and scan guests in at the gate.</p>
+      <p class="hero__lede" data-rise>Find what’s happening near you, from conferences and trade fairs to lectures and campus nights. Hosting? Share one link, sell tickets and scan guests in at the gate.</p>
 
       <form class="search" data-search role="search" aria-label="Find events" data-rise>
         <label class="search__field search__field--what">
           <span class="search__label">What are you looking for?</span>
-          <input type="search" name="q" placeholder="Wedding, lecture…" autocomplete="off" enterkeyhint="search">
+          <input type="search" name="q" placeholder="Trade fair, lecture…" autocomplete="off" enterkeyhint="search">
         </label>
         <label class="search__field">
           <span class="search__label">Type</span>
           <select name="type">
             <option value="">All events</option>
-            <option>Weddings</option>
+            <option>Trade fairs</option>
             <option>Conferences</option>
             <option>Lectures</option>
             <option>Campus events</option>
             <option>Associations</option>
+            <option>Cooperative launches</option>
             <option>Shows</option>
             <option>Workshops</option>
           </select>
@@ -79,7 +80,7 @@
       <p class="search__msg" data-search-msg role="status" aria-live="polite" hidden></p>
       <div class="chips" data-rise>
         <span class="chips__label">Popular:</span>
-        <button class="chip" type="button" data-chip="Weddings">Weddings</button>
+        <button class="chip" type="button" data-chip="Trade fairs">Trade fairs</button>
         <button class="chip" type="button" data-chip="Conferences">Conferences</button>
         <button class="chip" type="button" data-chip="Lectures">Lectures</button>
         <button class="chip" type="button" data-chip="Campus events">Campus events</button>
@@ -103,7 +104,7 @@
               <div class="app__top">{{svg:assets/brand/ganor-lockup-currentcolor.svg|app__lockup}}<span class="app__av">AN</span></div>
               <p class="app__hello">Find something to go to</p>
               <div class="app__search">{{icon:search}}<span data-type="Lectures and summits near me"></span><i class="app__caret"></i></div>
-              <div class="app__chips"><span>All</span><span class="is-on">Lectures</span><span>Summits</span><span>Weddings</span></div>
+              <div class="app__chips"><span>All</span><span class="is-on">Lectures</span><span>Summits</span><span>Trade fairs</span></div>
               <ul class="evs">
                 <li class="ev"><span class="ev__date"><b>12</b>Dec</span><span class="ev__txt"><b>Annual Public Lecture</b><small>{{icon:location}}Kano · Fri 4:00 pm</small></span><span class="ev__price">Free</span></li>
                 <li class="ev ev--pick"><span class="ev__date"><b>13</b>Dec</span><span class="ev__txt"><b>Northern Tech Summit</b><small>{{icon:location}}Abuja · Sat 9:00 am</small></span><span class="ev__price">₦5,000</span><i class="tap" aria-hidden="true"></i></li>
@@ -197,12 +198,12 @@
     <p class="head__lede" data-reveal>The gatherings that matter to you, not just concerts and parties. Pick what you’re looking for and we’ll tell you when it’s live.</p>
   </div>
   <div class="cats">
-    <a class="cat" href="#join" data-interest="Weddings" data-reveal><span class="cat__icon">{{icon:hearts}}</span><span class="cat__name">Weddings</span><span class="cat__note">Walimas, dinners, receptions</span><span class="cat__go">{{icon:arrow}}</span></a>
+    <a class="cat" href="#join" data-interest="Trade fairs" data-reveal><span class="cat__icon">{{icon:market}}</span><span class="cat__name">Trade fairs</span><span class="cat__note">Expos, exhibitions and trade shows</span><span class="cat__go">{{icon:arrow}}</span></a>
     <a class="cat" href="#join" data-interest="Conferences" data-reveal><span class="cat__icon">{{icon:group}}</span><span class="cat__name">Conferences</span><span class="cat__note">Forums, summits, seminars</span><span class="cat__go">{{icon:arrow}}</span></a>
     <a class="cat" href="#join" data-interest="Lectures" data-reveal><span class="cat__icon">{{icon:mic}}</span><span class="cat__name">Lectures</span><span class="cat__note">Public and religious lectures</span><span class="cat__go">{{icon:arrow}}</span></a>
     <a class="cat" href="#join" data-interest="Campus events" data-reveal><span class="cat__icon">{{icon:cap}}</span><span class="cat__name">Campus events</span><span class="cat__note">Dinners, weeks, fairs</span><span class="cat__go">{{icon:arrow}}</span></a>
-    <a class="cat" href="#join" data-interest="Associations" data-reveal><span class="cat__icon">{{icon:pair}}</span><span class="cat__name">Associations</span><span class="cat__note">Meetings and launches</span><span class="cat__go">{{icon:arrow}}</span></a>
-    <a class="cat" href="#join" data-interest="Naming ceremonies" data-reveal><span class="cat__icon">{{icon:gift}}</span><span class="cat__name">Family gatherings</span><span class="cat__note">Naming ceremonies and more</span><span class="cat__go">{{icon:arrow}}</span></a>
+    <a class="cat" href="#join" data-interest="Associations" data-reveal><span class="cat__icon">{{icon:pair}}</span><span class="cat__name">Associations</span><span class="cat__note">Meetings, dinners and elections</span><span class="cat__go">{{icon:arrow}}</span></a>
+    <a class="cat" href="#join" data-interest="Cooperative launches" data-reveal><span class="cat__icon">{{icon:coop}}</span><span class="cat__name">Cooperative launches</span><span class="cat__note">Launches, AGMs and member days</span><span class="cat__go">{{icon:arrow}}</span></a>
     <a class="cat" href="#join" data-interest="Workshops" data-reveal><span class="cat__icon">{{icon:book}}</span><span class="cat__name">Workshops</span><span class="cat__note">Trainings and classes</span><span class="cat__go">{{icon:arrow}}</span></a>
     <a class="cat" href="#join" data-interest="Shows" data-reveal><span class="cat__icon">{{icon:music}}</span><span class="cat__name">Shows</span><span class="cat__note">Concerts, plays, comedy</span><span class="cat__go">{{icon:arrow}}</span></a>
   </div>
@@ -552,12 +553,12 @@
         <span class="field__label">What kind of event? <small>(optional)</small></span>
         <select name="interest">
           <option value="">Choose one</option>
-          <option>Weddings</option>
+          <option>Trade fairs</option>
           <option>Conferences</option>
           <option>Lectures</option>
           <option>Campus events</option>
           <option>Associations</option>
-          <option>Naming ceremonies</option>
+          <option>Cooperative launches</option>
           <option>Workshops</option>
           <option>Shows</option>
         </select>
