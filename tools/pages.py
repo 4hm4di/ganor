@@ -122,7 +122,7 @@ page("docs", "Docs", "How Ganor works for hosts, guests and businesses: creating
       <p><b>Contact the host.</b> The host runs the event, so questions about the venue, the programme, changes or refunds go to them. Every event page shows how to reach the host.</p>
       <h3>When to contact Ganor</h3>
       <p>Message us if you paid but your ticket didn’t arrive, if you were charged twice, or if you can’t reach the host about a cancelled event. See the <a href="refunds.html">refund policy</a>.</p>"""),
- ("halal", "Halal-friendly events", "verified", """
+ ("halal", "Halal-friendly events", "halal", """
       <p>Hosts can mark an event <b>Halal-friendly</b> so guests who care about it can find it. Guests can search for it with the Halal-friendly filter. When you add the label, you tick what applies, and the event page shows exactly that list.</p>
       <h3>How the event is run</h3>
       <ul>

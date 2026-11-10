@@ -80,13 +80,12 @@
         <button class="btn btn--primary search__go" type="submit"><span>Find</span><span class="btn__arrow">{{icon:search}}</span></button>
       </form>
       <p class="search__msg" data-search-msg role="status" aria-live="polite" hidden></p>
-      <div class="chips" data-rise>
-        <span class="chips__label">Popular:</span>
-        <button class="chip" type="button" data-chip="Trade fairs">Trade fairs</button>
-        <button class="chip" type="button" data-chip="Conferences">Conferences</button>
-        <button class="chip" type="button" data-chip="Lectures">Lectures</button>
-        <button class="chip" type="button" data-chip="Campus events">Campus events</button>
-        <button class="chip chip--halal" type="button" aria-pressed="false" data-halal>{{icon:verified}}Halal-friendly</button>
+      <div class="chips" data-rise role="group" aria-label="Popular searches">
+        <button class="chip" type="button" data-chip="Trade fairs">{{icon:market}}Trade fairs</button>
+        <button class="chip" type="button" data-chip="Conferences">{{icon:group}}Conferences</button>
+        <button class="chip" type="button" data-chip="Lectures">{{icon:mic}}Lectures</button>
+        <button class="chip" type="button" data-chip="Campus events">{{icon:cap}}Campus events</button>
+        <button class="chip chip--halal" type="button" aria-pressed="false" data-halal>{{icon:halal}}Halal-friendly</button>
       </div>
     </div>
 
@@ -111,7 +110,7 @@
               <ul class="evs">
                 <li class="ev"><span class="ev__date"><b>12</b>Dec</span><span class="ev__txt"><b>Annual Public Lecture</b><small>{{icon:location}}Kano · Fri 4:00 pm</small></span><span class="ev__price">Free</span></li>
                 <li class="ev ev--pick"><span class="ev__date"><b>13</b>Dec</span><span class="ev__txt"><b>Northern Tech Summit</b><small>{{icon:location}}Abuja · Sat 9:00 am</small></span><span class="ev__price">₦5,000</span><i class="tap" aria-hidden="true"></i></li>
-                <li class="ev"><span class="ev__date"><b>20</b>Dec</span><span class="ev__txt"><b>Halal Trade Fair</b><small>{{icon:location}}Ilorin · Sat 10:00 am</small><em class="ev__halal">{{icon:verified}}Halal-friendly</em></span><span class="ev__price">Free</span></li>
+                <li class="ev"><span class="ev__date"><b>20</b>Dec</span><span class="ev__txt"><b>Halal Trade Fair</b><small>{{icon:location}}Ilorin · Sat 10:00 am</small><em class="ev__halal">{{icon:halal}}Halal-friendly</em></span><span class="ev__price">Free</span></li>
                 <li class="ev"><span class="ev__date"><b>27</b>Dec</span><span class="ev__txt"><b>Founders’ Meetup</b><small>{{icon:location}}Kaduna · Sat 2:00 pm</small></span><span class="ev__price">Free</span></li>
               </ul>
               <div class="app__tabs"><span class="is-on">{{icon:compass}}Events</span><span>{{icon:shop}}Places</span><span>{{icon:ticket}}Tickets</span><span>{{icon:user}}Me</span></div>

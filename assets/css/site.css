@@ -259,10 +259,11 @@ button, .btn, .chip, .nav__links a, .cat, .role span { -webkit-user-select: none
 }
 .chip:active { transform: scale(0.96); }
 @media (hover: hover) and (pointer: fine) { .chip:hover { background: rgba(255,255,255,.12); } }
-.chip--halal { display: inline-flex; align-items: center; gap: 6px; padding-left: 10px; }
-.chip--halal .i { width: 16px; height: 16px; color: var(--ganor-marigold); }
+.chips .chip { display: inline-flex; align-items: center; gap: 6px; padding-left: 10px; }
+.chips .chip .i { width: 16px; height: 16px; flex: none; color: var(--ganor-lavender); }
+.chips .chip--halal .i { color: var(--ganor-marigold); }
+.chips .chip--halal[aria-pressed="true"] .i { color: #1C7A45; }
 .chip--halal[aria-pressed="true"] { background: #fff; color: var(--ganor-indigo); box-shadow: none; }
-.chip--halal[aria-pressed="true"] .i { color: var(--ganor-success, #1C7A45); }
 
 /* Phone + sample ticket */
 .hero__visual { position: relative; justify-self: center; width: min(340px, 82vw); padding-block: 12px; }
