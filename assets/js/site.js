@@ -38,7 +38,7 @@
       bar.style.setProperty('--p', ease(t));
       if (t < 1 || (!fontsReady && now - start < 2500)) { requestAnimationFrame(tick); return; }
       intro.classList.add('is-out');
-      try { sessionStorage.setItem('ganor-intro', '1'); } catch (e) {}
+      try { localStorage.setItem('ganor-intro', '1'); } catch (e) {}
       setTimeout(done, 260);
       setTimeout(() => intro.classList.add('is-gone'), 900);
     }
@@ -328,18 +328,21 @@
     if (!form) return;
     const done = $('[data-join-done]', form);
     const label = $('[data-join-label]', form);
+    const inbox = form.dataset.email || 'support@ganor.ng';
     const normalise = v => v.replace(/[^\d+]/g, '').replace(/^\+/, '');
     const validPhone = v => /^(0[789][01]\d{8}|234[789][01]\d{8})$/.test(normalise(v));
+    const validEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
     const fieldOf = name => form.elements[name].closest('.field');
+    const reach = () => form.reach.value;
 
     const check = name => {
       const el = form.elements[name];
-      const ok = name === 'phone' ? validPhone(el.value) : el.value.trim().length > 1;
+      const ok = name === 'phone' ? validPhone(el.value) : name === 'email' ? validEmail(el.value) : el.value.trim().length > 1;
       fieldOf(name).classList.toggle('is-invalid', !ok);
       el.setAttribute('aria-invalid', String(!ok));
       return ok;
     };
-    ['name', 'phone'].forEach(n => {
+    ['name', 'phone', 'email'].forEach(n => {
       const el = form.elements[n];
       const err = form.querySelector(`[data-err="${n}"]`);
       err.id = `err-${n}`;
@@ -348,38 +351,94 @@
       el.addEventListener('input', () => { if (fieldOf(n).classList.contains('is-invalid')) check(n); });
     });
 
+    // WhatsApp or email: only the chosen one is shown and required
+    const syncReach = () => {
+      const r = reach();
+      $$('[data-reach-field]', form).forEach(f => {
+        const on = f.dataset.reachField === r;
+        const input = $('input', f);
+        f.hidden = !on; input.disabled = !on; input.required = on;
+        if (!on) { f.classList.remove('is-invalid'); input.removeAttribute('aria-invalid'); }
+      });
+    };
+    $$('input[name="reach"]', form).forEach(r => r.addEventListener('change', () => {
+      syncReach();
+      const input = $(`[data-reach-field="${reach()}"] input`, form);
+      if (matchMedia('(pointer: fine)').matches) input.focus();
+    }));
+    syncReach();
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
+      const r = reach();
+      const contactField = r === 'email' ? 'email' : 'phone';
       const okName = check('name');
-      const okPhone = check('phone');
-      if (!okName || !okPhone) { form.querySelector('.is-invalid input').focus(); return; }
+      const okContact = check(contactField);
+      if (!okName || !okContact) { form.querySelector('.is-invalid input').focus(); return; }
       const role = form.role.value;
-      const roleText = { host: 'hosting an event', guest: 'looking for events', business: 'a local business' }[role];
+      const roleText = { host: 'Hosting an event', guest: 'Looking for events', business: 'A local business' }[role];
       const data = {
         name: form.elements.name.value.trim(),
-        phone: form.elements.phone.value.trim(),
-        role,
+        reach: r === 'email' ? 'Email' : 'WhatsApp',
+        whatsapp: r === 'whatsapp' ? form.elements.phone.value.trim() : '',
+        email: r === 'email' ? form.elements.email.value.trim() : '',
+        role: roleText,
         interest: form.interest.value || '',
-        source: 'ganor.ng'
+        source: location.hostname || 'ganor.ng',
+        _subject: `New Ganor sign-up: ${roleText}`,
+        _template: 'table',
+        _captcha: 'false'
       };
+      if (data.email) data._replyto = data.email;
       const endpoint = form.dataset.endpoint;
-      label.textContent = 'Sending…';
+      const btn = $('button[type="submit"]', form);
+      label.textContent = 'Sending…'; btn.disabled = true;
+      let sent = false;
       if (endpoint) {
         try {
           const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
-          if (!res.ok) throw new Error(res.status);
-        } catch (err) {
-          label.textContent = 'Try again';
-          return;
-        }
-      } else {
-        const text = `Hi Ganor, please add me to the list.\nName: ${data.name}\nI'm ${roleText}.` + (data.interest ? `\nInterested in: ${data.interest}` : '');
-        window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+          const json = await res.json().catch(() => ({}));
+          sent = res.ok && String(json.success) === 'true';
+        } catch (err) { sent = false; }
       }
+      if (!sent) {
+        // Inbox not reachable: hand the details over in the visitor's own app so the sign-up isn't lost
+        const lines = [`Hi Ganor, please add me to the list.`, `Name: ${data.name}`, `I'm: ${roleText}`]
+          .concat(data.interest ? [`Interested in: ${data.interest}`] : [])
+          .concat(data.whatsapp ? [`WhatsApp: ${data.whatsapp}`] : [`Email: ${data.email}`]);
+        const text = lines.join('\n');
+        if (r === 'email') location.href = `mailto:${inbox}?subject=${encodeURIComponent(data._subject)}&body=${encodeURIComponent(text)}`;
+        else window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+      }
+      btn.disabled = false;
       label.textContent = 'Join the list';
       done.hidden = false;
       form.reset();
+      syncReach();
     });
+  }
+
+  /* ---------- Typed line (name section) ---------- */
+  function setupTypeline() {
+    const box = $('[data-typeline]');
+    if (!box) return;
+    const out = $('[data-typed]', box);
+    const caret = $('.name__caret', box);
+    const text = $('.name__ghost', box).textContent;
+    const type = () => {
+      if (reduced.matches) { out.textContent = text; return; }
+      caret.classList.add('is-on');
+      let i = 0;
+      const step = () => {
+        out.textContent = text.slice(0, ++i);
+        if (i < text.length) setTimeout(step, text[i - 1] === ',' ? 260 : 34 + Math.random() * 40);
+      };
+      setTimeout(step, 350);
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); type(); } }, { threshold: 0.6 });
+      io.observe(box);
+    } else type();
   }
 
   /* ---------- Hero photo: set data-photo="assets/img/hero.jpg" on the hero to use a real photo ---------- */
@@ -490,12 +549,11 @@
       paint(price); paint(qty);
       out('price').textContent = naira(p);
       out('qty').textContent = q.toLocaleString('en-NG') + (q >= 3000 ? '+ tickets' : ' tickets');
-      const gross = p * q, total = f * q;
+      const gross = p * q, total = f * q; // total fee is kept for the take-home maths only
       const net = who === 'buyer' ? gross : gross - total;
       res('net').textContent = naira(net);
       res('gross').textContent = naira(gross);
       res('per').textContent = naira(f);
-      res('fee').textContent = naira(total);
       res('buyer').textContent = naira(who === 'buyer' ? p + f : p);
       res('note').textContent = who === 'buyer'
         ? 'Your full ticket price goes to your bank. Buyers pay the Ganor fee at checkout.'
@@ -570,5 +628,6 @@
   setupCalc();
   setupPlaces();
   setupDocNav();
+  setupTypeline();
   runIntro(startHero);
 })();

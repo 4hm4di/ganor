@@ -58,7 +58,7 @@ def page(slug, title, desc, label, h1, lede, sections, meta=None, nav_title="On 
 """
     (SRC / f"{slug}.html").write_text(out)
 
-CONTACT = """<p>WhatsApp or call <a href="https://wa.me/2348103301999" rel="noopener">0810 330 1999</a>, or visit us at No. 15 Guda Abdullahi Road, Farm Center, Kano.</p>"""
+CONTACT = """<p>WhatsApp or call <a href="https://wa.me/2348103301999" rel="noopener">0810 330 1999</a>, email <a href="mailto:support@ganor.ng">support@ganor.ng</a>, or visit us at No. 15 Guda Abdullahi Road, Farm Center, Kano.</p>"""
 
 # ---------------- DOCS ----------------
 page("docs", "Docs", "How Ganor works for hosts, guests and businesses: creating events, tickets, fees, sharing, gate check-in and getting help.",
@@ -198,7 +198,7 @@ page("privacy", "Privacy policy", "What personal data Ganor collects, why, who i
       <p>Ganor (“we”) runs ganor.ng and the Ganor app, and is responsible for the personal data described here. We follow the Nigeria Data Protection Act 2023.</p>"""),
  ("collect", "What we collect", "doc", """
       <h3>When you join the list</h3>
-      <p>Your name, WhatsApp number, whether you’re a host, a guest or a business, and the kind of event you’re interested in, if you tell us.</p>
+      <p>Your name, your WhatsApp number or email (you choose), whether you’re a host, a guest or a business, and the kind of event you’re interested in, if you tell us.</p>
       <h3>When you use Ganor</h3>
       <ul>
         <li><b>Account:</b> name, phone number, email and password.</li>
@@ -222,7 +222,7 @@ page("privacy", "Privacy policy", "What personal data Ganor collects, why, who i
       <ul>
         <li><b>The host of an event you attend:</b> the name on your ticket, your ticket type and your check-in, so they can run their event. Hosts may only use this for that event.</li>
         <li><b>Payment partners:</b> to process payments and payouts.</li>
-        <li><b>Messaging and hosting providers:</b> to send WhatsApp messages and run our service, under contracts that protect your data.</li>
+        <li><b>Messaging, email and hosting providers:</b> to send WhatsApp messages and emails, deliver website form submissions to our inbox, and run our service.</li>
         <li><b>Authorities:</b> when the law requires it.</li>
       </ul>"""),
  ("keep", "How long we keep it", "clock", """

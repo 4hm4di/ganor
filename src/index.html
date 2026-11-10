@@ -17,9 +17,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@ganorng">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Ganor","url":"https://ganor.ng/","logo":"https://ganor.ng/android-chrome-512x512.png","slogan":"Your city, found.","telephone":"+2348103301999","address":{"@type":"PostalAddress","streetAddress":"No. 15 Guda Abdullahi Road, Farm Center","addressLocality":"Kano","addressCountry":"NG"},"sameAs":["https://www.instagram.com/ganor.ng","https://www.tiktok.com/@ganor.ng","https://x.com/ganorng","https://www.facebook.com/ganor.ng","https://www.youtube.com/@ganor.ng"]}
+{"@context":"https://schema.org","@type":"Organization","name":"Ganor","url":"https://ganor.ng/","logo":"https://ganor.ng/android-chrome-512x512.png","slogan":"Your city, found.","telephone":"+2348103301999","email":"support@ganor.ng","address":{"@type":"PostalAddress","streetAddress":"No. 15 Guda Abdullahi Road, Farm Center","addressLocality":"Kano","addressCountry":"NG"},"sameAs":["https://www.instagram.com/ganor.ng","https://www.tiktok.com/@ganor.ng","https://x.com/ganorng","https://www.facebook.com/ganor.ng","https://www.youtube.com/@ganor.ng"]}
 </script>
-<script>document.documentElement.classList.add('js');try{if(sessionStorage.getItem('ganor-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('no-intro')}catch(e){document.documentElement.classList.add('no-intro')}</script>
+<script>document.documentElement.classList.add('js');try{if(localStorage.getItem('ganor-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('no-intro')}catch(e){document.documentElement.classList.add('no-intro')}</script>
 </head>
 <body>
 {{sprite}}
@@ -205,14 +205,6 @@
   </article>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <span>Weddings</span><i></i><span>Conferences</span><i></i><span>Lectures</span><i></i><span>Campus nights</span><i></i><span>Association meetings</span><i></i><span>Naming ceremonies</span><i></i><span>Workshops</span><i></i><span>Shows</span><i></i>
-    <span>Weddings</span><i></i><span>Conferences</span><i></i><span>Lectures</span><i></i><span>Campus nights</span><i></i><span>Association meetings</span><i></i><span>Naming ceremonies</span><i></i><span>Workshops</span><i></i><span>Shows</span><i></i>
-  </div>
-</div>
-
 <!-- FIND -->
 <section class="section wrap" id="find" aria-labelledby="find-title">
   <div class="head">
@@ -368,7 +360,7 @@
           <div class="gate__finder"><i></i><i></i><i></i><i></i>{{icon:qr-code|gate__qr}}<span class="gate__line"></span></div>
           <p>Point the camera at the QR code</p>
         </div>
-        <div class="gate__checking">{{svg:assets/brand/ganor-symbol-currentcolor.svg}}<span>Checking…</span></div>
+        <div class="gate__checking">{{svg:assets/brand/ganor-loader-currentcolor.svg|gate__loader}}<span>Checking…</span></div>
         <div class="gate__result">
           <img alt="" width="64" height="64" data-gate-icon>
           <p class="gate__title" data-gate-title></p>
@@ -452,7 +444,6 @@
       <dl class="calc__rows">
         <div><dt>Ticket sales</dt><dd data-res="gross">₦1,000,000</dd></div>
         <div><dt>Ganor fee per ticket</dt><dd data-res="per">₦350</dd></div>
-        <div><dt>Total Ganor fee</dt><dd data-res="fee">₦70,000</dd></div>
         <div><dt>Buyer pays per ticket</dt><dd data-res="buyer">₦5,350</dd></div>
       </dl>
       <a class="btn btn--light btn--block" href="#join"><span>Host your event</span><span class="btn__arrow">{{icon:arrow}}</span></a>
@@ -511,7 +502,10 @@
   </h2>
   <div class="name__foot" data-reveal>
     <p>Ganor (say <b>Gah-nor</b>) comes from the Hausa word for finding something. That is what we do: help you find what’s happening in your city, and help the people making it happen get found.</p>
-    <p class="name__ha" lang="ha">Idan ka zo gano, fahimta ta samu.</p>
+    <div class="name__say" data-typeline>
+      <p class="name__who">In Hausa</p>
+      <p class="name__ha" lang="ha"><span class="name__ghost" aria-hidden="true">Idan ka zo gano, fahimta ta samu.</span><span class="name__typed" aria-hidden="true"><span data-typed></span><i class="name__caret"></i></span><span class="sr-only">Idan ka zo gano, fahimta ta samu.</span></p>
+    </div>
   </div>
 </section>
 
@@ -528,10 +522,10 @@
         <div class="count__unit"><div class="count__digits" data-unit="s"></div><span>Seconds</span></div>
       </div>
       <h2 class="join__title" id="join-title" data-lines><span class="line"><span>Host here first.</span></span></h2>
-      <p class="join__lede" data-reveal>Leave your WhatsApp number. We’ll message you the day you can create your event, or when events near you go live.</p>
+      <p class="join__lede" data-reveal>Leave your WhatsApp number or email. We’ll tell you the day you can create your event, or when events near you go live.</p>
     </div>
 
-    <form class="join__form" data-join novalidate>
+    <form class="join__form" data-join data-endpoint="https://formsubmit.co/ajax/support@ganor.ng" data-email="support@ganor.ng" novalidate>
       <fieldset class="roles">
         <legend class="join__legend">I’m…</legend>
         <label class="role"><input type="radio" name="role" value="host" checked><span>{{icon:calendar}}Hosting an event</span></label>
@@ -543,10 +537,22 @@
         <input name="name" type="text" autocomplete="name" required placeholder="Aisha Bello">
         <span class="field__err" data-err="name">Please tell us your name.</span>
       </label>
-      <label class="field">
+      <fieldset class="reach">
+        <legend class="field__label">How should we reach you?</legend>
+        <div class="reach__opts">
+          <label class="role"><input type="radio" name="reach" value="whatsapp" checked><span>{{icon:chat}}WhatsApp</span></label>
+          <label class="role"><input type="radio" name="reach" value="email"><span>{{icon:mail}}Email</span></label>
+        </div>
+      </fieldset>
+      <label class="field" data-reach-field="whatsapp">
         <span class="field__label">WhatsApp number</span>
         <input name="phone" type="tel" inputmode="tel" autocomplete="tel" spellcheck="false" required placeholder="0801 234 5678">
         <span class="field__err" data-err="phone">Please enter a Nigerian number, like 0801 234 5678.</span>
+      </label>
+      <label class="field" data-reach-field="email" hidden>
+        <span class="field__label">Email</span>
+        <input name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="aisha@example.com" disabled>
+        <span class="field__err" data-err="email">Please enter an email address, like aisha@example.com.</span>
       </label>
       <label class="field">
         <span class="field__label">What kind of event? <small>(optional)</small></span>
@@ -563,10 +569,10 @@
         </select>
       </label>
       <button class="btn btn--primary btn--block" type="submit"><span data-join-label>Join the list</span><span class="btn__arrow">{{icon:arrow}}</span></button>
-      <p class="join__privacy">We only use your number to tell you about Ganor.</p>
+      <p class="join__privacy">We only use your details to tell you about Ganor.</p>
       <div class="join__done" data-join-done hidden>
         {{icon:check-circle}}
-        <p><b>You’re on the list.</b> We’ll message you on WhatsApp when Ganor opens.</p>
+        <p><b>You’re on the list.</b> We’ll let you know the day Ganor opens.</p>
       </div>
     </form>
   </div>
@@ -579,7 +585,7 @@
       <p class="label" data-reveal>Questions</p>
       <h2 class="h2" id="faq-title" data-lines><span class="line"><span>Good to know.</span></span></h2>
     </div>
-    <p class="head__lede" data-reveal>Something else on your mind? Message us on WhatsApp on 0810 330 1999.</p>
+    <p class="head__lede" data-reveal>Something else on your mind? WhatsApp us on <a href="https://wa.me/2348103301999" rel="noopener">0810 330 1999</a> or write to <a href="mailto:support@ganor.ng">support@ganor.ng</a>.</p>
   </div>
   <div class="acc" data-acc>
     <div class="acc__item">
