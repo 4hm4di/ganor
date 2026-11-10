@@ -13,18 +13,10 @@ def page(slug, title, desc, label, h1, lede, sections, meta=None, nav_title="On 
         body.append(f'    <section id="{sid}" aria-labelledby="{sid}-t">\n      <h2 id="{sid}-t">{ic}{name}</h2>\n{html.strip()}\n    </section>')
     meta_html = f'    <p class="meta">{meta}</p>\n' if meta else ""
     out = f"""<!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en-NG">
 <head>
 {{{{include:head.html}}}}
-<title>{title} · Ganor</title>
-<meta name="description" content="{desc}">
-<link rel="canonical" href="https://ganor.ng/{slug}.html">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Ganor">
-<meta property="og:title" content="{title} · Ganor">
-<meta property="og:description" content="{desc}">
-<meta property="og:image" content="https://ganor.ng/assets/img/og.png">
-<meta name="twitter:card" content="summary_large_image">
+{{{{seo:{slug}}}}}
 <script>document.documentElement.classList.add('js','no-intro')</script>
 </head>
 <body class="inner">

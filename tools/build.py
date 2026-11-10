@@ -11,12 +11,15 @@ Placeholders
   {{svg:path/to/file.svg|class}} inline an SVG file (currentColor logos etc.)
   {{qr:text}}                    QR code as inline SVG, black on white, quiet zone
   {{include:partial.html}}       insert src/partials/partial.html
+  {{seo:slug}}                   title, description, canonical, social cards, JSON-LD (tools/seo.py)
 """
 import pathlib
 import re
 
 import qrcode
 import qrcode.image.svg
+
+import seo
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
@@ -100,8 +103,12 @@ def main() -> None:
     pattern_tile()
     for page in sorted(SRC.glob("*.html")):
         out = ROOT / page.name
-        out.write_text(expand(page.read_text()))
+        built = expand(page.read_text())
+        built = re.sub(r"\{\{seo:([a-z0-9-]+)\}\}", lambda m: seo.head(m.group(1), built), built)
+        out.write_text(built)
         print("built", out.relative_to(ROOT))
+    (ROOT / "sitemap.xml").write_text(seo.sitemap())
+    print("built sitemap.xml")
 
 
 if __name__ == "__main__":

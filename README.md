@@ -90,3 +90,11 @@ With no endpoint set, it opens WhatsApp with the details filled in, so sign-ups 
 - **Fee:** `FEE_RATE` and `FEE_FLAT` at the top of `assets/js/site.js` drive the calculator and the hero checkout. Update the fee wording in `src/index.html` (pricing intro, FAQ) and `tools/pages.py` (docs, terms) to match.
 - **Hero photo:** put a photo at `assets/img/hero.jpg` and set `data-photo="assets/img/hero.jpg"` on the hero `<section>` in `src/index.html`. The dark scrim is applied automatically.
 - **Countdown:** `data-countdown` on the countdown in `src/index.html` (ISO date and time).
+
+## Search and share previews
+
+- `tools/seo.py` holds each page's title, description, canonical URL (always `https://ganor.ng/...`), share image and structured data. The build writes them into every page through `{{seo:slug}}`, and regenerates `sitemap.xml`.
+- Share images (1200×630) live in `assets/img/og*.png`. Remake them after changing titles or icons:
+  `pip install playwright && python3 -m playwright install chromium && python3 tools/og.py`
+- The FAQ structured data is read from the FAQ on the page, so editing a question updates it automatically.
+- Share previews and Google only see the real thing once ganor.ng points to this site (see Deploy). After that, check previews with the [Facebook sharing debugger](https://developers.facebook.com/tools/debug/) and submit `https://ganor.ng/sitemap.xml` in [Google Search Console](https://search.google.com/search-console).
