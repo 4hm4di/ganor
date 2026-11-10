@@ -41,7 +41,7 @@
       setTimeout(() => intro.classList.add('is-out'), HOLD);
       try { localStorage.setItem('ganor-intro', '1'); } catch (e) {}
       setTimeout(done, HOLD + 260);
-      setTimeout(() => intro.classList.add('is-gone'), HOLD + 900);
+      setTimeout(() => intro.classList.add('is-gone'), HOLD + 1100);
     }
     requestAnimationFrame(tick);
   }

@@ -131,7 +131,7 @@ page("docs", "Docs", "How Ganor works for hosts, guests and businesses: creating
       <h3>When to contact Ganor</h3>
       <p>Message us if you paid but your ticket didn’t arrive, if you were charged twice, or if you can’t reach the host about a cancelled event. See the <a href="refunds.html">refund policy</a>.</p>"""),
  ("places", "For businesses", "shop", """
-      <p>Ganor Places helps people find the businesses they can trust nearby: phone and electronics shops, fabric sellers, markets, hospitals, pharmacies, restaurants, hotels, event halls, salons, mechanics, schools, parks and more.</p>
+      <p>Ganor Places helps people find the businesses they can trust nearby: phone and electronics shops, fabric sellers, markets, hospitals, pharmacies, restaurants, hotels, event halls, salons, mechanics, schools, coworking spaces, tech hubs, gyms, football pitches and mini stadiums, parks and more.</p>
       <p>Every listing is checked in person, with directions and a working phone number. Ganor Places comes after events. To be among the first listed, <a href="./#join">join the list</a> and choose <b>A local business</b>.</p>"""),
  ("help", "Get help", "support", f"""
       <p>We answer on WhatsApp first.</p>

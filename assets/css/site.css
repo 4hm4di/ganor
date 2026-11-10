@@ -1320,11 +1320,6 @@ select option { background-color: #fff; color: var(--ganor-ink); }
   background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,0) 55%);
   opacity: 0; transition: opacity 260ms ease;
 }
-.rng__knob::after {
-  content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2px; margin: -1px 0 0 -7px; border-radius: 2px;
-  background: rgba(255,255,255,.75); box-shadow: 0 -4px 0 rgba(255,255,255,.75), 0 4px 0 rgba(255,255,255,.75);
-  transform: scale(.7); transition: opacity 200ms ease;
-}
 .rng.is-drag .rng__knob {
   transform: translate(-50%, -50%) scale(calc(1.5 + var(--s) * .28), calc(1.62 - var(--s) * .16));
   background: rgba(255,255,255,.16);
@@ -1340,7 +1335,6 @@ select option { background-color: #fff; color: var(--ganor-ink); }
   transition: transform 260ms cubic-bezier(.2,.8,.2,1), background-color 200ms ease, box-shadow 260ms ease;
 }
 .rng.is-drag .rng__knob::before { opacity: .55; }
-.rng.is-drag .rng__knob::after { opacity: 0; }
 .rng__ctl input[type="range"]:focus-visible ~ .rng__knob { box-shadow: 0 0 0 3px #fff, 0 0 0 6px rgba(55,48,184,.45); }
 @media (prefers-reduced-motion: reduce) { .rng__knob { transition: none; } }
 
@@ -1362,3 +1356,10 @@ select option { background-color: #fff; color: var(--ganor-ink); }
 .rng__top { flex-wrap: wrap; row-gap: 4px; }
 .rng__top output { margin-left: auto; }
 .calc__rows dd { white-space: nowrap; }
+
+/* Splash leaves as one pane sliding up into the header, like the menu closing */
+.intro { background: var(--ganor-indigo); transition: transform 950ms cubic-bezier(.76,0,.24,1), border-radius 950ms cubic-bezier(.76,0,.24,1); will-change: transform; }
+.intro__slats { display: none; }
+.intro.is-out { transform: translate3d(0, -100%, 0); border-radius: 0 0 40px 40px; }
+.intro.is-out .intro__inner { opacity: 0; transform: translateY(-40px); transition: opacity 420ms ease, transform 700ms cubic-bezier(.76,0,.24,1); }
+@media (prefers-reduced-motion: reduce) { .intro, .intro.is-out .intro__inner { transition: opacity 300ms ease; } .intro.is-out { transform: none; opacity: 0; } }
