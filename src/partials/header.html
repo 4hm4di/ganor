@@ -5,30 +5,35 @@
     <nav class="nav__links" aria-label="Main">
       <a href="./#find">Find</a>
       <a href="./#how">How it works</a>
-      <a href="./#tools">For hosts</a>
+      <a href="./#pricing">Pricing</a>
       <a href="./#places">Ganor Places</a>
-      <a href="./#faq">FAQ</a>
+      <a href="docs.html">Docs</a>
     </nav>
     <div class="nav__end">
       <a class="btn btn--primary btn--sm nav__cta" href="./#join"><span>Host your event</span><span class="btn__arrow">{{icon:arrow}}</span></a>
-      <button class="nav__menu" type="button" aria-label="Open menu" aria-haspopup="dialog" data-menu-open>
-        <span></span><span></span>
+      <button class="nav__menu" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false" data-menu-open>
+        <i></i><i></i>
       </button>
     </div>
   </div>
 </header>
 <dialog class="sheet" data-menu aria-label="Menu">
   <div class="sheet__top">
-    {{svg:assets/brand/ganor-lockup-currentcolor.svg|sheet__lockup}}
-    <button class="sheet__close" type="button" aria-label="Close menu" data-menu-close>{{icon:close-circle}}</button>
+    <a class="sheet__brand" href="./#top" aria-label="Ganor home" data-menu-link>{{svg:assets/brand/ganor-lockup-currentcolor.svg|sheet__lockup}}</a>
+    <button class="sheet__close" type="button" aria-label="Close menu" data-menu-close><i></i><i></i></button>
   </div>
-  <nav class="sheet__links" aria-label="Menu">
-    <a href="./#find">Find</a>
-    <a href="./#how">How it works</a>
-    <a href="./#tools">For hosts</a>
-    <a href="./#places">Ganor Places</a>
-    <a href="./#faq">FAQ</a>
+  <nav class="sheet__body" aria-label="Menu">
+    <ul class="sheet__links">
+      <li style="--i:0"><a href="./#find" data-menu-link><span class="sheet__row"><span class="sheet__n">01</span><b>Find</b><span class="sheet__go">{{icon:arrow}}</span></span></a></li>
+      <li style="--i:1"><a href="./#how" data-menu-link><span class="sheet__row"><span class="sheet__n">02</span><b>How it works</b><span class="sheet__go">{{icon:arrow}}</span></span></a></li>
+      <li style="--i:2"><a href="./#pricing" data-menu-link><span class="sheet__row"><span class="sheet__n">03</span><b>Pricing</b><span class="sheet__go">{{icon:arrow}}</span></span></a></li>
+      <li style="--i:3"><a href="./#places" data-menu-link><span class="sheet__row"><span class="sheet__n">04</span><b>Ganor Places</b><span class="sheet__go">{{icon:arrow}}</span></span></a></li>
+      <li style="--i:4"><a href="docs.html" data-menu-link><span class="sheet__row"><span class="sheet__n">05</span><b>Docs</b><span class="sheet__go">{{icon:arrow}}</span></span></a></li>
+      <li style="--i:5"><a href="./#faq" data-menu-link><span class="sheet__row"><span class="sheet__n">06</span><b>FAQ</b><span class="sheet__go">{{icon:arrow}}</span></span></a></li>
+    </ul>
   </nav>
-  <a class="btn btn--primary sheet__cta" href="./#join"><span>Host your event</span><span class="btn__arrow">{{icon:arrow}}</span></a>
-  <p class="sheet__note">@ganor.ng on all platforms (X: @ganorng)</p>
+  <div class="sheet__foot">
+    <a class="btn btn--light btn--block sheet__cta" href="./#join" data-menu-link><span>Host your event</span><span class="btn__arrow">{{icon:arrow}}</span></a>
+    <p class="sheet__legal"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refunds.html">Refunds</a></p>
+  </div>
 </dialog>

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ganor.ng/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://ganor.ng/docs.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ganor.ng/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://ganor.ng/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://ganor.ng/refunds.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://ganor.ng/credits.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>

@@ -6,7 +6,11 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const LAUNCH = '30 November';
+  /* Ganor fee on paid tickets. Change these two numbers if the fee changes. */
+  const FEE_RATE = 0.05;
+  const FEE_FLAT = 100;
+  const naira = n => '₦' + Math.round(n).toLocaleString('en-NG');
+  const fee = price => (price > 0 ? price * FEE_RATE + FEE_FLAT : 0);
 
   /* ---------- Waitlist destination ----------
      Set data-endpoint on the join form (e.g. a Formspree or Google Apps Script URL)
@@ -80,7 +84,7 @@
   /* ---------- Nav: solid after the hero, theme colour follows ---------- */
   function setupNav() {
     const nav = $('[data-nav]');
-    const hero = $('.hero');
+    const hero = $('.hero, .page-hero');
     const meta = $('meta[name="theme-color"]');
     if (!nav) return;
     if (!hero) { nav.classList.add('is-solid'); if (meta) meta.content = '#F6F1E7'; return; }
@@ -90,8 +94,17 @@
       if (s === solid) return;
       solid = s;
       nav.classList.toggle('is-solid', s);
-      if (meta) meta.content = s ? '#F6F1E7' : '#3730B8';
+      if (meta) meta.content = s ? '#F6F1E7' : (hero.classList.contains('has-photo') ? '#15132A' : '#3730B8');
     };
+    let lastY = scrollY;
+    const away = () => {
+      const y = scrollY;
+      const down = y > lastY + 4, up = y < lastY - 4;
+      if (down && y > innerHeight * 0.9) nav.classList.add('is-away');
+      else if (up || y < 80) nav.classList.remove('is-away');
+      if (down || up) lastY = y;
+    };
+    addEventListener('scroll', () => requestAnimationFrame(away), { passive: true });
     update();
     addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
     addEventListener('resize', update);
@@ -102,11 +115,32 @@
     const sheet = $('[data-menu]');
     const open = $('[data-menu-open]');
     if (!sheet || !open || typeof sheet.showModal !== 'function') return;
-    open.addEventListener('click', () => sheet.showModal());
-    $('[data-menu-close]', sheet).addEventListener('click', () => sheet.close());
-    sheet.addEventListener('click', e => {
-      if (e.target === sheet || e.target.closest('a')) sheet.close();
-    });
+    let closing = false;
+    const shut = (then) => {
+      if (!sheet.open || closing) return;
+      if (reduced.matches) { sheet.close(); then && then(); return; }
+      closing = true;
+      sheet.classList.add('is-closing');
+      setTimeout(() => {
+        sheet.classList.remove('is-closing'); sheet.close(); closing = false;
+        then && then();
+      }, 250);
+    };
+    open.addEventListener('click', () => { sheet.showModal(); open.setAttribute('aria-expanded', 'true'); });
+    sheet.addEventListener('close', () => { open.setAttribute('aria-expanded', 'false'); open.focus({ preventScroll: true }); });
+    sheet.addEventListener('cancel', e => { e.preventDefault(); shut(); });
+    $('[data-menu-close]', sheet).addEventListener('click', () => shut());
+    $$('a', sheet).forEach(a => a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      const hash = href.includes('#') ? href.slice(href.indexOf('#')) : '';
+      const target = hash && document.querySelector(hash);
+      const samePage = target && (href.startsWith('#') || href.startsWith('./#'));
+      if (samePage) {
+        e.preventDefault();
+        shut(() => { target.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth' }); history.replaceState(null, '', hash); });
+      }
+    }));
+    addEventListener('resize', () => { if (innerWidth >= 1000) shut(); });
   }
 
   /* ---------- Hero search (pre-launch) ---------- */
@@ -118,9 +152,9 @@
       const type = form.type.value;
       const area = form.area.value;
       const what = type ? type.toLowerCase() : 'events';
-      const where = area ? ` in ${area}` : ' in Kano';
+      const where = area ? ` in ${area}` : ' near you';
       msg.innerHTML = '';
-      msg.append(`Ganor opens on ${LAUNCH}. `);
+      msg.append('Ganor opens soon. ');
       const a = document.createElement('a');
       a.href = '#join';
       a.textContent = 'Join the list';
@@ -203,20 +237,20 @@
     const box = $('[data-countdown]');
     if (!box) return;
     const target = new Date(box.dataset.countdown).getTime();
-    const units = { d: $('[data-unit="d"]', box), h: $('[data-unit="h"]', box), m: $('[data-unit="m"]', box) };
+    const units = { d: $('[data-unit="d"]', box), h: $('[data-unit="h"]', box), m: $('[data-unit="m"]', box), s: $('[data-unit="s"]', box) };
     Object.values(units).forEach(u => u.setAttribute('role', 'text'));
     const render = () => {
       let s = Math.max(0, Math.floor((target - Date.now()) / 1000));
       const d = Math.floor(s / 86400); s -= d * 86400;
       const h = Math.floor(s / 3600); s -= h * 3600;
-      const m = Math.floor(s / 60);
-      setDigits(units.d, d); setDigits(units.h, h); setDigits(units.m, m);
-      box.setAttribute('aria-label', `${d} days, ${h} hours and ${m} minutes until Ganor opens in Kano`);
-      if (target - Date.now() <= 0) { box.closest('.join__copy').querySelector('.label').lastChild.textContent = 'Ganor is open in Kano'; }
+      const m = Math.floor(s / 60); s -= m * 60;
+      setDigits(units.d, d); setDigits(units.h, h); setDigits(units.m, m); setDigits(units.s, s);
+      box.setAttribute('aria-label', `${d} days, ${h} hours and ${m} minutes until Ganor opens`);
+      if (target - Date.now() <= 0) { box.closest('.join__copy').querySelector('.label').textContent = 'Ganor is open'; }
     };
     // start from zero so the digits roll in when the section appears
     Object.values(units).forEach(u => setDigits(u, 0));
-    const go = () => { render(); setInterval(render, 15000); };
+    const go = () => { render(); setInterval(render, 1000); };
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); setTimeout(go, 150); } }, { threshold: 0.4 });
       io.observe(box);
@@ -348,6 +382,176 @@
     });
   }
 
+  /* ---------- Hero photo: set data-photo="assets/img/hero.jpg" on the hero to use a real photo ---------- */
+  function setupHeroPhoto() {
+    const hero = $('.hero');
+    const src = hero && hero.dataset.photo;
+    if (!src) return;
+    const img = new Image();
+    img.onload = () => { hero.style.setProperty('--hero-photo', `url(${src})`); hero.classList.add('has-photo'); };
+    img.src = src;
+  }
+
+  /* ---------- Live phone: find → pay → get in ---------- */
+  function setupLive() {
+    const live = $('[data-live]');
+    if (!live) return;
+    const scrs = $$('.scr', live);
+    const steps = $$('.live__step', live);
+    const fill = $('[data-live-fill]', live);
+    const pauseBtn = $('[data-live-pause]', live);
+    const pauseLabel = $('[data-live-pause-l]', live);
+    const typed = $('[data-type]', live);
+    const pick = $('.ev--pick', live);
+    const qty = $('[data-qty]', live), sub = $('[data-co-sub]', live), feeEl = $('[data-co-fee]', live), total = $('[data-co-total]', live);
+    const payBtn = $('[data-co-btn]', live), payLabel = $('[data-co-label]', live);
+    const tk = $('.scr--tk', live);
+    const PRICE = 5000;
+    let at = 0, timers = [], paused = false, visible = true;
+    const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+    const clear = () => { timers.forEach(clearTimeout); timers = []; };
+    const setCheckout = (n) => {
+      qty.textContent = n;
+      sub.textContent = naira(PRICE * n); feeEl.textContent = naira(fee(PRICE) * n); total.textContent = naira((PRICE + fee(PRICE)) * n);
+      payLabel.textContent = 'Pay ' + naira((PRICE + fee(PRICE)) * n);
+    };
+    const resetScreens = () => {
+      typed.textContent = ''; pick.classList.remove('is-picked');
+      setCheckout(1); payBtn.classList.remove('is-paying', 'is-paid');
+      tk.classList.remove('is-scanning', 'is-admitted');
+    };
+    const show = (i) => {
+      const prev = at;
+      at = i;
+      live.dataset.at = i;
+      scrs.forEach((s, k) => { s.classList.toggle('is-on', k === i); s.classList.toggle('is-out', k === prev && k !== i); });
+      setTimeout(() => scrs[prev] && prev !== i && scrs[prev].classList.remove('is-out'), 700);
+      steps.forEach((b, k) => { b.classList.toggle('is-on', k === i); b.classList.toggle('is-done', k < i); b.setAttribute('aria-selected', String(k === i)); });
+      fill.style.setProperty('--p', i / (steps.length - 1));
+    };
+    const scenes = [
+      () => { // find
+        resetScreens();
+        const text = typed.dataset.type;
+        if (reduced.matches) { typed.textContent = text; return 3200; }
+        [...text].forEach((ch, k) => later(() => { typed.textContent += ch; }, 300 + k * 38));
+        const t = 300 + text.length * 38;
+        later(() => pick.classList.add('is-picked'), t + 900);
+        return t + 2100;
+      },
+      () => { // pay
+        if (reduced.matches) { setCheckout(2); payBtn.classList.add('is-paid'); return 3200; }
+        later(() => setCheckout(2), 700);
+        later(() => payBtn.classList.add('is-paying'), 1500);
+        later(() => payBtn.classList.add('is-paid'), 2450);
+        return 3600;
+      },
+      () => { // ticket + gate
+        if (reduced.matches) { tk.classList.add('is-admitted'); return 3600; }
+        later(() => tk.classList.add('is-scanning'), 900);
+        later(() => tk.classList.add('is-admitted'), 2000);
+        return 4200;
+      }
+    ];
+    const run = (i) => {
+      clear();
+      show(i);
+      const dur = scenes[i]();
+      if (!paused && visible) later(() => run((i + 1) % scenes.length), dur);
+    };
+    steps.forEach((b, k) => b.addEventListener('click', () => run(k)));
+    pauseBtn.addEventListener('click', () => {
+      paused = !paused;
+      pauseBtn.setAttribute('aria-pressed', String(paused));
+      pauseLabel.textContent = paused ? 'Play' : 'Pause';
+      if (paused) clear(); else run((at + 1) % scenes.length);
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => {
+        const was = visible; visible = e.isIntersecting;
+        if (!visible) clear(); else if (!was && !paused) run(at);
+      }).observe(live);
+    }
+    document.addEventListener('visibilitychange', () => { if (document.hidden) clear(); else if (!paused && visible) run(at); });
+    run(0);
+  }
+
+  /* ---------- Earnings calculator ---------- */
+  function setupCalc() {
+    const calc = $('[data-calc]');
+    if (!calc) return;
+    const seg = $('.seg', calc);
+    const price = $('[data-in="price"]', calc), qty = $('[data-in="qty"]', calc);
+    const out = k => $(`[data-out="${k}"]`, calc), res = k => $(`[data-res="${k}"]`, calc);
+    let who = 'buyer';
+    const paint = (input) => input.style.setProperty('--v', ((input.value - input.min) / (input.max - input.min) * 100) + '%');
+    const render = () => {
+      const p = +price.value, q = +qty.value, f = fee(p);
+      paint(price); paint(qty);
+      out('price').textContent = naira(p);
+      out('qty').textContent = q.toLocaleString('en-NG') + (q >= 3000 ? '+ tickets' : ' tickets');
+      const gross = p * q, total = f * q;
+      const net = who === 'buyer' ? gross : gross - total;
+      res('net').textContent = naira(net);
+      res('gross').textContent = naira(gross);
+      res('per').textContent = naira(f);
+      res('fee').textContent = naira(total);
+      res('buyer').textContent = naira(who === 'buyer' ? p + f : p);
+      res('note').textContent = who === 'buyer'
+        ? 'Your full ticket price goes to your bank. Buyers pay the Ganor fee at checkout.'
+        : 'Buyers pay your ticket price only. The Ganor fee comes out of each sale.';
+    };
+    $$('.seg__opt', calc).forEach(b => b.addEventListener('click', () => {
+      who = b.dataset.who;
+      seg.dataset.who = who;
+      $$('.seg__opt', calc).forEach(o => { const on = o === b; o.classList.toggle('is-on', on); o.setAttribute('aria-checked', String(on)); });
+      render();
+    }));
+    seg.addEventListener('keydown', e => {
+      if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+      const next = $(`.seg__opt[data-who="${who === 'buyer' ? 'host' : 'buyer'}"]`, calc);
+      next.click(); next.focus(); e.preventDefault();
+    });
+    [price, qty].forEach(i => i.addEventListener('input', render));
+    const ft = $('[data-fee-text]');
+    if (ft) ft.textContent = `${FEE_RATE * 100}% + ${naira(FEE_FLAT)}`;
+    render();
+  }
+
+  /* ---------- Places category filter ---------- */
+  function setupPlaces() {
+    const btns = $$('[data-pf]');
+    const cards = $$('.pcat');
+    if (!btns.length) return;
+    btns.forEach(b => b.addEventListener('click', () => {
+      const g = b.dataset.pf;
+      btns.forEach(o => { const on = o === b; o.classList.toggle('is-on', on); o.setAttribute('aria-pressed', String(on)); });
+      cards.forEach(c => {
+        const show = g === 'all' || c.dataset.g === g;
+        if (show && c.classList.contains('is-hidden')) {
+          c.classList.remove('is-hidden'); c.classList.add('is-entering');
+          requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove('is-entering')));
+        } else if (!show) c.classList.add('is-hidden');
+      });
+    }));
+  }
+
+  /* ---------- Docs side nav: highlight the section in view ---------- */
+  function setupDocNav() {
+    const links = $$('.doc__nav a[href^="#"]');
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        links.forEach(a => a.classList.remove('is-on'));
+        const a = map.get(e.target.id);
+        if (a) { a.classList.add('is-on'); const ul = a.closest('ul'); if (ul.scrollWidth > ul.clientWidth) ul.scrollTo({ left: a.offsetLeft - 20, behavior: 'smooth' }); }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    map.forEach((a, id) => { const t = document.getElementById(id); if (t) io.observe(t); });
+  }
+
   /* ---------- Boot ---------- */
   setupNav();
   setupMenu();
@@ -361,5 +565,10 @@
   setupReveal();
   setupCounters();
   setupCountdown();
+  setupHeroPhoto();
+  setupLive();
+  setupCalc();
+  setupPlaces();
+  setupDocNav();
   runIntro(startHero);
 })();
