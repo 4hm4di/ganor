@@ -65,6 +65,7 @@
             <option>Abuja</option>
             <option>Bauchi</option>
             <option>Ibadan</option>
+            <option>Ilorin</option>
             <option>Jos</option>
             <option>Kaduna</option>
             <option>Kano</option>
@@ -83,9 +84,9 @@
         <span class="chips__label">Popular:</span>
         <button class="chip" type="button" data-chip="Trade fairs">Trade fairs</button>
         <button class="chip" type="button" data-chip="Conferences">Conferences</button>
-        <button class="chip" type="button" data-chip="Summits">Summits</button>
         <button class="chip" type="button" data-chip="Lectures">Lectures</button>
         <button class="chip" type="button" data-chip="Campus events">Campus events</button>
+        <button class="chip chip--halal" type="button" aria-pressed="false" data-halal>{{icon:verified}}Halal-friendly</button>
       </div>
     </div>
 
@@ -110,7 +111,7 @@
               <ul class="evs">
                 <li class="ev"><span class="ev__date"><b>12</b>Dec</span><span class="ev__txt"><b>Annual Public Lecture</b><small>{{icon:location}}Kano · Fri 4:00 pm</small></span><span class="ev__price">Free</span></li>
                 <li class="ev ev--pick"><span class="ev__date"><b>13</b>Dec</span><span class="ev__txt"><b>Northern Tech Summit</b><small>{{icon:location}}Abuja · Sat 9:00 am</small></span><span class="ev__price">₦5,000</span><i class="tap" aria-hidden="true"></i></li>
-                <li class="ev"><span class="ev__date"><b>20</b>Dec</span><span class="ev__txt"><b>Campus Dinner Night</b><small>{{icon:location}}Zaria · Sat 7:00 pm</small></span><span class="ev__price">₦3,000</span></li>
+                <li class="ev"><span class="ev__date"><b>20</b>Dec</span><span class="ev__txt"><b>Halal Trade Fair</b><small>{{icon:location}}Ilorin · Sat 10:00 am</small><em class="ev__halal">{{icon:verified}}Halal-friendly</em></span><span class="ev__price">Free</span></li>
                 <li class="ev"><span class="ev__date"><b>27</b>Dec</span><span class="ev__txt"><b>Founders’ Meetup</b><small>{{icon:location}}Kaduna · Sat 2:00 pm</small></span><span class="ev__price">Free</span></li>
               </ul>
               <div class="app__tabs"><span class="is-on">{{icon:compass}}Events</span><span>{{icon:shop}}Places</span><span>{{icon:ticket}}Tickets</span><span>{{icon:user}}Me</span></div>
@@ -200,8 +201,8 @@
     <p class="head__lede" data-reveal>The gatherings that matter to you, not just concerts and parties. Pick what you’re looking for and we’ll tell you when it’s live.</p>
   </div>
   <div class="cats">
-    <a class="cat" href="#join" data-interest="Trade fairs" data-reveal><span class="cat__icon">{{icon:market}}</span><span class="cat__name">Trade fairs</span><span class="cat__note">Expos, exhibitions and trade shows</span><span class="cat__go">{{icon:arrow}}</span></a>
-    <a class="cat" href="#join" data-interest="Conferences" data-reveal><span class="cat__icon">{{icon:group}}</span><span class="cat__name">Conferences &amp; summits</span><span class="cat__note">Forums, seminars and panels</span><span class="cat__go">{{icon:arrow}}</span></a>
+    <a class="cat" href="#join" data-interest="Trade fairs" data-reveal><span class="cat__icon">{{icon:market}}</span><span class="cat__name">Trade fairs</span><span class="cat__note">Expos, halal expos and trade shows</span><span class="cat__go">{{icon:arrow}}</span></a>
+    <a class="cat" href="#join" data-interest="Conferences" data-reveal><span class="cat__icon">{{icon:group}}</span><span class="cat__name">Conferences &amp; summits</span><span class="cat__note">Forums, panels and Islamic finance</span><span class="cat__go">{{icon:arrow}}</span></a>
     <a class="cat" href="#join" data-interest="Lectures" data-reveal><span class="cat__icon">{{icon:mic}}</span><span class="cat__name">Lectures</span><span class="cat__note">Public and religious lectures</span><span class="cat__go">{{icon:arrow}}</span></a>
     <a class="cat" href="#join" data-interest="Campus events" data-reveal><span class="cat__icon">{{icon:cap}}</span><span class="cat__name">Campus events</span><span class="cat__note">Dinners, weeks, fairs</span><span class="cat__go">{{icon:arrow}}</span></a>
     <a class="cat" href="#join" data-interest="Associations" data-reveal><span class="cat__icon">{{icon:pair}}</span><span class="cat__name">Associations</span><span class="cat__note">Meetings, dinners and elections</span><span class="cat__go">{{icon:arrow}}</span></a>
@@ -564,6 +565,7 @@
           <option>Cooperative launches</option>
           <option>Workshops</option>
           <option>Shows</option>
+          <option>Halal-friendly events</option>
         </select>
       </label>
       <button class="btn btn--primary btn--block" type="submit"><span data-join-label>Join the list</span><span class="btn__arrow">{{icon:arrow}}</span></button>
@@ -613,6 +615,10 @@
     <div class="acc__item">
       <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="q7" id="q7b"><span class="acc__num">07</span><span class="acc__q">Which cities is Ganor for?</span><span class="acc__ic">{{icon:add-circle}}</span></button></h3>
       <div class="acc__panel" id="q7" role="region" aria-labelledby="q7b" hidden><div><p>Anywhere in Nigeria. Any host can create an event and sell tickets wherever the event is, and guests can find events in their own city. Ganor Places grows city by city.</p></div></div>
+    </div>
+    <div class="acc__item">
+      <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="q8" id="q8b"><span class="acc__num">08</span><span class="acc__q">What does Halal-friendly mean?</span><span class="acc__ic">{{icon:add-circle}}</span></button></h3>
+      <div class="acc__panel" id="q8" role="region" aria-labelledby="q8b" hidden><div><p>It’s a label hosts can add so you can find events that fit your values. It can cover how the event is run, such as halal food, no alcohol and time for prayer, and what it’s about, such as Islamic finance, halal investment and halal trade. The event page shows exactly what the host ticked. It’s the host’s description; Ganor doesn’t certify events. <a href="docs.html#halal">Read more</a>.</p></div></div>
     </div>
 
   </div>

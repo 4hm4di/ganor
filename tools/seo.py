@@ -10,7 +10,7 @@ import re
 
 SITE = "https://ganor.ng"
 # Bump when the share images change, so WhatsApp, Facebook and X fetch the new ones.
-OG_VERSION = "2"
+OG_VERSION = "3"
 NAME = "Ganor"
 LOCALE = "en_NG"
 X_HANDLE = "@ganorng"
@@ -32,7 +32,7 @@ PAGES = {
     "index": (
         "/",
         "Ganor · Events, tickets and trusted places near you",
-        "Find conferences, summits, trade fairs and trusted places near you. Hosts share one link, "
+        "Find conferences, summits, trade fairs and halal-friendly events near you. Hosts share one link, "
         "sell tickets and scan guests in at the gate. Free events cost nothing.",
         "og.png",
         "Ganor: your city, found. Events, tickets and places near you.",

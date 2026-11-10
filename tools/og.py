@@ -19,24 +19,23 @@ def icon(name, cls=""):
     return f'<svg class="i {cls}"><use href="#i-{name}"/></svg>'
 
 
-# file, kicker, title (use <br>), subtitle, phone screen (find|pay|ticket), chips [(icon, text)], url
-# The phone screens are taken from the live hero on index.html (see shoot_phones below).
+# file, kicker, title (use <br>), subtitle, big icon, chips [(icon, text)], url
 CARDS = [
+    # The home card shows two app screens from the hero, in white phones set in a tray.
     ("og.png", "Events · Tickets · Places", "Your city,<br>found.",
-     "Find what’s happening near you. Host an event, sell tickets, scan guests in.",
-     "find", [("search", "Find events"), ("ticket", "Sell tickets"), ("scan", "Check-in")], "ganor.ng"),
+     None, "phones", [("search", "Find events"), ("ticket", "Sell tickets"), ("scan", "Check-in")], "ganor.ng"),
     ("og-docs.png", "Docs", "How Ganor<br>works.",
      "Create an event, sell tickets, share one link and check guests in.",
-     "pay", [("calendar", "Create"), ("share", "Share"), ("scan", "Gate")], "ganor.ng/docs"),
+     "doc", [("calendar", "Create"), ("share", "Share"), ("ticket", "Sell"), ("scan", "Gate")], "ganor.ng/docs"),
     ("og-terms.png", "Legal", "Terms<br>of use.",
      "The rules for hosting, buying and listing on Ganor, written to be read.",
-     "ticket", [], "ganor.ng/terms"),
+     "shield", [], "ganor.ng/terms"),
     ("og-privacy.png", "Legal", "Privacy<br>policy.",
      "What we collect, why, and your rights under the Nigeria Data Protection Act 2023.",
-     "find", [], "ganor.ng/privacy"),
+     "lock", [], "ganor.ng/privacy"),
     ("og-refunds.png", "Legal", "Refund<br>policy.",
      "Ask the host first. If an event is cancelled, you get your money back.",
-     "pay", [], "ganor.ng/refunds"),
+     "wallet", [], "ganor.ng/refunds"),
 ]
 
 CSS = """
@@ -53,25 +52,44 @@ p.s{margin:18px 0 0;max-width:640px;font:500 26px/1.35 Inter;color:rgba(255,255,
 .chip{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 20px 0 14px;border-radius:999px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28);font:600 20px/1 Inter}
 .chip .i{width:26px;height:26px}
 .url{display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:999px;background:#fff;color:#3730B8;font:700 20px/1 Inter}
-.ph{position:absolute;right:96px;top:62px;width:330px;transform:rotate(-5deg);transform-origin:50% 0;filter:drop-shadow(0 40px 60px rgba(21,19,42,.45))}
+.tile{position:absolute;right:84px;top:50%;width:300px;height:300px;margin-top:-150px;border-radius:72px;background:#fff;color:#3730B8;display:grid;place-items:center;transform:rotate(-6deg);box-shadow:0 40px 80px -30px rgba(21,19,42,.55)}
+.tile .i{width:168px;height:168px}
+.tile:after{content:"";position:absolute;inset:-22px;border-radius:90px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.stack{position:absolute;right:76px;top:96px;display:grid;gap:18px}
+.stack .t{width:116px;height:116px;border-radius:32px;background:#fff;color:#3730B8;display:grid;place-items:center;box-shadow:0 26px 50px -24px rgba(21,19,42,.6)}
+.stack .t .i{width:64px;height:64px}
+.stack .t:nth-child(1){transform:translateX(-60px) rotate(-8deg)}
+.stack .t:nth-child(2){transform:translateX(30px) rotate(5deg)}
+.stack .t:nth-child(3){transform:translateX(-30px) rotate(-3deg)}
+.home .in{max-width:640px}
+.home .foot{max-width:590px}
+.tray{position:absolute;left:668px;right:56px;top:46px;height:700px;border-radius:64px;background:linear-gradient(180deg,#EEEFF5 0%,#DCDEE8 100%);box-shadow:inset 0 3px 0 rgba(255,255,255,.9),inset 0 -40px 60px rgba(55,48,184,.10),0 40px 80px -30px rgba(21,19,42,.6)}
+.tray:before{content:"";position:absolute;inset:18px;border-radius:48px;background:#E3E5EE;box-shadow:inset 0 6px 14px rgba(21,19,42,.14)}
+.ph{position:absolute;top:84px;width:186px;filter:drop-shadow(0 26px 30px rgba(21,19,42,.28))}
 .ph img{display:block;width:100%;height:auto}
-.in{max-width:850px}
-.foot{flex-wrap:nowrap!important}
-p.s{max-width:600px}
+.ph--l{left:calc(50% - 194px);transform:rotate(-8deg);transform-origin:100% 100%}
+.ph--r{right:calc(50% - 194px);transform:rotate(8deg);transform-origin:0 100%}
 """
 
 
-def card_html(kicker, title, sub, screen, chips, url):
+def card_html(kicker, title, sub, big, chips, url):
     chips_html = "".join(f'<span class="chip">{icon(i)}{t}</span>' for i, t in chips)
-    art = f'<div class="ph"><img src="_phones/{screen}.png" alt=""></div>'
+    home = big == "phones"
+    if home:
+        art = ('<div class="tray"><div class="ph ph--l"><img src="_phones/find.png" alt=""></div>'
+               '<div class="ph ph--r"><img src="_phones/ticket.png" alt=""></div></div>')
+    elif big:
+        art = f'<div class="tile">{icon(big)}</div>'
+    else:
+        art = '<div class="stack">' + "".join(f'<div class="t">{icon(n)}</div>' for n in ("ticket", "location", "scan")) + "</div>"
     return f"""<!doctype html><html><head><meta charset="utf-8">
 <link rel="stylesheet" href="../assets/css/fonts.css"><style>{CSS}</style></head><body>
 {SPRITE}
-<div class="c"><div class="fade"></div>{art}<div class="in">
+<div class="c{' home' if home else ''}"><div class="fade"></div>{art}<div class="in">
 {LOCKUP}
 <p class="k">{kicker}</p>
 <h1>{title}</h1>
-<p class="s">{sub}</p>
+{f'<p class="s">{sub}</p>' if sub else ""}
 <div class="foot">{chips_html}<span class="url">{url}</span></div>
 </div></div></body></html>"""
 
@@ -81,21 +99,18 @@ SET_SCREEN = """(i) => {
   live.querySelectorAll('.scr').forEach((s, k) => { s.classList.toggle('is-on', k === i); s.classList.remove('is-out'); });
   const t = live.querySelector('[data-type]'); t.textContent = t.dataset.type;
   const caret = live.querySelector('.app__caret'); if (caret) caret.style.display = 'none';
-  if (i === 1) {
-    const set = (q, v) => { live.querySelector(q).textContent = v; };
-    set('[data-qty]', '2'); set('[data-co-sub]', '₦10,000'); set('[data-co-fee]', '₦700');
-    set('[data-co-total]', '₦10,700'); set('[data-co-label]', 'Pay ₦10,700');
-  }
   if (i === 2) live.querySelector('.scr--tk').classList.add('is-admitted');
 }"""
+# Freeze the hero and turn its phone into a white one, like the share-image mockup.
 FREEZE = """*{animation:none!important;transition:none!important}
-[data-rise]{opacity:1!important;transform:none!important} .phone{box-shadow:none!important} [data-tag]{display:none!important}
+[data-rise]{opacity:1!important;transform:none!important} [data-tag]{display:none!important}
+.phone{background:linear-gradient(160deg,#FFFFFF,#E9EAF1)!important;box-shadow:inset 0 0 0 1.5px #D3D5E0,inset 0 0 0 5px #F7F7FA!important}
 html,body,.hero,.hero *:not(.phone):not(.phone *){background:transparent!important}
 .hero::before,.hero::after,.hero__visual::before,.hero__visual::after{display:none!important}"""
 
 
 def shoot_phones(b, folder):
-    """Screenshot the hero phone on index.html in each of its three screens (transparent PNGs)."""
+    """Screenshot the hero phone on index.html showing the find and ticket screens (transparent PNGs)."""
     folder.mkdir(exist_ok=True)
     ctx = b.new_context(viewport={"width": 1280, "height": 1000}, device_scale_factor=2, reduced_motion="reduce")
     ctx.add_init_script("try{localStorage.setItem('ganor-intro','1')}catch(e){}")
@@ -104,7 +119,7 @@ def shoot_phones(b, folder):
     pg.wait_for_timeout(1500)
     pg.add_style_tag(content=FREEZE)
     pg.evaluate("() => document.querySelectorAll('[data-live-pause]').forEach(b => b.click())")
-    for i, name in enumerate(("find", "pay", "ticket")):
+    for i, name in ((0, "find"), (2, "ticket")):
         pg.evaluate(SET_SCREEN, i)
         pg.wait_for_timeout(300)
         pg.locator(".hero .phone").screenshot(path=str(folder / f"{name}.png"), omit_background=True)

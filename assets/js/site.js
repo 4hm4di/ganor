@@ -148,18 +148,20 @@
   function setupSearch() {
     const form = $('[data-search]');
     const msg = $('[data-search-msg]');
+    const halalChip = $('[data-halal]');
     if (!form || !msg) return;
     const say = () => {
       const type = form.type.value;
       const area = form.area.value;
-      const what = type ? type.toLowerCase() : 'events';
+      const halal = halalChip && halalChip.getAttribute('aria-pressed') === 'true';
+      const what = (halal ? 'halal-friendly ' : '') + (type ? type.toLowerCase() : 'events');
       const where = area ? ` in ${area}` : ' near you';
       msg.innerHTML = '';
       msg.append('Ganor opens soon. ');
       const a = document.createElement('a');
       a.href = '#join';
       a.textContent = 'Join the list';
-      a.addEventListener('click', () => prefill({ role: 'guest', interest: type }));
+      a.addEventListener('click', () => prefill({ role: 'guest', interest: halal ? 'Halal-friendly events' : type }));
       msg.append(a, ` and we’ll tell you when ${what}${where} go live.`);
       msg.hidden = false;
     };
@@ -168,6 +170,10 @@
       form.type.value = chip.dataset.chip;
       say();
     }));
+    if (halalChip) halalChip.addEventListener('click', () => {
+      halalChip.setAttribute('aria-pressed', String(halalChip.getAttribute('aria-pressed') !== 'true'));
+      say();
+    });
   }
 
   /* ---------- Prefill the join form from anywhere ---------- */

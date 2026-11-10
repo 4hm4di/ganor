@@ -122,6 +122,23 @@ page("docs", "Docs", "How Ganor works for hosts, guests and businesses: creating
       <p><b>Contact the host.</b> The host runs the event, so questions about the venue, the programme, changes or refunds go to them. Every event page shows how to reach the host.</p>
       <h3>When to contact Ganor</h3>
       <p>Message us if you paid but your ticket didn’t arrive, if you were charged twice, or if you can’t reach the host about a cancelled event. See the <a href="refunds.html">refund policy</a>.</p>"""),
+ ("halal", "Halal-friendly events", "verified", """
+      <p>Hosts can mark an event <b>Halal-friendly</b> so guests who care about it can find it. Guests can search for it with the Halal-friendly filter. When you add the label, you tick what applies, and the event page shows exactly that list.</p>
+      <h3>How the event is run</h3>
+      <ul>
+        <li>Halal food and drinks only, and no alcohol.</li>
+        <li>Prayer times kept in the programme, with a place to pray.</li>
+        <li>A modest dress code, or separate seating for men and women.</li>
+      </ul>
+      <h3>What the event is about</h3>
+      <ul>
+        <li>Islamic finance and non-interest banking.</li>
+        <li>Halal investment, savings, takaful and zakat.</li>
+        <li>Halal products, trade and certification, such as halal expos and Muslim business fairs.</li>
+        <li>Islamic lectures, Eid fests and community gatherings.</li>
+      </ul>
+      <p>An event can tick one item or many. A tech summit with prayer breaks and halal food counts, and so does an Islamic finance forum.</p>
+      <div class="callout"><b>This is the host’s description.</b> Ganor doesn’t certify events as halal. If an event isn’t what the host said, tell us and we’ll look into it. Using the label falsely counts as a misleading event under our <a href="terms.html#not-allowed">terms</a>.</div>"""),
  ("places", "For businesses", "shop", """
       <p>Ganor Places helps people find the businesses they can trust nearby: phone and electronics shops, fabric sellers, markets, hospitals, pharmacies, restaurants, hotels, event halls, salons, mechanics, schools, coworking spaces, tech hubs, gyms, football pitches and mini stadiums, parks and more.</p>
       <p>Every listing is checked in person, with directions and a working phone number. Ganor Places comes after events. To be among the first listed, <a href="./#join">join the list</a> and choose <b>A local business</b>.</p>"""),
