@@ -1,0 +1,27 @@
+You're going, {{first_name}}!
+
+Your ticket for {{event_name}} is confirmed. We've sent it to your WhatsApp too.
+
+Date: {{event_date}}
+Time: {{event_time}} (gate opens {{gate_time}})
+Venue: {{venue_name}}, {{venue_address}}
+Directions: {{map_url}}
+Ticket: {{ticket_type}} x {{ticket_qty}}
+Name: {{holder_name}}
+
+Ticket code: {{ticket_code}}
+View your ticket and QR code: {{ticket_url}}
+Show it at the gate. Each code works once, so keep it to yourself.
+Add to calendar: {{calendar_url}}
+
+Receipt, order {{order_id}} ({{paid_at}})
+Tickets: {{subtotal}}
+Ganor fee: {{fee}}
+Total paid: {{total}} by {{payment_method}}
+
+Questions about the event? Contact the host, {{host_name}}: {{host_phone}} · {{host_email}}
+Changes and refunds are up to the host: https://ganor.ng/refunds.html
+
+Didn't buy this? Reply to this email or write to support@ganor.ng.
+
+Ganor · ganor.ng
