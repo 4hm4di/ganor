@@ -203,7 +203,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a guest or a
       <p>Ganor uses work by others, under these licences:</p>
       <ul>
         <li><b>Icons:</b> the <a href="https://icon-sets.iconify.design/solar/" rel="noopener">Solar icon set</a> by 480 Design, licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>, recoloured and reorganised for Ganor.</li>
-        <li><b>Social icons:</b> Facebook, Instagram and YouTube from <a href="https://feathericons.com" rel="noopener">Feather</a>; TikTok, X and WhatsApp from <a href="https://tabler.io/icons" rel="noopener">Tabler Icons</a>. Both MIT licensed. The platform logos are trademarks of their owners and are used only to link to Ganor’s accounts.</li>
+        <li><b>Social icons:</b> Facebook, Instagram, LinkedIn and YouTube from <a href="https://feathericons.com" rel="noopener">Feather</a>; TikTok, X and WhatsApp from <a href="https://tabler.io/icons" rel="noopener">Tabler Icons</a>. Both MIT licensed. The platform logos are trademarks of their owners and are used only to link to Ganor’s accounts.</li>
         <li><b>Typefaces:</b> Bricolage Grotesque and Inter, licensed under the <a href="https://openfontlicense.org" rel="noopener">SIL Open Font License 1.1</a>.</li>
       </ul>
       <p>The Ganor name, logo and symbol are Ganor’s. Please don’t use them without asking.</p>"""),

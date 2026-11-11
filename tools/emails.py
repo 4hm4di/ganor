@@ -103,7 +103,7 @@ def footer(marketing=False):
             ("tiktok", "TikTok", "https://www.tiktok.com/@ganor.ng"),
             ("x", "X", "https://x.com/ganorng"),
             ("facebook", "Facebook", "https://www.facebook.com/ganor.ng"),
-            ("youtube", "YouTube", "https://www.youtube.com/@ganor.ng"),
+            ("linkedin", "LinkedIn", "https://www.linkedin.com/company/ganorng"),
             ("whatsapp", "WhatsApp", "https://wa.me/2348103301999"),
         ]
     )
@@ -203,7 +203,7 @@ def signature(name, role):
         f'<td style="padding-right:10px;"><a href="{url}" style="text-decoration:none;"><img src="{IMG}/social-{n}-ink.png" width="16" height="16" alt="{label}" style="width:16px;height:16px;display:block;border:0;"></a></td>'
         for n, label, url in [("instagram", "Instagram", "https://www.instagram.com/ganor.ng"), ("tiktok", "TikTok", "https://www.tiktok.com/@ganor.ng"),
                               ("x", "X", "https://x.com/ganorng"), ("facebook", "Facebook", "https://www.facebook.com/ganor.ng"),
-                              ("whatsapp", "WhatsApp", "https://wa.me/2348103301999")]
+                              ("linkedin", "LinkedIn", "https://www.linkedin.com/company/ganorng"), ("whatsapp", "WhatsApp", "https://wa.me/2348103301999")]
     )
     return f"""<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:{SANS};color:{INK};">
 <tr>

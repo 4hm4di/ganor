@@ -9,7 +9,7 @@ OUT = ROOT / "assets/email"
 SPRITE = (ROOT / "assets/icons/sprite.svg").read_text()
 LOCK = (ROOT / "assets/brand/ganor-lockup-currentcolor.svg").read_text()
 SYMBOL = (ROOT / "assets/brand/ganor-symbol-currentcolor.svg").read_text()
-SOCIAL = {n: (ROOT / f"assets/social/{n}.svg").read_text() for n in ["instagram", "tiktok", "x", "facebook", "youtube", "whatsapp"]}
+SOCIAL = {n: (ROOT / f"assets/social/{n}.svg").read_text() for n in ["instagram", "tiktok", "x", "facebook", "linkedin", "whatsapp"]}
 
 INDIGO, INK, WHITE = "#3730B8", "#15132A", "#FFFFFF"
 

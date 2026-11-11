@@ -1,6 +1,6 @@
 # Social icon licences
 
-facebook.svg, instagram.svg, youtube.svg are from Feather (https://feathericons.com).
+facebook.svg, instagram.svg, linkedin.svg, youtube.svg are from Feather (https://feathericons.com).
 tiktok.svg, x.svg, whatsapp.svg are from Tabler Icons (https://tabler.io/icons).
 The platform logos themselves are trademarks of their owners and are used only to link to Ganor's accounts.
 

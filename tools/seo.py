@@ -21,7 +21,7 @@ SOCIAL = [
     "https://www.tiktok.com/@ganor.ng",
     "https://x.com/ganorng",
     "https://www.facebook.com/ganor.ng",
-    "https://www.youtube.com/@ganor.ng",
+    "https://www.linkedin.com/company/ganorng",
 ]
 
 # slug: (path, share title, description, share image, image alt, breadcrumb name)
