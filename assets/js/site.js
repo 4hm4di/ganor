@@ -527,7 +527,17 @@
         _template: 'table',
         _captcha: 'false'
       };
-      if (data.email) data._replyto = data.email;
+      if (data.email) {
+        data._replyto = data.email;
+        // Thank-you email to the visitor (sent by the form service to the address they gave)
+        const first = data.name.split(/\s+/)[0];
+        const next = {
+          host: "We'll be in touch before launch to help you set up your first event on Ganor.",
+          guest: "We'll let you know as soon as events near you are on Ganor.",
+          business: "We'll be in touch when Ganor Places opens to businesses near you."
+        }[role];
+        data._autoresponse = `Hi ${first}, thanks for joining the Ganor list. You're in.\n\n${next}\n\nQuestions? Reply to this email or WhatsApp 0810 330 1999.\n\nThe Ganor team\nganor.ng`;
+      }
       const endpoint = form.dataset.endpoint;
       const btn = $('button[type="submit"]', form);
       label.textContent = 'Sending…'; btn.disabled = true;
