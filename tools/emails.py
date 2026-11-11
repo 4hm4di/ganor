@@ -77,13 +77,21 @@ u + #body a, #MessageViewBody a {{ color: inherit; text-decoration: none; }}
 
 def header_bar():
     return f"""<tr><td class="px" bgcolor="{INDIGO}" style="background:{INDIGO};padding:26px 44px;border-radius:22px 22px 0 0;">
-  <a href="{SITE}" style="text-decoration:none;"><img src="{IMG}/logo-white.png" width="140" height="26" alt="Ganor" style="width:140px;height:26px;"></a>
+  {logo()}
 </td></tr>"""
 
 
-def header_hero(kicker, title, text, cta, href):
+def logo(animated=True):
+    if animated:
+        # GIF has 7px of room around the logo for the turning symbol; pull it back so the logo lines up.
+        # Its first frame is the finished logo, which is all Outlook on desktop shows.
+        return f'<a href="{SITE}" style="text-decoration:none;"><img src="{IMG}/logo-white-animated.gif" width="155" height="40" alt="Ganor" style="width:155px;height:40px;margin:-7px 0 -7px -7px;"></a>'
+    return f'<a href="{SITE}" style="text-decoration:none;"><img src="{IMG}/logo-white.png" width="140" height="26" alt="Ganor" style="width:140px;height:26px;"></a>'
+
+
+def header_hero(kicker, title, text, cta, href, animated=True):
     return f"""<tr><td class="px" bgcolor="{INDIGO}" style="background:{INDIGO};padding:30px 44px 46px;border-radius:22px 22px 0 0;">
-  <a href="{SITE}" style="text-decoration:none;"><img src="{IMG}/logo-white.png" width="140" height="26" alt="Ganor" style="width:140px;height:26px;"></a>
+  {logo(animated)}
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:40px;"><tr>
     <td bgcolor="{MARI}" style="background:{MARI};border-radius:999px;padding:6px 14px;font-family:{SANS};font-size:12px;line-height:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{INK};">{kicker}</td>
   </tr></table>
@@ -390,6 +398,28 @@ def newsletter():
 
 # ---------- sample data for previews ----------
 
+# ---------- 5. Welcome (sent when someone joins the list) ----------
+
+def welcome():
+    header = header_hero("You’re in", "Your city,<br>found.", "Thanks for joining the Ganor list. Here’s what to expect.", "Explore Ganor", SITE, animated=True)
+    body = (
+        kicker("Welcome to Ganor", icon="check-circle")
+        + h1("Hi {{first_name}}, you’re on the list.")
+        + p("{{next_step}}")
+        + panel(
+            f"""<p style="margin:0;font-family:{SANS};font-size:13px;line-height:18px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:{MUTED};">What’s coming</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+{icon_row("calendar", "<b>Events near you.</b> Find what’s on in your city, from trade fairs to tech meetups.")}
+{icon_row("ticket", "<b>Tickets in seconds.</b> Pay once, get your ticket on WhatsApp, walk in with a scan.")}
+{icon_row("shop", "<b>Places you can trust.</b> Shops, hospitals, places to eat and stay, checked in person.")}
+</table>"""
+        )
+        + p(f'Questions? Reply to this email or <a href="https://wa.me/2348103301999" style="color:{INDIGO};font-weight:600;">WhatsApp 0810 330 1999</a>.', top=28, size=15, color=MUTED)
+        + p("The Ganor team", top=22, size=15)
+    )
+    return shell("Welcome to Ganor", "You’re on the list. Here’s what to expect.", header, body, footer(marketing=True))
+
+
 SAMPLE = {
     "first_name": "Fatima", "event_name": "Northern Tech Summit", "event_date": "Saturday, 13 December 2026",
     "event_time": "9:00 am", "gate_time": "8:30 am", "venue_name": "Abuja International Conference Centre",
@@ -399,7 +429,7 @@ SAMPLE = {
     "payment_method": "bank transfer", "host_name": "Northern Tech Community", "host_phone": "0801 234 5678",
     "host_email": "hello@example.com", "event_banner_url": "sample-banner.png", "host_logo_url": "sample-host.png",
     "qr_image_url": "sample-qr.png", "unsubscribe_url": "#", "preferences_url": "#", "event_url": "#",
-    "subject": "A note from Ganor", "preheader": "", "button_label": "Open Ganor", "button_url": SITE,
+    "next_step": "We’ll let you know as soon as events near you are on Ganor.", "subject": "A note from Ganor", "preheader": "", "button_label": "Open Ganor", "button_url": SITE,
     "sender_name": "Ahmad Abdallah", "sender_role": "Team",
 }
 
@@ -416,6 +446,7 @@ def main():
     files["general.html"] = general()
     html, txt = ticket(); files["ticket-confirmation.html"] = html; files["ticket-confirmation.txt"] = txt
     files["newsletter.html"] = newsletter()
+    files["welcome.html"] = welcome()
     files["signatures.html"] = signatures_page()
     for name, content in files.items():
         (OUT / name).write_text(content if name.endswith(".html") else text_version(content))
