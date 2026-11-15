@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Export the built site into the Ganor app as its public homepage ("launch mode").
+"""Launch mode for the ganor.ng pages (used by build.py), and copying shared assets into the app.
+
+The homepage and legal pages are served by ganor.ng only; app.ganor.ng redirects to them.
+Old notes on the in-app homepage, kept for reference:
 
     python3 tools/build.py && python3 tools/export_app.py [path/to/ganor-app]
 
@@ -95,13 +98,8 @@ a.chip{text-decoration:none}
 def main() -> None:
     if not (PUBLIC.is_dir()):
         sys.exit(f"export_app: {PUBLIC} not found")
-    # Build each page fresh from src/ (the ganor.ng copies are already in launch mode for app.ganor.ng links).
-    import build
-    import seo
-    for page in PAGES:
-        built = build.expand((ROOT / "src" / page).read_text())
-        built = re.sub(r"\{\{seo:([a-z0-9-]+)\}\}", lambda m: seo.head(m.group(1), built), built)
-        (PUBLIC / page).write_text(launch(built, page))
+    # Since the domain split (15 Nov 2026) the homepage and legal pages live only on ganor.ng;
+    # app.ganor.ng redirects to them. Only shared icons and assets are copied into the app.
     for name in ROOT_FILES:
         if (ROOT / name).exists():
             shutil.copy2(ROOT / name, PUBLIC / name)
@@ -109,7 +107,7 @@ def main() -> None:
     if dest.exists():
         shutil.rmtree(dest)
     shutil.copytree(ROOT / "assets", dest, ignore=shutil.ignore_patterns("*.ai", "*.psd", "*.zip", "brand-guidelines*", "BRAND.md"))
-    print(f"exported {len(PAGES)} pages and assets to {PUBLIC}")
+    print(f"copied icons and assets to {PUBLIC}")
 
 
 if __name__ == "__main__":
