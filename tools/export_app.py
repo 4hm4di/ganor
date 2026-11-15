@@ -33,35 +33,36 @@ def sub(text: str, old: str, new: str, count: int = 1, page: str = "") -> str:
     return text.replace(old, new)
 
 
-def launch(html: str, page: str) -> str:
+def launch(html: str, page: str, base: str = "") -> str:
+    """base = "" inside the app (paths like /events); "https://app.ganor.ng" for the ganor.ng site."""
     # Header and menu: host CTA goes into the app; add Sign in.
-    html = re.sub(r'href="\./#join"(\s*(?:data-menu-link)?\s*)><span>Host your event', r'href="/dashboard"\1><span>Host your event', html)
-    html = sub(html, '<a href="docs.html">Docs</a>\n', '<a href="docs.html">Docs</a>\n      <a href="/login">Sign in</a>\n', 0, page)
+    html = re.sub(r'href="\./#join"(\s*(?:data-menu-link)?\s*)><span>Host your event', rf'href="{base}/dashboard"\1><span>Host your event', html)
+    html = sub(html, '<a href="docs.html">Docs</a>\n', f'<a href="docs.html">Docs</a>\n      <a href="{base}/login">Sign in</a>\n', 0, page)
     html = re.sub(r'(<li style="--i:5"><a href="\./#faq" data-menu-link><span class="sheet__row"><b>FAQ</b></span></a></li>)',
-                  r'\1\n      <li style="--i:6"><a href="/login" data-menu-link><span class="sheet__row"><b>Sign in</b></span></a></li>', html)
+                  rf'\1\n      <li style="--i:6"><a href="{base}/login" data-menu-link><span class="sheet__row"><b>Sign in</b></span></a></li>', html)
     if page != "index.html":
         return html
 
     # Hero search: a real GET form to /events (no data-search, so the pre-launch script leaves it alone).
-    html = sub(html, '<form class="search" data-search role="search"', '<form class="search" action="/events" method="get" role="search"', 1, page)
+    html = sub(html, '<form class="search" data-search role="search"', f'<form class="search" action="{base}/events" method="get" role="search"', 1, page)
     html = sub(html, '<select name="area">', '<select name="city">', 1, page)
 
     # Chips and category cards become links to filtered event lists.
     def chip(m: re.Match) -> str:
-        return f'<a class="chip" href="/events?type={quote_plus(m.group(1))}">{m.group(2)}</a>'
+        return f'<a class="chip" href="{base}/events?type={quote_plus(m.group(1))}">{m.group(2)}</a>'
     html, n = re.subn(r'<button class="chip" type="button" data-chip="([^"]+)">(.*?)</button>', chip, html, flags=re.S)
     if n < 3:
         sys.exit("export_app: chips not found")
     html = re.sub(r'<button class="chip chip--halal" type="button" aria-pressed="false" data-halal>(.*?)</button>',
-                  r'<a class="chip chip--halal" href="/events?halal=1">\1</a>', html, flags=re.S)
+                  rf'<a class="chip chip--halal" href="{base}/events?halal=1">\1</a>', html, flags=re.S)
     html, n = re.subn(r'<a class="cat" href="#join" data-interest="([^"]+)"',
-                      lambda m: f'<a class="cat" href="/events?type={quote_plus(m.group(1))}"', html)
+                      lambda m: f'<a class="cat" href="{base}/events?type={quote_plus(m.group(1))}"', html)
     if n < 6:
         sys.exit("export_app: category cards not found")
 
     # Pricing card CTA.
     html = sub(html, '<a class="btn btn--light btn--block" href="#join"><span>Host your event</span>',
-               '<a class="btn btn--light btn--block" href="/dashboard"><span>Host your event</span>', 1, page)
+               f'<a class="btn btn--light btn--block" href="{base}/dashboard"><span>Host your event</span>', 1, page)
 
     # Join: countdown and pre-launch copy become launch copy with two buttons; the form stays for Places updates.
     start = html.index('<p class="label label--on-indigo" data-reveal>Ganor opens in</p>')
@@ -71,8 +72,8 @@ def launch(html: str, page: str) -> str:
       <h2 class="join__title" id="join-title" data-lines><span class="line"><span>Host here today.</span></span></h2>
       <p class="join__lede" data-reveal>Create your event in minutes, sell tickets on one link and scan guests in at the gate. Looking for something to go to? See what’s on.</p>
       <div class="join__ctas" data-reveal>
-        <a class="btn btn--light" href="/login?mode=signup"><span>Create your host account</span>{arrow}</a>
-        <a class="btn btn--ghost-light" href="/events"><span>Find events</span>{arrow}</a>
+        <a class="btn btn--light" href="{base}/login?mode=signup"><span>Create your host account</span>{arrow}</a>
+        <a class="btn btn--ghost-light" href="{base}/events"><span>Find events</span>{arrow}</a>
       </div>
       <p class="join__lede join__lede--small" data-reveal>Own a business or want updates? Leave your details and we’ll tell you when Ganor Places opens.</p>''' + html[end:]
 
@@ -94,9 +95,13 @@ a.chip{text-decoration:none}
 def main() -> None:
     if not (PUBLIC.is_dir()):
         sys.exit(f"export_app: {PUBLIC} not found")
+    # Build each page fresh from src/ (the ganor.ng copies are already in launch mode for app.ganor.ng links).
+    import build
+    import seo
     for page in PAGES:
-        src = ROOT / page
-        (PUBLIC / page).write_text(launch(src.read_text(), page))
+        built = build.expand((ROOT / "src" / page).read_text())
+        built = re.sub(r"\{\{seo:([a-z0-9-]+)\}\}", lambda m: seo.head(m.group(1), built), built)
+        (PUBLIC / page).write_text(launch(built, page))
     for name in ROOT_FILES:
         if (ROOT / name).exists():
             shutil.copy2(ROOT / name, PUBLIC / name)

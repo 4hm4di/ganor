@@ -107,6 +107,13 @@ def main() -> None:
         built = re.sub(r"\{\{seo:([a-z0-9-]+)\}\}", lambda m: seo.head(m.group(1), built), built)
         out.write_text(built)
         print("built", out.relative_to(ROOT))
+    # Ganor is open: the site's pages link into the app (app.ganor.ng) instead of the waitlist.
+    from export_app import launch, PAGES
+    for name in PAGES + ["404.html"]:
+        path = ROOT / name
+        if path.exists():
+            path.write_text(launch(path.read_text(), name, base="https://app.ganor.ng"))
+    print("launch mode: links go to app.ganor.ng")
     (ROOT / "sitemap.xml").write_text(seo.sitemap())
     print("built sitemap.xml")
 

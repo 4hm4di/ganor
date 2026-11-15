@@ -161,7 +161,7 @@
 
       <p class="tag tag--a" data-tag data-for="0">{{icon:location|tag__i}}Events near you</p>
       <p class="tag tag--b" data-tag data-for="1">{{icon:wallet|tag__i}}Paid by transfer</p>
-      <p class="tag tag--c" data-tag data-for="2">{{icon:whatsapp|tag__i}}Ticket sent on WhatsApp</p>
+      <p class="tag tag--c" data-tag data-for="2">{{icon:whatsapp|tag__i}}Ticket saved to WhatsApp</p>
       <p class="tag tag--d" data-tag data-for="2">{{icon:users|tag__i}}214 of 350 checked in</p>
 
       <div class="live__foot">
@@ -184,7 +184,7 @@
   </article>
   <article class="tile" data-reveal>
     <span class="tile__icon">{{icon:ticket}}</span>
-    <div><h2 class="tile__title">Your ticket on WhatsApp</h2><p>Find it on your phone. No printing.</p></div>
+    <div><h2 class="tile__title">Your ticket on your phone</h2><p>Save it to WhatsApp in one tap. No printing.</p></div>
   </article>
   <article class="tile" data-reveal>
     <span class="tile__icon">{{icon:scan}}</span>
@@ -274,7 +274,7 @@
         <div class="step__text">
           <p class="step__num"><span>03</span>Sell</p>
           <h3 class="h3">Guests pay their way</h3>
-          <p>Card, bank transfer or USSD. Each guest gets their ticket on WhatsApp straight away.</p>
+          <p>Card, bank transfer or USSD. Each guest gets their ticket straight away and saves it to WhatsApp in one tap.</p>
         </div>
         <div class="step__card">
           <span class="stamp">Payment · Received</span>
@@ -285,7 +285,7 @@
               <span class="pay__opt">{{icon:wallet}}Transfer</span>
               <span class="pay__opt">{{icon:phone}}USSD</span>
             </div>
-            <div class="notice">{{icon:whatsapp}}<span><b>Ticket sent</b><small>Abdallah Nasir · Regular · on WhatsApp</small></span></div>
+            <div class="notice">{{icon:whatsapp}}<span><b>Ticket sent</b><small>Abdallah Nasir · Regular · saved to WhatsApp</small></span></div>
           </div>
         </div>
       </li>
@@ -567,11 +567,11 @@
           <option>Halal-friendly events</option>
         </select>
       </label>
-      <button class="btn btn--primary btn--block" type="submit"><span data-join-label>Join the list</span><span class="btn__arrow">{{icon:arrow}}</span></button>
+      <button class="btn btn--primary btn--block" type="submit"><span data-join-label>Get updates</span><span class="btn__arrow">{{icon:arrow}}</span></button>
       <p class="join__privacy">We only use your details to tell you about Ganor.</p>
       <div class="join__done" data-join-done hidden>
         {{icon:check-circle}}
-        <p><b>You’re on the list.</b> We’ll let you know the day Ganor opens.</p>
+        <p><b>You’re signed up.</b> We’ll tell you when Ganor Places opens and about new events near you.</p>
       </div>
     </form>
   </div>
@@ -589,15 +589,15 @@
   <div class="acc" data-acc>
     <div class="acc__item">
       <h3><button class="acc__btn" type="button" aria-expanded="true" aria-controls="q1" id="q1b"><span class="acc__num">01</span><span class="acc__q">What is Ganor?</span><span class="acc__ic">{{icon:add-circle}}</span></button></h3>
-      <div class="acc__panel" id="q1" role="region" aria-labelledby="q1b"><div><p>Ganor helps you find what’s happening in your city. Hosts create events, sell tickets or take free RSVPs, and scan guests in at the gate. Guests find events, pay, and get their ticket on WhatsApp. Ganor Places, for finding trusted local businesses, comes next.</p></div></div>
+      <div class="acc__panel" id="q1" role="region" aria-labelledby="q1b"><div><p>Ganor helps you find what’s happening in your city. Hosts create events, sell tickets or take free RSVPs, and scan guests in at the gate. Guests find events, RSVP or pay, and get their ticket on their phone. Ganor Places, for finding trusted local businesses, comes next.</p></div></div>
     </div>
     <div class="acc__item">
       <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="q2" id="q2b"><span class="acc__num">02</span><span class="acc__q">How do I say Ganor?</span><span class="acc__ic">{{icon:add-circle}}</span></button></h3>
       <div class="acc__panel" id="q2" role="region" aria-labelledby="q2b" hidden><div><p>Say it Gah-nor. The name comes from <em>gano</em>, the Hausa word for finding something.</p></div></div>
     </div>
     <div class="acc__item">
-      <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="q3" id="q3b"><span class="acc__num">03</span><span class="acc__q">When can I use it?</span><span class="acc__ic">{{icon:add-circle}}</span></button></h3>
-      <div class="acc__panel" id="q3" role="region" aria-labelledby="q3b" hidden><div><p>Very soon. Join the list and we’ll message you on WhatsApp the day Ganor opens.</p></div></div>
+      <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="q3" id="q3b"><span class="acc__num">03</span><span class="acc__q">Can I use it now?</span><span class="acc__ic">{{icon:add-circle}}</span></button></h3>
+      <div class="acc__panel" id="q3" role="region" aria-labelledby="q3b" hidden><div><p>Yes. <a href="https://app.ganor.ng/login?mode=signup">Create your host account</a> and publish your first event in minutes, or <a href="https://app.ganor.ng/events">find events near you</a>. Guests don’t need an account.</p></div></div>
     </div>
     <div class="acc__item">
       <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="q4" id="q4b"><span class="acc__num">04</span><span class="acc__q">What does it cost to host?</span><span class="acc__ic">{{icon:add-circle}}</span></button></h3>
@@ -605,7 +605,7 @@
     </div>
     <div class="acc__item">
       <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="q5" id="q5b"><span class="acc__num">05</span><span class="acc__q">Where do guests get their ticket?</span><span class="acc__ic">{{icon:add-circle}}</span></button></h3>
-      <div class="acc__panel" id="q5" role="region" aria-labelledby="q5b" hidden><div><p>On WhatsApp, straight after they pay or RSVP. At the gate, the host scans the QR code with any phone.</p></div></div>
+      <div class="acc__panel" id="q5" role="region" aria-labelledby="q5b" hidden><div><p>On their phone, straight after they RSVP or pay: a QR code and a private ticket link they can save to their own WhatsApp in one tap, and get by email too. At the gate, the host scans the QR code with any phone.</p></div></div>
     </div>
     <div class="acc__item">
       <h3><button class="acc__btn" type="button" aria-expanded="false" aria-controls="q6" id="q6b"><span class="acc__num">06</span><span class="acc__q">I bought a ticket. Who do I contact?</span><span class="acc__ic">{{icon:add-circle}}</span></button></h3>

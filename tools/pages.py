@@ -3,7 +3,7 @@ Run: python3 tools/pages.py && python3 tools/build.py
 """
 from pathlib import Path
 SRC = Path(__file__).resolve().parent.parent / "src"
-UPDATED = "14 November 2026"
+UPDATED = "15 November 2026"
 
 def page(slug, title, desc, label, h1, lede, sections, meta=None, nav_title="On this page"):
     nav = "\n".join(f'        <li><a href="#{sid}">{name}</a></li>' for sid, name, _icon, _body in sections)
@@ -58,7 +58,7 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
  [
  ("start", "Getting started", "compass", """
       <p>Ganor is where you find what’s happening near you. Hosts create an event, share one link, take free RSVPs or sell tickets, and scan guests in at the gate. Guests open the link, get their ticket with a QR code, and show it at the door.</p>
-      <div class="callout"><b>Ganor opens soon.</b> These docs describe how it works when it opens. <a href="./#join">Join the list</a> and we’ll message you on WhatsApp the day you can start.</div>
+      <div class="callout"><b>Ganor is open.</b> Create your host account at <a href="https://app.ganor.ng/login?mode=signup">app.ganor.ng</a>, or <a href="https://app.ganor.ng/events">find events near you</a>.</div>
       <h3>Who Ganor is for</h3>
       <ul>
         <li><b>Hosts:</b> anyone running a gathering, from conferences, summits, trade fairs and cooperative launches to lectures, campus events and shows.</li>
@@ -107,14 +107,16 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
         </tbody>
       </table></div>
       <ul>
-        <li>A paid plan is paid before the event is published, and covers that one event.</li>
+        <li>A paid plan is paid before the event is published, and covers that one event. To pay, email support@ganor.ng with the reference in your event’s <b>Plan</b> card and we’ll send the bank details; once Ganor confirms your payment, you can publish.</li>
         <li>On the Free plan, RSVPs close when 30 guests have registered. You can upgrade from your event page at any time.</li>
         <li>The Free plan includes one gate account for the event. Paid plans can have as many as you need.</li>
-        <li>You can run one Free plan event at a time, and start up to 2 a month. After that, choose a paid plan for the next event, or wait until the free one ends or the new month starts.</li>
+        <li>You can run one Free plan event at a time, and start up to 2 a month. Past that, Ganor shows you the paid plans for your next event; or try again later.</li>
         <li>Your dashboard shows what each plan includes before you choose.</li>
       </ul>
       <h3>Your questions</h3>
-      <p>Add questions to the RSVP form, such as organisation, job title or t-shirt size, and mark which ones are required. You can download your guest list with their answers.</p>"""),
+      <p>Add questions to the RSVP form, such as organisation, job title or t-shirt size, and mark which ones are required. You can download your guest list with their answers.</p>
+      <h3>Keeping RSVPs real</h3>
+      <p>Ganor limits fake RSVPs for you: one RSVP per phone number, up to 4 guests registered from the same phone, and a cap on bursts of RSVPs from one network. Guests who hit a limit see a clear message telling them what to do.</p>"""),
  ("tickets", "Paid tickets", "ticket", """
       <p>A paid event can have as many ticket types as you need, for example Regular, VIP and Table for 10. For each one you set:</p>
       <ul>
@@ -123,7 +125,7 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
         <li><b>What’s included</b>, such as front rows, lunch or a certificate (optional).</li>
       </ul>
       <p>You can pause or reopen any ticket type at any time. Once a ticket type has sold, its price is locked; add a new ticket type for a different price.</p>
-      <div class="callout"><b>Online payments are switching on soon.</b> You can set up and publish paid events now; the event page shows that ticket sales open soon until card, transfer and USSD payments go live.</div>"""),
+      <div class="callout"><b>Card, transfer and USSD checkout is switching on.</b> You can set up, publish and share paid events now. Until checkout is live, your event page tells guests that ticket sales open soon.</div>"""),
  ("share", "Share your event", "share", """
       <p>Every event gets one link, like <b>app.ganor.ng/e/your-event</b>. Post it on WhatsApp, your status, Instagram or anywhere else. The link shows a clean preview with your banner, date and venue, and your event page has buttons to share it on WhatsApp, X, Facebook and LinkedIn.</p>
       <p>Guests who open the link can RSVP or buy straight away. They don’t need an account or an app.</p>"""),
@@ -144,6 +146,8 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
         </tbody>
       </table></div>
       <p>Try your own numbers with the <a href="./#pricing">calculator</a>.</p>
+      <h3>Your dashboard</h3>
+      <p>Your dashboard shows tickets and RSVPs, take-home and check-ins over 7, 30 or 90 days, with a chart for each event and a projection to event day. Download your guest list as a spreadsheet (CSV) or a branded PDF, and look up any guest by phone to resend their ticket on WhatsApp.</p>
       <h3>Payouts</h3>
       <p>Add the bank account for your payouts in your dashboard. Ganor checks it before any money is paid out. Your dashboard shows your sales, your take-home and your payout details, so you always know where your money is.</p>"""),
  ("gate", "Gate check-in", "scan", """
@@ -169,7 +173,8 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
  ("guests", "For guests", "user", """
       <h3>Getting your ticket</h3>
       <p>Open the event link. For a free event, enter your name, your phone number and any details the host asks for, then tap <b>RSVP</b>. For a paid event, choose your tickets and pay by card, bank transfer or USSD once sales are open.</p>
-      <p>Your ticket appears straight away with its QR code. Keep it on your phone (a screenshot works) and show it at the gate. Each ticket gets one person in, once.</p>
+      <p>Your ticket appears straight away with its QR code. Each ticket also has a <b>private link</b>: tap <b>Save to my WhatsApp</b> to send it to your own chat, copy it, and if you gave an email we email it to you too. On the day, open the link (or a screenshot) and show the QR code at the gate. Each ticket gets one person in, once.</p>
+      <p>Lost your link? Ask the host. They can look you up by your phone number and send your ticket link to you on WhatsApp.</p>
       <h3>Questions about an event</h3>
       <p><b>Contact the host.</b> The host runs the event, so questions about the venue, the programme, changes or refunds go to them. Every event page has the host’s WhatsApp or phone number.</p>
       <h3>When to contact Ganor</h3>
@@ -233,7 +238,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team 
  ("guests", "If you get a ticket", "ticket", """
       <ul>
         <li>The price you pay is shown before you pay, including any Ganor fee.</li>
-        <li>Your ticket and its QR code appear as soon as you RSVP or pay. Keep your QR code to yourself: each ticket works once, and the first scan is the one that counts.</li>
+        <li>Your ticket and its QR code appear as soon as you RSVP or pay, with a private link to your ticket. Keep the QR code and the link to yourself: anyone with them can use the ticket, each ticket works once, and the first scan is the one that counts.</li>
         <li>One phone number can RSVP once to each free event.</li>
         <li>Questions about the event, changes and refunds go to the host. If you can’t reach them, message us.</li>
         <li>Don’t resell tickets for more than you paid or copy tickets. The host may refuse entry for copied or resold tickets.</li>
@@ -241,7 +246,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team 
       </ul>"""),
  ("fees", "Fees and payments", "percent", """
       <p><b>Paid tickets:</b> the Ganor fee is 6% of the ticket price + ₦100 per ticket, with card and transfer charges included. Paid tickets cost at least ₦1,000. The host chooses whether the buyer pays the fee at checkout or the host absorbs it.</p>
-      <p><b>Free RSVP events:</b> the Free plan costs nothing and allows up to 30 guests, for one event at a time and up to 2 events a calendar month. Larger free events use a paid plan (Basic, Standard, Pro or Premium), priced per event and shown before you choose. A plan is paid before the event is published and covers that one event only. Plan fees aren’t refundable once the event is published, except where the law requires.</p>
+      <p><b>Free RSVP events:</b> the Free plan costs nothing and allows up to 30 guests, for one event at a time and up to 2 events a calendar month. Hosts pay for plans by bank transfer, confirmed by Ganor before the event is published. Larger free events use a paid plan (Basic, Standard, Pro or Premium), priced per event and shown before you choose. A plan is paid before the event is published and covers that one event only. Plan fees aren’t refundable once the event is published, except where the law requires.</p>
       <p>We may change our fees. Changes never apply to tickets or plans already paid for, and we’ll tell hosts before they take effect.</p>
       <p>Payments are processed by our licensed payment partners. We don’t store card details. Ticket money, minus the Ganor fee where the host absorbs it, is paid out to the host’s bank account after we’ve checked it.</p>"""),
  ("not-allowed", "What’s not allowed", "shield", """
@@ -250,7 +255,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team 
         <li>Events or businesses that break the law, or that promote hate, violence or harm.</li>
         <li>Selling tickets you don’t have the right to sell.</li>
         <li>Collecting payments outside Ganor for tickets advertised on Ganor.</li>
-        <li>Fake RSVPs, or filling an event’s places to keep real guests out.</li>
+        <li>Fake RSVPs, filling an event’s places to keep real guests out, or using several phones or networks to get round RSVP limits.</li>
         <li>Sharing one account between people to get round the one-device rule.</li>
         <li>Trying to break, copy or overload Ganor, or to get into other people’s accounts.</li>
       </ul>
@@ -280,8 +285,8 @@ page("privacy", "Privacy policy", "What personal data Ganor collects, why, who i
  ("who", "Who we are", "info", """
       <p>Ganor (“we”) runs ganor.ng and the Ganor app at app.ganor.ng, and is responsible for the personal data described here. We follow the Nigeria Data Protection Act 2023.</p>"""),
  ("collect", "What we collect", "doc", """
-      <h3>When you join the list</h3>
-      <p>Your name, your WhatsApp number or email (you choose), whether you’re a host, a guest or a business, and the kind of event you’re interested in, if you tell us.</p>
+      <h3>When you sign up for updates</h3>
+      <p>Your name, your WhatsApp number or email (you choose), whether you’re a host, a guest or a business, and the kind of event or business you’re interested in, if you tell us.</p>
       <h3>When you use Ganor</h3>
       <ul>
         <li><b>Host account:</b> your name and email, and your password (stored scrambled, so no one can read it). If you sign in with Google, Google shares your name and email address with us.</li>
@@ -298,11 +303,11 @@ page("privacy", "Privacy policy", "What personal data Ganor collects, why, who i
  ("use", "How we use it", "settings", """
       <ul>
         <li>To run your account, keep it to one device at a time, and keep it secure.</li>
-        <li>To deliver tickets and check guests in at the gate.</li>
+        <li>To deliver tickets and check guests in at the gate, including emailing your ticket link if you gave an email address, and letting the host resend your ticket link on WhatsApp if you lose it.</li>
         <li>To process payments and pay hosts.</li>
         <li>To send you one WhatsApp message after an event asking you to rate it, only if you ticked that box at checkout. Reply STOP and we won’t send another.</li>
         <li>To show guests’ ratings of events and hosts, so people can choose events with confidence.</li>
-        <li>To tell you when Ganor opens, if you joined the list.</li>
+        <li>To tell you about Ganor Places and other updates, if you signed up for them.</li>
         <li>To keep Ganor safe and stop fraud, such as fake RSVPs.</li>
         <li>To meet our legal duties.</li>
       </ul>
@@ -317,7 +322,7 @@ page("privacy", "Privacy policy", "What personal data Ganor collects, why, who i
         <li><b>Authorities:</b> when the law requires it.</li>
       </ul>"""),
  ("keep", "How long we keep it", "clock", """
-      <p>We keep your data only as long as we need it: account data while your account is open, ticket and payment records for as long as the law requires, gate sign-in records for up to a week after they end, and waitlist details until Ganor opens or until you ask us to delete them. Rating links and the records of who agreed to rating messages are deleted 6 months after ratings for that event close. Published reviews stay up until you ask us to remove them; they are linked to a coded reference, not your phone number.</p>"""),
+      <p>We keep your data only as long as we need it: account data while your account is open, ticket and payment records for as long as the law requires, gate sign-in records for up to a week after they end, and update sign-ups until you unsubscribe or ask us to delete them. Rating links and the records of who agreed to rating messages are deleted 6 months after ratings for that event close. Published reviews stay up until you ask us to remove them; they are linked to a coded reference, not your phone number.</p>"""),
  ("rights", "Your rights", "shield", """
       <p>You can ask us to:</p>
       <ul>
