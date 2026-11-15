@@ -110,6 +110,7 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
         <li>A paid plan is paid before the event is published, and covers that one event.</li>
         <li>On the Free plan, RSVPs close when 30 guests have registered. You can upgrade from your event page at any time.</li>
         <li>The Free plan includes one gate account for the event. Paid plans can have as many as you need.</li>
+        <li>You can run one Free plan event at a time, and start up to 2 a month. After that, choose a paid plan for the next event, or wait until the free one ends or the new month starts.</li>
         <li>Your dashboard shows what each plan includes before you choose.</li>
       </ul>
       <h3>Your questions</h3>
@@ -240,7 +241,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team 
       </ul>"""),
  ("fees", "Fees and payments", "percent", """
       <p><b>Paid tickets:</b> the Ganor fee is 6% of the ticket price + ₦100 per ticket, with card and transfer charges included. Paid tickets cost at least ₦1,000. The host chooses whether the buyer pays the fee at checkout or the host absorbs it.</p>
-      <p><b>Free RSVP events:</b> the Free plan costs nothing and allows up to 30 guests. Larger free events use a paid plan (Basic, Standard, Pro or Premium), priced per event and shown before you choose. A plan is paid before the event is published and covers that one event only. Plan fees aren’t refundable once the event is published, except where the law requires.</p>
+      <p><b>Free RSVP events:</b> the Free plan costs nothing and allows up to 30 guests, for one event at a time and up to 2 events a calendar month. Larger free events use a paid plan (Basic, Standard, Pro or Premium), priced per event and shown before you choose. A plan is paid before the event is published and covers that one event only. Plan fees aren’t refundable once the event is published, except where the law requires.</p>
       <p>We may change our fees. Changes never apply to tickets or plans already paid for, and we’ll tell hosts before they take effect.</p>
       <p>Payments are processed by our licensed payment partners. We don’t store card details. Ticket money, minus the Ganor fee where the host absorbs it, is paid out to the host’s bank account after we’ve checked it.</p>"""),
  ("not-allowed", "What’s not allowed", "shield", """
