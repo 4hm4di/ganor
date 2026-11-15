@@ -112,7 +112,7 @@ def footer(marketing=False):
             ("x", "X", "https://x.com/ganorng"),
             ("facebook", "Facebook", "https://www.facebook.com/ganor.ng"),
             ("linkedin", "LinkedIn", "https://www.linkedin.com/company/ganorng"),
-            ("whatsapp", "WhatsApp", "https://wa.me/2348103301999"),
+            ("whatsapp", "WhatsApp", "https://wa.me/2348106742222"),
         ]
     )
     why = (
@@ -124,7 +124,7 @@ def footer(marketing=False):
     return f"""<tr><td align="center" style="padding:30px 20px 0;font-family:{SANS};font-size:12px;line-height:19px;color:{MUTED};">
   <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>{icons}</tr></table>
   <p style="margin:18px 0 0;">{why}Ganor · No. 15 Guda Abdullahi Road, Farm Center, Kano<br>
-  <a href="mailto:support@ganor.ng" style="color:{MUTED};">support@ganor.ng</a> &nbsp;·&nbsp; <a href="tel:+2348103301999" style="color:{MUTED};text-decoration:none;">0810 330 1999</a><br>
+  <a href="mailto:support@ganor.ng" style="color:{MUTED};">support@ganor.ng</a> &nbsp;·&nbsp; <a href="tel:+2348106742222" style="color:{MUTED};text-decoration:none;">0810 674 2222</a><br>
   <a href="{SITE}/terms.html" style="color:{MUTED};">Terms</a> &nbsp;·&nbsp; <a href="{SITE}/privacy.html" style="color:{MUTED};">Privacy</a> &nbsp;·&nbsp; <a href="{SITE}/refunds.html" style="color:{MUTED};">Refunds</a></p>
 </td></tr>"""
 
@@ -184,7 +184,7 @@ def auto_reply():
 </table>"""
         )
         + f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px;"><tr><td>{button("Read the docs", SITE + "/docs.html")}</td></tr></table>'
-        + p(f'Need us now? <a href="https://wa.me/2348103301999" style="color:{INDIGO};font-weight:600;">WhatsApp 0810 330 1999</a>.', top=18, size=15, color=MUTED)
+        + p(f'Need us now? <a href="https://wa.me/2348106742222" style="color:{INDIGO};font-weight:600;">WhatsApp 0810 674 2222</a>.', top=18, size=15, color=MUTED)
         + p("The Ganor team", top=28, size=15)
     )
     html = shell("We’ve got your message", "Thanks for writing to Ganor. Here’s what happens next.", header_bar(), body, footer())
@@ -197,7 +197,7 @@ While you wait:
 - Question about an event? The host can help fastest. Their contact is on the event page.
 - Hosting? Our docs cover creating events, fees and gate check-in: {SITE}/docs.html
 
-Need us now? WhatsApp 0810 330 1999.
+Need us now? WhatsApp 0810 674 2222.
 
 The Ganor team
 support@ganor.ng · ganor.ng"""
@@ -211,7 +211,7 @@ def signature(name, role):
         f'<td style="padding-right:10px;"><a href="{url}" style="text-decoration:none;"><img src="{IMG}/social-{n}-ink.png" width="16" height="16" alt="{label}" style="width:16px;height:16px;display:block;border:0;"></a></td>'
         for n, label, url in [("instagram", "Instagram", "https://www.instagram.com/ganor.ng"), ("tiktok", "TikTok", "https://www.tiktok.com/@ganor.ng"),
                               ("x", "X", "https://x.com/ganorng"), ("facebook", "Facebook", "https://www.facebook.com/ganor.ng"),
-                              ("linkedin", "LinkedIn", "https://www.linkedin.com/company/ganorng"), ("whatsapp", "WhatsApp", "https://wa.me/2348103301999")]
+                              ("linkedin", "LinkedIn", "https://www.linkedin.com/company/ganorng"), ("whatsapp", "WhatsApp", "https://wa.me/2348106742222")]
     )
     return f"""<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:{SANS};color:{INK};">
 <tr>
@@ -220,7 +220,7 @@ def signature(name, role):
     <p style="margin:0;font-family:{HEAD};font-size:16px;line-height:20px;font-weight:800;color:{INK};">{name}</p>
     <p style="margin:2px 0 0;font-size:13px;line-height:18px;color:{MUTED};">{role}</p>
     <p style="margin:8px 0 0;font-size:13px;line-height:19px;color:{INK};">
-      <a href="tel:+2348103301999" style="color:{INK};text-decoration:none;">0810 330 1999</a> &nbsp;·&nbsp;
+      <a href="tel:+2348106742222" style="color:{INK};text-decoration:none;">0810 674 2222</a> &nbsp;·&nbsp;
       <a href="mailto:support@ganor.ng" style="color:{INDIGO};text-decoration:none;">support@ganor.ng</a> &nbsp;·&nbsp;
       <a href="{SITE}" style="color:{INDIGO};text-decoration:none;font-weight:600;">ganor.ng</a></p>
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:8px;"><tr>{social}</tr></table>
@@ -414,7 +414,7 @@ def welcome():
 {icon_row("shop", "<b>Places you can trust.</b> Shops, hospitals, places to eat and stay, checked in person.")}
 </table>"""
         )
-        + p(f'Questions? Reply to this email or <a href="https://wa.me/2348103301999" style="color:{INDIGO};font-weight:600;">WhatsApp 0810 330 1999</a>.', top=28, size=15, color=MUTED)
+        + p(f'Questions? Reply to this email or <a href="https://wa.me/2348106742222" style="color:{INDIGO};font-weight:600;">WhatsApp 0810 674 2222</a>.', top=28, size=15, color=MUTED)
         + p("The Ganor team", top=22, size=15)
     )
     return shell("Welcome to Ganor", "You’re on the list. Here’s what to expect.", header, body, footer(marketing=True))

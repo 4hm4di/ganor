@@ -83,7 +83,7 @@ ORG = {
     "logo": {"@type": "ImageObject", "url": f"{SITE}/android-chrome-512x512.png", "width": 512, "height": 512},
     "slogan": "Your city, found.",
     "email": "support@ganor.ng",
-    "telephone": "+2348103301999",
+    "telephone": "+2348106742222",
     "address": {
         "@type": "PostalAddress",
         "streetAddress": "No. 15 Guda Abdullahi Road, Farm Center",
@@ -95,7 +95,7 @@ ORG = {
         "@type": "ContactPoint",
         "contactType": "customer support",
         "email": "support@ganor.ng",
-        "telephone": "+2348103301999",
+        "telephone": "+2348106742222",
         "areaServed": "NG",
         "availableLanguage": ["English", "Hausa"],
     }],

@@ -50,7 +50,7 @@ def page(slug, title, desc, label, h1, lede, sections, meta=None, nav_title="On 
 """
     (SRC / f"{slug}.html").write_text(out)
 
-CONTACT = """<p>WhatsApp or call <a href="https://wa.me/2348103301999" rel="noopener">0810 330 1999</a>, email <a href="mailto:support@ganor.ng">support@ganor.ng</a>, or visit us at No. 15 Guda Abdullahi Road, Farm Center, Kano.</p>"""
+CONTACT = """<p>WhatsApp or call <a href="https://wa.me/2348106742222" rel="noopener">0810 674 2222</a>, email <a href="mailto:support@ganor.ng">support@ganor.ng</a>, or visit us at No. 15 Guda Abdullahi Road, Farm Center, Kano.</p>"""
 
 # ---------------- DOCS ----------------
 page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and businesses: accounts, free RSVP events and plans, paid tickets, fees, gate check-in and getting help.",
