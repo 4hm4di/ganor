@@ -69,7 +69,8 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
       <p>Hosts and gate teams work in the Ganor app at <b>app.ganor.ng</b>. Guests don’t need an account.</p>"""),
  ("account", "Your host account", "user", """
       <h3>Signing up</h3>
-      <p>Create your host account at <b>app.ganor.ng</b> with your email and a password, then open the link we email you to confirm your address. Or tap <b>Continue with Google</b> to sign up and sign in with your Google account.</p>
+      <p>Create your host account at <b>app.ganor.ng</b> with your email and a password, then open the link we email you to confirm your address. Either way, you tick the box to agree to the Terms and Privacy policy first. Or tap <b>Continue with Google</b> to sign up and sign in with your Google account.</p>
+      <p>Your first visit opens your overview with a short <b>to-do list</b>: add a contact number and logo, create and publish your first event, share the link, and add a payout account and gate team if you need them. Hide it any time.</p>
       <h3>Your host profile</h3>
       <p>Your name, logo and a few lines about you appear on your event pages. Add how guests can reach you: a <b>WhatsApp or call number is required before you can publish</b>. Email, website and Instagram are optional.</p>
       <h3>Staying safe</h3>
@@ -91,7 +92,9 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
         <li>If it applies, tick <b>Halal-friendly</b> (see <a href="#halal">Halal-friendly events</a>).</li>
         <li>Save. Your event stays a draft, visible only to you, until you publish it.</li>
       </ol>
-      <p>Before you can publish, Ganor checks that your profile has a WhatsApp or call number, that a paid event has at least one ticket type, and that a paid RSVP plan has been paid. You can change the details after you publish; tell your guests about any change to the date, time or venue.</p>"""),
+      <p>Before you can publish, Ganor checks that your profile has a WhatsApp or call number, that a paid event has at least one ticket type, and that a paid RSVP plan has been paid. You can change the details after you publish; tell your guests about any change to the date, time or venue.</p>
+      <h3>Public or private</h3>
+      <p>When you publish, you choose who can find your event. <b>Public</b> events are listed on Ganor&rsquo;s Find events page and can show up in search. <b>Private</b> events are left off Find events and out of search; only people you send the link to can open them. You can switch between the two any time from your event page.</p>"""),
  ("rsvp", "Free RSVP events", "users", """
       <p>A Free RSVP event costs your guests nothing. Each guest gives their name and phone number, answers any questions you add, and gets a ticket with a QR code to show at the gate. One phone number can RSVP once per event.</p>
       <h3>Plans</h3>
@@ -149,7 +152,7 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
       <h3>Your dashboard</h3>
       <p>Your dashboard shows tickets and RSVPs, take-home and check-ins over 7, 30 or 90 days, with a chart for each event and a projection to event day. Download your guest list as a spreadsheet (CSV) or a branded PDF, and look up any guest by phone to resend their ticket on WhatsApp.</p>
       <h3>Payouts</h3>
-      <p>Add the bank account for your payouts in your dashboard. Ganor checks it before any money is paid out. Your dashboard shows your sales, your take-home and your payout details, so you always know where your money is.</p>"""),
+      <p>Add the bank account for your payouts in your dashboard. Ganor checks it before any money is paid out. Your <b>Wallet</b> in the dashboard shows your take-home, the Ganor fees, any refunds, each event&rsquo;s sales and your payout account&rsquo;s status, so you always know where your money is.</p>"""),
  ("gate", "Gate check-in", "scan", """
       <p>Any phone becomes the scanner. Open your event and tap <b>Gate check-in</b>, or let your gate team scan for you. Point the camera at a guest’s QR code, or type the code under it. You’ll see one of these results:</p>
       <ul>
