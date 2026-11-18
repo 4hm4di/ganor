@@ -3,7 +3,7 @@ Run: python3 tools/pages.py && python3 tools/build.py
 """
 from pathlib import Path
 SRC = Path(__file__).resolve().parent.parent / "src"
-UPDATED = "15 November 2026"
+UPDATED = "18 November 2026"
 
 def page(slug, title, desc, label, h1, lede, sections, meta=None, nav_title="On this page"):
     nav = "\n".join(f'        <li><a href="#{sid}">{name}</a></li>' for sid, name, _icon, _body in sections)
@@ -77,7 +77,7 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
       <ul>
         <li><b>One device at a time.</b> Signing in on a new phone or computer signs your account out everywhere else.</li>
         <li><b>Automatic sign-out.</b> After 30 minutes without activity, or when you close the browser, you’re signed out.</li>
-        <li><b>Your bank account</b> for payouts is added once in your dashboard and checked before money is paid out.</li>
+        <li><b>Your bank account</b> for payouts is added once in your dashboard. Ganor confirms the account name, then your share of each paid ticket goes straight to it.</li>
       </ul>"""),
  ("create", "Create an event", "calendar", """
       <p>Tap <b>New event</b> and choose what kind it is:</p>
@@ -152,7 +152,7 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
       <h3>Your dashboard</h3>
       <p>Your dashboard shows tickets and RSVPs, take-home and check-ins over 7, 30 or 90 days, with a chart for each event and a projection to event day. Download your guest list as a spreadsheet (CSV) or a branded PDF, and look up any guest by phone to resend their ticket on WhatsApp.</p>
       <h3>Payouts</h3>
-      <p>Add the bank account for your payouts in your dashboard. Ganor checks it before any money is paid out. Your <b>Wallet</b> in the dashboard shows your take-home, the Ganor fees, any refunds, each event&rsquo;s sales and your payout account&rsquo;s status, so you always know where your money is.</p>"""),
+      <p>Add the bank account for your payouts in your dashboard. Ganor confirms the account name matches your bank&rsquo;s record. After that, every ticket payment is split at checkout by Paystack, our licensed payment partner: your share settles directly to your bank account on Paystack&rsquo;s normal settlement schedule, and the Ganor fee goes to Ganor. Ganor doesn&rsquo;t hold ticket money, and there&rsquo;s nothing to request. Your <b>Wallet</b> in the dashboard shows your take-home, the Ganor fees, any refunds, each event&rsquo;s sales and your payout account&rsquo;s status, so you always know where your money is.</p>"""),
  ("gate", "Gate check-in", "scan", """
       <p>Any phone becomes the scanner. Open your event and tap <b>Gate check-in</b>, or let your gate team scan for you. Point the camera at a guest’s QR code, or type the code under it. You’ll see one of these results:</p>
       <ul>
@@ -251,7 +251,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team 
       <p><b>Paid tickets:</b> the Ganor fee is 6% of the ticket price + ₦100 per ticket, with card and transfer charges included. Paid tickets cost at least ₦1,000. The host chooses whether the buyer pays the fee at checkout or the host absorbs it.</p>
       <p><b>Free RSVP events:</b> the Free plan costs nothing and allows up to 30 guests, for one event at a time and up to 2 events a calendar month. Hosts pay for plans by bank transfer, confirmed by Ganor before the event is published. Larger free events use a paid plan (Basic, Standard, Pro or Premium), priced per event and shown before you choose. A plan is paid before the event is published and covers that one event only. Plan fees aren’t refundable once the event is published, except where the law requires.</p>
       <p>We may change our fees. Changes never apply to tickets or plans already paid for, and we’ll tell hosts before they take effect.</p>
-      <p>Payments are processed by our licensed payment partners. We don’t store card details. Ticket money, minus the Ganor fee where the host absorbs it, is paid out to the host’s bank account after we’ve checked it.</p>"""),
+      <p>Payments are processed by our licensed payment partners. We don’t store card details. Each ticket payment is split at checkout by our payment partner: the host’s share (the ticket price, minus the Ganor fee where the host absorbs it) settles directly to the host’s verified bank account, and the Ganor fee goes to Ganor. Ganor doesn’t hold ticket money for hosts or guests.</p>"""),
  ("not-allowed", "What’s not allowed", "shield", """
       <ul>
         <li>Fake, misleading or duplicate events or listings, including misusing the Halal-friendly label.</li>
@@ -262,7 +262,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team 
         <li>Sharing one account between people to get round the one-device rule.</li>
         <li>Trying to break, copy or overload Ganor, or to get into other people’s accounts.</li>
       </ul>
-      <p>We may remove events or listings, hold payouts while we check a problem, or suspend or close accounts that break these terms. Where we can, we’ll tell you why.</p>"""),
+      <p>We may remove events or listings, pause ticket sales while we check a problem, or suspend or close accounts that break these terms. Where we can, we’ll tell you why.</p>"""),
  ("places", "Ganor Places", "shop", """
       <p>Businesses on Ganor Places must give true details and keep them up to date. We check listings in person, but we can’t promise the quality of any business’s goods or services. Deal with businesses carefully, as you would anywhere.</p>"""),
  ("liability", "Our responsibility", "info", """
