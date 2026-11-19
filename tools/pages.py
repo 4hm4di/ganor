@@ -3,7 +3,7 @@ Run: python3 tools/pages.py && python3 tools/build.py
 """
 from pathlib import Path
 SRC = Path(__file__).resolve().parent.parent / "src"
-UPDATED = "18 November 2026"
+UPDATED = "19 November 2026"
 
 def page(slug, title, desc, label, h1, lede, sections, meta=None, nav_title="On this page"):
     nav = "\n".join(f'        <li><a href="#{sid}">{name}</a></li>' for sid, name, _icon, _body in sections)
@@ -53,8 +53,8 @@ def page(slug, title, desc, label, h1, lede, sections, meta=None, nav_title="On 
 CONTACT = """<p>WhatsApp or call <a href="https://wa.me/2348106742222" rel="noopener">0810 674 2222</a>, email <a href="mailto:support@ganor.ng">support@ganor.ng</a>, or visit us at No. 15 Guda Abdullahi Road, Farm Center, Kano.</p>"""
 
 # ---------------- DOCS ----------------
-page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and businesses: accounts, free RSVP events and plans, paid tickets, fees, gate check-in and getting help.",
- "Docs", "How Ganor works", "Everything you need to host an event, run the gate, get a ticket or get your business found. Short answers, in plain words.",
+page("docs", "Docs", "How Ganor works for hosts, gate teams and guests: accounts, free RSVP events and plans, paid tickets, fees, gate check-in and getting help.",
+ "Docs", "How Ganor works", "Everything you need to host an event, run the gate or get a ticket. Short answers, in plain words.",
  [
  ("start", "Getting started", "compass", """
       <p>Ganor is where you find what’s happening near you. Hosts create an event, share one link, take free RSVPs or sell tickets, and scan guests in at the gate. Guests open the link, get their ticket with a QR code, and show it at the door.</p>
@@ -64,7 +64,6 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
         <li><b>Hosts:</b> anyone running a gathering, from conferences, summits, trade fairs and cooperative launches to lectures, campus events and shows.</li>
         <li><b>Gate teams:</b> the people a host trusts to scan guests in.</li>
         <li><b>Guests:</b> anyone looking for something to go to, or holding a ticket.</li>
-        <li><b>Businesses:</b> shops, hospitals, restaurants, hotels and more, listed on Ganor Places.</li>
       </ul>
       <p>Hosts and gate teams work in the Ganor app at <b>app.ganor.ng</b>. Guests don’t need an account.</p>"""),
  ("account", "Your host account", "user", """
@@ -198,24 +197,21 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams, guests and business
         <li>Islamic lectures, Eid fests and community gatherings.</li>
       </ul>
       <div class="callout"><b>This is the host’s description.</b> Ganor doesn’t certify events as halal. If an event isn’t what the host said, tell us and we’ll look into it. Using the label falsely counts as a misleading event under our <a href="terms.html#not-allowed">terms</a>.</div>"""),
- ("places", "For businesses", "shop", """
-      <p>Ganor Places helps people find the businesses they can trust nearby: phone and electronics shops, fabric sellers, markets, hospitals, pharmacies, restaurants, hotels, event halls, salons, mechanics, schools, coworking spaces, tech hubs, gyms, football pitches and mini stadiums, parks and more.</p>
-      <p>Every listing is checked in person, with directions and a working phone number. Ganor Places comes after events. To be among the first listed, <a href="./#join">join the list</a> and choose <b>A local business</b>.</p>"""),
- ("help", "Get help", "support", f"""
+  ("help", "Get help", "support", f"""
       <p>We answer on WhatsApp first.</p>
       {CONTACT}"""),
  ])
 
 # ---------------- TERMS ----------------
-page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team member, a guest or a business.",
+page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team member or a guest.",
  "Legal", "Terms of use", "The rules for using Ganor, written to be read. Please read them before you host, buy or list on Ganor.",
  [
  ("about", "About these terms", "doc", """
-      <p>These terms apply when you use ganor.ng, the Ganor app at app.ganor.ng or any Ganor service (together, “Ganor”). “We” and “us” mean Ganor. “You” means anyone using Ganor: a <b>host</b> who runs an event, a <b>gate team member</b> who scans tickets for a host, a <b>guest</b> who RSVPs or buys a ticket, or a <b>business</b> listed on Ganor Places.</p>
+      <p>These terms apply when you use ganor.ng, the Ganor app at app.ganor.ng or any Ganor service (together, “Ganor”). “We” and “us” mean Ganor. “You” means anyone using Ganor: a <b>host</b> who runs an event, a <b>gate team member</b> who scans tickets for a host, or a <b>guest</b> who RSVPs or buys a ticket.</p>
       <p>By using Ganor you agree to these terms, our <a href="privacy.html">privacy policy</a> and our <a href="refunds.html">refund policy</a>.</p>"""),
  ("who", "Who can use Ganor", "users", """
       <ul>
-        <li>Hosts and businesses must be at least 18 and able to enter a contract in Nigeria.</li>
+        <li>Hosts must be at least 18 and able to enter a contract in Nigeria.</li>
         <li>Guests under 18 should use Ganor with a parent or guardian’s permission.</li>
         <li>You must give true details and keep your account safe. You’re responsible for what happens in your account.</li>
       </ul>"""),
@@ -255,7 +251,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team 
  ("not-allowed", "What’s not allowed", "shield", """
       <ul>
         <li>Fake, misleading or duplicate events or listings, including misusing the Halal-friendly label.</li>
-        <li>Events or businesses that break the law, or that promote hate, violence or harm.</li>
+        <li>Events that break the law, or that promote hate, violence or harm.</li>
         <li>Selling tickets you don’t have the right to sell.</li>
         <li>Collecting payments outside Ganor for tickets advertised on Ganor.</li>
         <li>Fake RSVPs, filling an event’s places to keep real guests out, or using several phones or networks to get round RSVP limits.</li>
@@ -263,9 +259,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team 
         <li>Trying to break, copy or overload Ganor, or to get into other people’s accounts.</li>
       </ul>
       <p>We may remove events or listings, pause ticket sales while we check a problem, or suspend or close accounts that break these terms. Where we can, we’ll tell you why.</p>"""),
- ("places", "Ganor Places", "shop", """
-      <p>Businesses on Ganor Places must give true details and keep them up to date. We check listings in person, but we can’t promise the quality of any business’s goods or services. Deal with businesses carefully, as you would anywhere.</p>"""),
- ("liability", "Our responsibility", "info", """
+  ("liability", "Our responsibility", "info", """
       <p>We work hard to keep Ganor running and safe, but we can’t promise it will always be available or free of errors. We are not responsible for how an event is run, for what happens at an event, or for a host’s or business’s actions.</p>
       <p>Nothing in these terms limits rights you have under Nigerian consumer law, including the Federal Competition and Consumer Protection Act 2018.</p>"""),
  ("changes", "Changes and law", "settings", """
@@ -289,7 +283,7 @@ page("privacy", "Privacy policy", "What personal data Ganor collects, why, who i
       <p>Ganor (“we”) runs ganor.ng and the Ganor app at app.ganor.ng, and is responsible for the personal data described here. We follow the Nigeria Data Protection Act 2023.</p>"""),
  ("collect", "What we collect", "doc", """
       <h3>When you sign up for updates</h3>
-      <p>Your name, your WhatsApp number or email (you choose), whether you’re a host, a guest or a business, and the kind of event or business you’re interested in, if you tell us.</p>
+      <p>Your name, your WhatsApp number or email (you choose), whether you’re a host or a guest, and the kind of event you’re interested in, if you tell us.</p>
       <h3>When you use Ganor</h3>
       <ul>
         <li><b>Host account:</b> your name and email, and your password (stored scrambled, so no one can read it). If you sign in with Google, Google shares your name and email address with us.</li>
@@ -298,7 +292,7 @@ page("privacy", "Privacy policy", "What personal data Ganor collects, why, who i
         <li><b>Stopping fake RSVPs:</b> when you RSVP we keep a scrambled code for your browser and for your network, so we can limit how many RSVPs come from one phone or one place. We never store your IP address or a readable device ID.</li>
         <li><b>Gate team:</b> each gate account’s name and username, which events it can check in, when it signed in, and the tickets it scanned.</li>
         <li><b>Ratings:</b> if you agreed at checkout, the star rating and comment you leave after an event, the name you choose to show, and whether your ticket was scanned.</li>
-        <li><b>Hosts and businesses:</b> event or business details, and the bank account for payouts.</li>
+        <li><b>Hosts:</b> event details, and the bank account for payouts.</li>
         <li><b>Payments:</b> handled by our licensed payment partners. We receive confirmation of payment, not your card details.</li>
       </ul>
       <h3>Cookies</h3>
@@ -310,7 +304,7 @@ page("privacy", "Privacy policy", "What personal data Ganor collects, why, who i
         <li>To process payments and pay hosts.</li>
         <li>To send you one WhatsApp message after an event asking you to rate it, only if you ticked that box at checkout. Reply STOP and we won’t send another.</li>
         <li>To show guests’ ratings of events and hosts, so people can choose events with confidence.</li>
-        <li>To tell you about Ganor Places and other updates, if you signed up for them.</li>
+        <li>To tell you about new events and other Ganor updates, if you signed up for them.</li>
         <li>To keep Ganor safe and stop fraud, such as fake RSVPs.</li>
         <li>To meet our legal duties.</li>
       </ul>

@@ -364,17 +364,13 @@ def newsletter():
         event("12", "Dec", "Annual Public Lecture", "Kano · Fri 4:00 pm", "Free"),
         event("20", "Dec", "Kano International Trade Fair", "Kano · Sat 10:00 am", "₦1,000"),
     ])
-    chips = "".join(
-        f'<td style="padding:0 8px 8px 0;"><span style="display:inline-block;padding:8px 14px;border-radius:999px;border:1px solid {LINE};font-family:{SANS};font-size:13px;line-height:18px;font-weight:600;color:{INK};white-space:nowrap;">{t}</span></td>'
-        for t in ["Phones &amp; electronics", "Hospitals", "Places to eat", "Hotels", "Gyms"]
-    )
     host = f"""<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:36px;"><tr>
 <td bgcolor="{INK}" style="background:{INK};border-radius:20px;padding:30px 28px;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
     <td class="stack" valign="top" style="font-family:{SANS};">
       <p style="margin:0;font-size:12px;line-height:16px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:{LAV};">For hosts</p>
       <h2 style="margin:10px 0 0;font-family:{HEAD};font-size:28px;line-height:32px;font-weight:800;color:#FFFFFF;">Hosting something?</h2>
-      <p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#E9E6F7;">One link to share, tickets on WhatsApp, every gate opens with a scan. Free events cost nothing; paid tickets are 5% + ₦100 each.</p>
+      <p style="margin:10px 0 0;font-size:15px;line-height:24px;color:#E9E6F7;">One link to share, tickets on WhatsApp, every gate opens with a scan. Free events cost nothing; paid tickets are 6% + ₦100 each.</p>
     </td>
     <td class="stack stack-gap left-sm" valign="bottom" align="right" width="190" style="padding-left:16px;">{button("Host your event", SITE + "/#join", fill="#FFFFFF", text=INDIGO)}</td>
   </tr></table>
@@ -386,14 +382,9 @@ def newsletter():
         + f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;">{events}</table>'
         + f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;"><tr><td>{button("See all events", SITE + "/#find", outline=True)}</td></tr></table>'
         + host
-        + f'<div style="margin-top:36px;">{kicker("Coming next", icon="shop")}</div>'
-        + f'<h2 style="margin:10px 0 0;font-family:{HEAD};font-size:24px;line-height:30px;font-weight:800;color:{INK};">Ganor Places: who to trust nearby.</h2>'
-        + p("Shops, hospitals, places to eat and stay, workspaces and more, checked in person.", top=8, size=15, color=MUTED)
-        + f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:14px;"><tr>{chips}</tr></table>'
-        + p(f'Own a business? <a href="{SITE}/#join" style="color:{INDIGO};font-weight:600;">Get found first</a>.', top=10, size=15)
     )
     hero = header_hero("Ganor weekly", "Your city,<br>found.", "Find what’s happening near you, buy tickets in seconds, and get them on WhatsApp.", "See what’s on", SITE + "/#find")
-    return shell("Ganor: what’s on near you", "Events this week, plus what’s coming to Ganor.", hero, body, footer(marketing=True))
+    return shell("Ganor: what’s on near you", "Events this week near you.", hero, body, footer(marketing=True))
 
 
 # ---------- sample data for previews ----------
@@ -411,7 +402,7 @@ def welcome():
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 {icon_row("calendar", "<b>Events near you.</b> Find what’s on in your city, from trade fairs to tech meetups.")}
 {icon_row("ticket", "<b>Tickets in seconds.</b> Pay once, get your ticket on WhatsApp, walk in with a scan.")}
-{icon_row("shop", "<b>Places you can trust.</b> Shops, hospitals, places to eat and stay, checked in person.")}
+{icon_row("scan", "<b>Walk straight in.</b> Hosts scan your ticket’s QR code at the gate in a second.")}
 </table>"""
         )
         + p(f'Questions? Reply to this email or <a href="https://wa.me/2348106742222" style="color:{INDIGO};font-weight:600;">WhatsApp 0810 674 2222</a>.', top=28, size=15, color=MUTED)

@@ -22,13 +22,13 @@ def icon(name, cls=""):
 # file, kicker, title (use <br>), subtitle, big icon, chips [(icon, text)], url
 CARDS = [
     # The home card shows two app screens from the hero, sized to run from the logo line to the chip line.
-    ("og.png", "Events · Tickets · Places", "Your city,<br>found.",
+    ("og.png", "Events · Tickets · Check-in", "Your city,<br>found.",
      None, "phones", [("search", "Find events"), ("ticket", "Sell tickets"), ("scan", "Check-in")], "ganor.ng"),
     ("og-docs.png", "Docs", "How Ganor<br>works.",
      "Create an event, sell tickets, share one link and check guests in.",
      "doc", [("calendar", "Create"), ("share", "Share"), ("ticket", "Sell"), ("scan", "Gate")], "ganor.ng/docs"),
     ("og-terms.png", "Legal", "Terms<br>of use.",
-     "The rules for hosting, buying and listing on Ganor, written to be read.",
+     "The rules for hosting and buying on Ganor, written to be read.",
      "shield", [], "ganor.ng/terms"),
     ("og-privacy.png", "Legal", "Privacy<br>policy.",
      "What we collect, why, and your rights under the Nigeria Data Protection Act 2023.",

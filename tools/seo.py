@@ -41,10 +41,10 @@ PAGES = {
     "docs": (
         "/docs.html",
         "Docs · How Ganor works",
-        "How to host an event on Ganor, sell tickets and free RSVPs, share one link, "
-        "check guests in at the gate, and get your business on Ganor Places.",
+        "How to host an event on Ganor, sell tickets and free RSVPs, share one link "
+        "and check guests in at the gate.",
         "og-docs.png",
-        "Ganor docs: how Ganor works for hosts, guests and businesses.",
+        "Ganor docs: how Ganor works for hosts and guests.",
         "Docs",
     ),
     "terms": (

@@ -1051,7 +1051,7 @@ select option { background-color: #fff; color: var(--ganor-ink); }
 .co__btn.is-paid .co__btn-l { opacity: 0; transform: translateY(-8px); }
 .co__btn.is-paid .co__btn-d { opacity: 1; transform: none; }
 
-.app__tabs { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); padding: 6px; border-radius: 18px; background: #fff; box-shadow: 0 1px 0 var(--ganor-line); }
+.app__tabs { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); padding: 6px; border-radius: 18px; background: #fff; box-shadow: 0 1px 0 var(--ganor-line); }
 .app__tabs span { display: grid; justify-items: center; gap: 2px; padding: 5px 0; border-radius: 12px; font: 600 9.5px/12px var(--ganor-font-body); color: var(--ganor-muted); }
 .app__tabs .i { width: 18px; height: 18px; }
 .app__tabs .is-on { color: var(--ganor-indigo); background: rgba(55,48,184,.08); }

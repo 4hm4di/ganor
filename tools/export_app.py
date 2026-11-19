@@ -41,8 +41,8 @@ def launch(html: str, page: str, base: str = "") -> str:
     # Header and menu: host CTA goes into the app; add Sign in.
     html = re.sub(r'href="\./#join"(\s*(?:data-menu-link)?\s*)><span>Host your event', rf'href="{base}/dashboard"\1><span>Host your event', html)
     html = sub(html, '<a href="docs.html">Docs</a>\n', f'<a href="docs.html">Docs</a>\n      <a href="{base}/login">Sign in</a>\n', 0, page)
-    html = re.sub(r'(<li style="--i:5"><a href="\./#faq" data-menu-link><span class="sheet__row"><b>FAQ</b></span></a></li>)',
-                  rf'\1\n      <li style="--i:6"><a href="{base}/login" data-menu-link><span class="sheet__row"><b>Sign in</b></span></a></li>', html)
+    html = re.sub(r'(<li style="--i:4"><a href="\./#faq" data-menu-link><span class="sheet__row"><b>FAQ</b></span></a></li>)',
+                  rf'\1\n      <li style="--i:5"><a href="{base}/login" data-menu-link><span class="sheet__row"><b>Sign in</b></span></a></li>', html)
     if page != "index.html":
         return html
 
@@ -67,7 +67,7 @@ def launch(html: str, page: str, base: str = "") -> str:
     html = sub(html, '<a class="btn btn--light btn--block" href="#join"><span>Host your event</span>',
                f'<a class="btn btn--light btn--block" href="{base}/dashboard"><span>Host your event</span>', 1, page)
 
-    # Join: countdown and pre-launch copy become launch copy with two buttons; the form stays for Places updates.
+    # Join: countdown and pre-launch copy become launch copy with two buttons; the form stays for event updates.
     start = html.index('<p class="label label--on-indigo" data-reveal>Ganor opens in</p>')
     end = html.index('</p>', html.index('class="join__lede"')) + len('</p>')
     arrow = '<span class="btn__arrow"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span>'
@@ -78,11 +78,8 @@ def launch(html: str, page: str, base: str = "") -> str:
         <a class="btn btn--light" href="{base}/login?mode=signup"><span>Create your host account</span>{arrow}</a>
         <a class="btn btn--ghost-light" href="{base}/events"><span>Find events</span>{arrow}</a>
       </div>
-      <p class="join__lede join__lede--small" data-reveal>Own a business or want updates? Leave your details and we’ll tell you when Ganor Places opens.</p>''' + html[end:]
+      <p class="join__lede join__lede--small" data-reveal>Want updates? Leave your details and we’ll tell you about new events near you.</p>''' + html[end:]
 
-    # The updates form now mainly serves businesses waiting for Ganor Places.
-    html = sub(html, '<input type="radio" name="role" value="host" checked>', '<input type="radio" name="role" value="host">', 1, page)
-    html = sub(html, '<input type="radio" name="role" value="business">', '<input type="radio" name="role" value="business" checked>', 1, page)
 
     # Small style additions for the launch buttons.
     html = sub(html, '</head>', '''<style>
