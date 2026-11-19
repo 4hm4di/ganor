@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Ganor",
   "short_name": "Ganor",
-  "description": "Find events and trusted places near you. Host an event, share one link, sell tickets and scan guests in at the gate.",
+  "description": "Find events near you. Host an event, share one link, sell tickets and scan guests in at the gate.",
   "lang": "en-NG",
   "dir": "ltr",
   "start_url": "./",

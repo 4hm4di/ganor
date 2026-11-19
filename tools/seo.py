@@ -31,11 +31,11 @@ TAB = {"index": "Ganor · Your city, found.", "docs": "Docs · Ganor", "terms": 
 PAGES = {
     "index": (
         "/",
-        "Ganor · Events, tickets and trusted places near you",
+        "Ganor · Events and tickets near you",
         "Find conferences, summits, trade fairs and halal-friendly events near you. Hosts share one link, "
         "sell tickets and scan guests in at the gate. Free events cost nothing.",
         "og.png",
-        "Ganor: your city, found. Events, tickets and places near you.",
+        "Ganor: your city, found. Events and tickets near you.",
         "Home",
     ),
     "docs": (
