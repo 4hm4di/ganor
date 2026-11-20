@@ -32,7 +32,7 @@ button, .btn, .chip, .nav__links a, .cat, .role span { -webkit-user-select: none
 ::selection { background: var(--ganor-indigo); color: #fff; }
 
 :focus-visible { outline: 3px solid var(--ganor-indigo); outline-offset: 3px; border-radius: 6px; }
-.on-dark :focus-visible, .hero :focus-visible, .join :focus-visible, .foot :focus-visible, .places :focus-visible, .sheet :focus-visible,
+.on-dark :focus-visible, .hero :focus-visible, .join :focus-visible, .pricing > .wrap > .head :focus-visible, .pricing .calc__out :focus-visible, .foot :focus-visible, .places :focus-visible, .sheet :focus-visible,
 .nav:not(.is-solid) :focus-visible { outline-color: var(--ganor-marigold); }
 .join__form :focus-visible { outline-color: var(--ganor-indigo); }
 
@@ -1415,3 +1415,15 @@ select option { background-color: #fff; color: var(--ganor-ink); }
 .meter.is-live i { transition: none; }
 [data-meter-text] { font-variant-numeric: tabular-nums; }
 .card__foot--plain { display: block; }
+
+/* ---------- Pricing: an indigo band with the Ganor symbol pattern, the calculator sitting on it ---------- */
+.pricing { position: relative; isolation: isolate; overflow: hidden; background: var(--ganor-indigo); color: #fff; }
+.pricing__pattern { position: absolute; inset: 0; z-index: -1; background: url(../img/pattern-indigo.svg) 0 0 / 96px 192px; -webkit-mask-image: radial-gradient(120% 90% at 100% 0%, #000 0%, transparent 60%); mask-image: radial-gradient(120% 90% at 100% 0%, #000 0%, transparent 60%); }
+.pricing__glow { position: absolute; z-index: -1; left: 50%; bottom: -30%; width: min(1100px, 120vw); aspect-ratio: 2 / 1; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 178, 30, .16), rgba(255, 178, 30, 0)); pointer-events: none; }
+.pricing__inner { position: relative; }
+.pricing .h2 { color: #fff; }
+.pricing .head__lede { color: var(--ganor-lavender); }
+.pricing .head__lede b { color: #fff; }
+.pricing .note { color: var(--ganor-lavender); }
+.pricing .calc { box-shadow: 0 40px 80px -40px rgba(10, 8, 40, .65), 0 0 0 1px rgba(255, 255, 255, .08); }
+.pricing .calc__in { color: var(--ganor-ink); }

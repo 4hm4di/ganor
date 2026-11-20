@@ -489,10 +489,13 @@ a.chip{text-decoration:none}
 </section>
 
 <!-- PRICING (earnings calculator) -->
-<section class="section wrap pricing" id="pricing" aria-labelledby="pricing-title">
+<section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+  <div class="pricing__pattern" aria-hidden="true"></div>
+  <div class="pricing__glow" aria-hidden="true"></div>
+  <div class="wrap pricing__inner">
   <div class="head head--split">
     <div>
-      <p class="label" data-reveal>Pricing</p>
+      <p class="label label--on-indigo" data-reveal>Pricing</p>
       <h2 class="h2" id="pricing-title" data-lines><span class="line"><span>See what you</span></span> <span class="line"><span>take home.</span></span></h2>
     </div>
     <p class="head__lede" data-reveal>One fee on paid tickets: <b data-fee-text>6% + ₦100</b> per ticket, with card and transfer charges included. Tickets start at ₦1,000. Free events cost nothing. You choose who pays it.</p>
@@ -509,7 +512,7 @@ a.chip{text-decoration:none}
       <div class="rng">
         <div class="rng__top"><label for="calc-price">Ticket price</label><output for="calc-price" data-out="price">₦5,000</output></div>
         <div class="rng__ctl"><input id="calc-price" type="range" min="1000" max="100000" step="500" value="5000" data-in="price"><span class="rng__knob" aria-hidden="true"></span></div>
-        <div class="rng__scale" aria-hidden="true"><span>₦500</span><span>₦50,000</span><span>₦100,000</span></div>
+        <div class="rng__scale" aria-hidden="true"><span>₦1,000</span><span>₦50,000</span><span>₦100,000</span></div>
       </div>
 
       <div class="rng">
@@ -532,6 +535,7 @@ a.chip{text-decoration:none}
     </div>
   </div>
   <p class="note">An example, not a quote. Free tickets and RSVPs carry no fee.</p>
+  </div>
 </section>
 
 <!-- NAME -->
