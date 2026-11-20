@@ -1427,3 +1427,19 @@ select option { background-color: #fff; color: var(--ganor-ink); }
 .pricing .note { color: var(--ganor-lavender); }
 .pricing .calc { box-shadow: 0 40px 80px -40px rgba(10, 8, 40, .65), 0 0 0 1px rgba(255, 255, 255, .08); }
 .pricing .calc__in { color: var(--ganor-ink); }
+
+/* Pricing in Ink: no pattern (the brand keeps it for indigo); an indigo glow from the top right instead. */
+.pricing--ink { background: var(--ganor-ink); }
+.pricing--ink .pricing__pattern { display: none; }
+.pricing--ink::before { content: ""; position: absolute; z-index: -1; right: -10%; top: -30%; width: min(900px, 90vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, rgba(55, 48, 184, .55), rgba(55, 48, 184, 0)); pointer-events: none; }
+.pricing--ink .pricing__glow { background: radial-gradient(closest-side, rgba(255, 178, 30, .12), rgba(255, 178, 30, 0)); }
+.pricing--ink .calc { box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .06); }
+
+/* Pricing in Lavender: a light band with Ink text. */
+.pricing--lav { background: var(--ganor-lavender); color: var(--ganor-ink); }
+.pricing--lav .pricing__pattern { display: none; }
+.pricing--lav .label { color: var(--ganor-indigo); }
+.pricing--lav .h2, .pricing--lav .head__lede b { color: var(--ganor-ink); }
+.pricing--lav .head__lede, .pricing--lav .note { color: #3B3852; }
+.pricing--lav .pricing__glow { background: radial-gradient(closest-side, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0)); }
+.pricing--lav .calc { box-shadow: 0 40px 80px -44px rgba(21, 19, 42, .45); }
