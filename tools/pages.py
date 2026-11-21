@@ -151,7 +151,7 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams and guests: accounts
       <h3>Your dashboard</h3>
       <p>Your dashboard shows tickets and RSVPs, take-home and check-ins over 7, 30 or 90 days, with a chart for each event and a projection to event day. Download your guest list as a spreadsheet (CSV) or a branded PDF, and look up any guest by phone to resend their ticket on WhatsApp.</p>
       <h3>Payouts</h3>
-      <p>Add the bank account for your payouts in your dashboard. Ganor confirms the account name matches your bank&rsquo;s record. After that, every ticket payment is split at checkout by Paystack, our licensed payment partner: your share settles directly to your bank account on Paystack&rsquo;s normal settlement schedule, and the Ganor fee goes to Ganor. Ganor doesn&rsquo;t hold ticket money, and there&rsquo;s nothing to request. Your <b>Earnings</b> page in the dashboard shows your take-home, the Ganor fees, any refunds, each event&rsquo;s sales and your payout account&rsquo;s status, so you always know where your money is.</p>"""),
+      <p>Add the bank account for your payouts in your dashboard. Ganor confirms the account name matches your bank&rsquo;s record, and your paid tickets go on sale once it&rsquo;s verified. After that, every ticket payment is split at checkout by Paystack, our licensed payment partner: your share settles directly to your bank account on Paystack&rsquo;s normal settlement schedule, and the Ganor fee goes to Ganor. Ganor doesn&rsquo;t hold ticket money, and there&rsquo;s nothing to request. Your <b>Earnings</b> page in the dashboard shows your take-home, the Ganor fees, any refunds, each event&rsquo;s sales and your payout account&rsquo;s status, so you always know where your money is.</p>"""),
  ("gate", "Gate check-in", "scan", """
       <p>Any phone becomes the scanner. Open your event and tap <b>Gate check-in</b>, or let your gate team scan for you. Point the camera at a guest’s QR code, or type the code under it. You’ll see one of these results:</p>
       <ul>
@@ -403,7 +403,7 @@ page("acceptable-use", "Acceptable use policy", "What you can and can’t host, 
  ("checks", "How we check", "shield", """
       <ul>
         <li>Hosts confirm their email address, and must add a WhatsApp or call number guests can reach before they can publish.</li>
-        <li>Before a host can receive money from paid tickets, Ganor confirms that the name on their payout bank account matches their bank’s record.</li>
+        <li>A host’s paid tickets only go on sale once Ganor has confirmed that the name on their payout bank account matches their bank’s record.</li>
         <li>We may review any event, and we look into every report we receive from guests or anyone else.</li>
         <li>Our payment partner also runs its own checks on payments.</li>
       </ul>"""),
