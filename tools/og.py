@@ -36,6 +36,12 @@ CARDS = [
     ("og-refunds.png", "Legal", "Refund<br>policy.",
      "Ask the host first. If an event is cancelled, you get your money back.",
      "wallet", [], "ganor.ng/refunds"),
+    ("og-acceptable-use.png", "Legal", "Acceptable<br>use.",
+     "Real events, run honestly. What's allowed on Ganor and what isn't.",
+     "shield", [], "ganor.ng/acceptable-use"),
+    ("og-ticket-delivery.png", "Legal", "Ticket<br>delivery.",
+     "Digital tickets, on your phone the moment you RSVP or pay. Nothing is shipped.",
+     "ticket", [], "ganor.ng/ticket-delivery"),
 ]
 
 CSS = """

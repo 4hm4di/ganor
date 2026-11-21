@@ -27,7 +27,8 @@ SOCIAL = [
 # slug: (path, share title, description, share image, image alt, breadcrumb name)
 # Browser-tab titles are kept short so they show in full on a tab
 TAB = {"index": "Ganor · Your city, found.", "docs": "Docs · Ganor", "terms": "Terms · Ganor",
-       "privacy": "Privacy · Ganor", "refunds": "Refunds · Ganor"}
+       "privacy": "Privacy · Ganor", "refunds": "Refunds · Ganor",
+       "acceptable-use": "Acceptable use · Ganor", "ticket-delivery": "Ticket delivery · Ganor"}
 PAGES = {
     "index": (
         "/",
@@ -72,6 +73,24 @@ PAGES = {
         "og-refunds.png",
         "Ganor refund policy.",
         "Refund policy",
+    ),
+    "acceptable-use": (
+        "/acceptable-use.html",
+        "Acceptable use policy · Ganor",
+        "What you can and can't host, sell or do on Ganor, how we check, and what happens "
+        "when the rules are broken.",
+        "og-acceptable-use.png",
+        "Ganor acceptable use policy.",
+        "Acceptable use policy",
+    ),
+    "ticket-delivery": (
+        "/ticket-delivery.html",
+        "Ticket delivery policy · Ganor",
+        "Ganor tickets are digital and arrive the moment you RSVP or pay, on screen, by link, "
+        "email and WhatsApp. Nothing is shipped.",
+        "og-ticket-delivery.png",
+        "Ganor ticket delivery policy.",
+        "Ticket delivery policy",
     ),
 }
 

@@ -3,7 +3,7 @@ Run: python3 tools/pages.py && python3 tools/build.py
 """
 from pathlib import Path
 SRC = Path(__file__).resolve().parent.parent / "src"
-UPDATED = "19 November 2026"
+UPDATED = "21 November 2026"
 
 def page(slug, title, desc, label, h1, lede, sections, meta=None, nav_title="On this page"):
     nav = "\n".join(f'        <li><a href="#{sid}">{name}</a></li>' for sid, name, _icon, _body in sections)
@@ -151,7 +151,7 @@ page("docs", "Docs", "How Ganor works for hosts, gate teams and guests: accounts
       <h3>Your dashboard</h3>
       <p>Your dashboard shows tickets and RSVPs, take-home and check-ins over 7, 30 or 90 days, with a chart for each event and a projection to event day. Download your guest list as a spreadsheet (CSV) or a branded PDF, and look up any guest by phone to resend their ticket on WhatsApp.</p>
       <h3>Payouts</h3>
-      <p>Add the bank account for your payouts in your dashboard. Ganor confirms the account name matches your bank&rsquo;s record. After that, every ticket payment is split at checkout by Paystack, our licensed payment partner: your share settles directly to your bank account on Paystack&rsquo;s normal settlement schedule, and the Ganor fee goes to Ganor. Ganor doesn&rsquo;t hold ticket money, and there&rsquo;s nothing to request. Your <b>Wallet</b> in the dashboard shows your take-home, the Ganor fees, any refunds, each event&rsquo;s sales and your payout account&rsquo;s status, so you always know where your money is.</p>"""),
+      <p>Add the bank account for your payouts in your dashboard. Ganor confirms the account name matches your bank&rsquo;s record. After that, every ticket payment is split at checkout by Paystack, our licensed payment partner: your share settles directly to your bank account on Paystack&rsquo;s normal settlement schedule, and the Ganor fee goes to Ganor. Ganor doesn&rsquo;t hold ticket money, and there&rsquo;s nothing to request. Your <b>Earnings</b> page in the dashboard shows your take-home, the Ganor fees, any refunds, each event&rsquo;s sales and your payout account&rsquo;s status, so you always know where your money is.</p>"""),
  ("gate", "Gate check-in", "scan", """
       <p>Any phone becomes the scanner. Open your event and tap <b>Gate check-in</b>, or let your gate team scan for you. Point the camera at a guest’s QR code, or type the code under it. You’ll see one of these results:</p>
       <ul>
@@ -208,7 +208,7 @@ page("terms", "Terms of use", "The terms for using Ganor as a host, a gate team 
  [
  ("about", "About these terms", "doc", """
       <p>These terms apply when you use ganor.ng, the Ganor app at app.ganor.ng or any Ganor service (together, “Ganor”). “We” and “us” mean Ganor. “You” means anyone using Ganor: a <b>host</b> who runs an event, a <b>gate team member</b> who scans tickets for a host, or a <b>guest</b> who RSVPs or buys a ticket.</p>
-      <p>By using Ganor you agree to these terms, our <a href="privacy.html">privacy policy</a> and our <a href="refunds.html">refund policy</a>.</p>"""),
+      <p>By using Ganor you agree to these terms, our <a href="acceptable-use.html">acceptable use policy</a>, <a href="privacy.html">privacy policy</a>, <a href="refunds.html">refund policy</a> and <a href="ticket-delivery.html">ticket delivery policy</a>.</p>"""),
  ("who", "Who can use Ganor", "users", """
       <ul>
         <li>Hosts must be at least 18 and able to enter a contract in Nigeria.</li>
@@ -357,6 +357,96 @@ page("refunds", "Refund policy", "How refunds work on Ganor: who to contact, wha
       <p>We’ll look into it and, where a refund is owed, make sure it reaches you.</p>"""),
  ("how", "How refunds are paid", "wallet", """
       <p>Refunds go back to the card or account you paid with, through our payment partner. Banks can take a few working days to show the money in your account.</p>"""),
+ ("contact", "Contact", "support", CONTACT),
+ ], meta=f"Last updated {UPDATED}")
+
+# ---------------- ACCEPTABLE USE ----------------
+page("acceptable-use", "Acceptable use policy", "What you can and can’t host, sell or do on Ganor, how we check, and what happens when the rules are broken.",
+ "Legal", "Acceptable use policy", "Ganor is for real events, run honestly. This page sets out what’s allowed, what isn’t, and what we do about it.",
+ [
+ ("scope", "Who this applies to", "info", """
+      <p>This policy applies to everyone who uses Ganor: <b>hosts</b> who run events, <b>gate team members</b> who scan tickets, and <b>guests</b> who RSVP or buy tickets. It is part of our <a href="terms.html">terms of use</a>.</p>"""),
+ ("allowed", "What Ganor is for", "check-circle", """
+      <p>Ganor is for listing real events, taking free RSVPs, selling tickets to them and checking guests in. For example:</p>
+      <ul>
+        <li>Conferences, summits, trade fairs, exhibitions and workshops.</li>
+        <li>Concerts, comedy shows, film screenings and cultural events.</li>
+        <li>Religious, community and charity gatherings.</li>
+        <li>Weddings, naming ceremonies and other private events.</li>
+        <li>Sports, fitness and outdoor events.</li>
+      </ul>
+      <p>A ticket on Ganor is entry to an event. It can include what the host says comes with it, such as a meal or an event pack, but it can’t be used to sell something else.</p>"""),
+ ("not-allowed", "What isn’t allowed", "close-circle", """
+      <p>You can’t use Ganor to list, promote or sell tickets for any of these:</p>
+      <ul>
+        <li>Anything illegal in Nigeria, or an event without the permits, licences or venue permission the law requires.</li>
+        <li>Weapons, ammunition or explosives, or events that sell or hand them out.</li>
+        <li>Illegal drugs or controlled substances, and alcohol or tobacco for anyone under 18.</li>
+        <li>Adult, sexual or escort content or services.</li>
+        <li>Gambling, betting, lotteries or raffles, unless the host holds the licence the law requires.</li>
+        <li>Investment, trading or “money-making” schemes that promise returns, including forex or crypto signals, Ponzi, pyramid or multi-level recruitment schemes.</li>
+        <li>Goods, services, memberships, loans or donations dressed up as tickets.</li>
+        <li>Counterfeit or stolen goods, or events that copy another brand or event to mislead people.</li>
+        <li>Hate, violence, harassment or discrimination, or groups that promote them.</li>
+        <li>Fake events, events you don’t run or don’t have the right to sell tickets for, or details meant to mislead guests.</li>
+      </ul>"""),
+ ("conduct", "How everyone must use Ganor", "user", """
+      <ul>
+        <li>Give true details about yourself, your event and your payout account. Don’t pretend to be someone else.</li>
+        <li>Take ticket payments for Ganor events only through Ganor’s checkout, and don’t use it to move money for anything other than tickets.</li>
+        <li>Don’t make fake purchases, test stolen cards or try to get money back unfairly.</li>
+        <li>Hosts use guests’ details only to run their event, and don’t send them spam.</li>
+        <li>Guests don’t copy tickets or resell them for more than they paid.</li>
+        <li>Gate accounts are only for checking guests in at the host’s events.</li>
+        <li>Don’t try to break, overload, scrape or get around the security of Ganor.</li>
+      </ul>"""),
+ ("checks", "How we check", "shield", """
+      <ul>
+        <li>Hosts confirm their email address, and must add a WhatsApp or call number guests can reach before they can publish.</li>
+        <li>Before a host can receive money from paid tickets, Ganor confirms that the name on their payout bank account matches their bank’s record.</li>
+        <li>We may review any event, and we look into every report we receive from guests or anyone else.</li>
+        <li>Our payment partner also runs its own checks on payments.</li>
+      </ul>"""),
+ ("breaking", "If the rules are broken", "warning", """
+      <p>Depending on what happened, we may:</p>
+      <ul>
+        <li>Ask the host to change the event, or take the event down.</li>
+        <li>Pause ticket sales while we look into a problem.</li>
+        <li>Refund guests, for example when an event was fake or misleading.</li>
+        <li>Switch off gate accounts, or suspend or close the account.</li>
+        <li>Report it to our payment partner, and to the authorities where the law requires.</li>
+      </ul>"""),
+ ("report", "Report an event or account", "chat", """
+      <p>If something on Ganor looks wrong, tell us. Send the event link and what you saw to <a href="mailto:support@ganor.ng">support@ganor.ng</a>, or WhatsApp us on <a href="https://wa.me/2348106742222">0810 674 2222</a>. We read every report.</p>"""),
+ ("contact", "Contact", "support", CONTACT),
+ ], meta=f"Last updated {UPDATED}")
+
+# ---------------- TICKET DELIVERY ----------------
+page("ticket-delivery", "Ticket delivery policy", "Ganor tickets are digital: how and when you get your ticket, what it contains, and what to do if it doesn’t arrive. Nothing is shipped.",
+ "Legal", "Ticket delivery policy", "Every Ganor ticket is digital. It arrives the moment you RSVP or pay, and nothing is ever shipped.",
+ [
+ ("digital", "Digital tickets only", "ticket", """
+      <p>Ganor sells digital tickets and takes free RSVPs for events. We don’t sell or ship physical goods, and there’s no delivery fee.</p>"""),
+ ("when", "When you get your ticket", "clock", """
+      <ul>
+        <li><b>Straight away:</b> as soon as you RSVP, or your payment goes through, your ticket opens on screen with its QR code.</li>
+        <li><b>A private link:</b> your ticket also has its own private link, so you can open it again on any phone.</li>
+        <li><b>By email:</b> if you give an email address, we send the ticket there too.</li>
+        <li><b>On WhatsApp:</b> one tap sends the ticket link to your own WhatsApp, so it’s easy to find on the day.</li>
+      </ul>"""),
+ ("contents", "What your ticket shows", "qr-code", """
+      <p>Your name, the event, its date, time and venue, your ticket type, a QR code and a ticket code. Each ticket works once: the first scan at the gate is the one that counts, so keep your QR code and link to yourself.</p>"""),
+ ("gate", "At the event", "scan", """
+      <p>Show your ticket on your phone at the gate. The host’s team scans the QR code, or types the ticket code, to check you in. The host and venue decide who is let in and the rules on the day.</p>"""),
+ ("missing", "If your ticket doesn’t arrive", "warning", """
+      <ul>
+        <li>Check your email’s spam or promotions folder, and look for the ticket link in your WhatsApp.</li>
+        <li>Ask the host: they can resend your ticket from their dashboard using your phone number.</li>
+        <li>If you paid but no ticket appeared, or you can’t reach the host, message us with the phone number or email you used. We’ll find your ticket and send it again.</li>
+      </ul>
+      <p>If you were charged but no ticket was issued, see the <a href="refunds.html">refund policy</a>.</p>"""),
+ ("changes", "If the event changes or is cancelled", "calendar", """
+      <p>Your ticket stays valid for the new date or venue. If the host cancels a paid event, you get your money back as set out in the <a href="refunds.html">refund policy</a>.</p>"""),
  ("contact", "Contact", "support", CONTACT),
  ], meta=f"Last updated {UPDATED}")
 

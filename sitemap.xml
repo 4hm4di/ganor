@@ -30,4 +30,16 @@
     <priority>0.3</priority>
     <image:image><image:loc>https://ganor.ng/assets/img/og-refunds.png</image:loc></image:image>
   </url>
+  <url>
+    <loc>https://ganor.ng/acceptable-use.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.3</priority>
+    <image:image><image:loc>https://ganor.ng/assets/img/og-acceptable-use.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ganor.ng/ticket-delivery.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.3</priority>
+    <image:image><image:loc>https://ganor.ng/assets/img/og-ticket-delivery.png</image:loc></image:image>
+  </url>
 </urlset>
